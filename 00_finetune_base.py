@@ -15,7 +15,8 @@ Run once before any metric script:
     python 00_finetune_base.py
 """
 
-import os, random
+import os
+import random
 import numpy as np
 import torch
 import matplotlib
@@ -329,7 +330,7 @@ def main():
             learning_rate=2e-5,
             weight_decay=0.01,
             warmup_ratio=0.1,
-            evaluation_strategy="epoch",
+            eval_strategy="epoch",
             save_strategy="epoch",
             load_best_model_at_end=True,
             metric_for_best_model="eval_loss",
