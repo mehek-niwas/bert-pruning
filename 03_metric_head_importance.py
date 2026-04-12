@@ -15,11 +15,13 @@ evaluates, and produces publication-ready figures for the final report:
   results/03_HIS_results.csv
   results/ALL_metrics_combined.csv         — merged table for all three metrics
   results/03_HIS_pruning_report.txt      — full 12×12 head scores + per-layer block means, pruned subsets, eval per ratio
+  results/prune_finetune_logs/03_HIS/    — JSON log_history + PNG loss/metric curve per (task, head|block, ratio)
 
 Usage:
     python 03_metric_head_importance.py
 """
 
+import json
 import os, random, copy
 import numpy as np
 import torch
@@ -310,21 +312,137 @@ def append_pruning_report_block(
     lines.append("Full eval metrics: " + ev)
 
 # ---------------------------------------------------------------------------
+# Prune-stage fine-tune: structured logs + loss curves (one JSON + one PNG per run)
+# ---------------------------------------------------------------------------
+SCRIPT_TAG_HIS = "03_HIS"
+
+
+def plot_prune_finetune_curve(log_history, cfg, out_path, title):
+    df = pd.DataFrame(log_history)
+    color = cfg["color"]
+    pk = cfg["primary_key"]
+    fig, ax = plt.subplots(figsize=(8, 4.5))
+    ax2 = ax.twinx()
+    train_df = (
+        df[df.get("loss", pd.Series(dtype=float)).notna()].copy()
+        if "loss" in df.columns
+        else pd.DataFrame()
+    )
+    eval_df = (
+        df[df.get("eval_loss", pd.Series(dtype=float)).notna()].copy()
+        if "eval_loss" in df.columns
+        else pd.DataFrame()
+    )
+    if not train_df.empty and "epoch" in train_df.columns:
+        ax.plot(
+            train_df["epoch"],
+            train_df["loss"],
+            color=color,
+            lw=1.4,
+            alpha=0.55,
+            label="Train loss",
+        )
+    if not eval_df.empty and "epoch" in eval_df.columns:
+        ax.plot(
+            eval_df["epoch"],
+            eval_df["eval_loss"],
+            color=color,
+            lw=2,
+            ls="--",
+            label="Val loss",
+        )
+        if pk in eval_df.columns:
+            ax2.plot(
+                eval_df["epoch"],
+                eval_df[pk],
+                color="#F59E0B",
+                lw=2,
+                marker="o",
+                ms=5,
+                label=cfg["primary_label"],
+            )
+    ax.set_xlabel("Epoch")
+    ax.set_ylabel("Loss", color=color)
+    ax2.set_ylabel(cfg["primary_label"], color="#F59E0B")
+    ax.set_title(title, fontweight="bold", fontsize=11)
+    ax2.spines["right"].set_visible(True)
+    lines1, l1 = ax.get_legend_handles_labels()
+    lines2, l2 = ax2.get_legend_handles_labels()
+    ax.legend(lines1 + lines2, l1 + l2, fontsize=8, loc="upper right")
+    plt.tight_layout()
+    plt.savefig(out_path, bbox_inches="tight")
+    plt.close()
+
+
+def save_prune_finetune_logs_and_curve(
+    script_tag, metric_title, task_name, level, prune_ratio, trainer, cfg
+):
+    subdir = os.path.join(RESULTS_DIR, "prune_finetune_logs", script_tag)
+    os.makedirs(subdir, exist_ok=True)
+    rtag = int(round(prune_ratio * 100))
+    base = f"{task_name}_{level}_r{rtag}"
+    log_history = trainer.state.log_history
+    payload = {
+        "script": script_tag,
+        "metric": metric_title,
+        "task": task_name,
+        "level": level,
+        "prune_ratio": prune_ratio,
+        "primary_key": cfg["primary_key"],
+        "log_history": log_history,
+    }
+    json_path = os.path.join(subdir, f"{base}.json")
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2, default=str)
+    png_path = os.path.join(subdir, f"{base}.png")
+    plot_prune_finetune_curve(
+        log_history,
+        cfg,
+        png_path,
+        f"{metric_title} fine-tune — {task_name.upper()} {level} prune {rtag}%",
+    )
+    print(f"    FT log:  {json_path}")
+    print(f"    FT plot: {png_path}")
+
+
+# ---------------------------------------------------------------------------
 # Fine-tune & evaluate
 # ---------------------------------------------------------------------------
-def finetune_and_eval(model, task_name, cfg, tokenized, tokenizer):
+def finetune_and_eval(
+    model,
+    task_name,
+    cfg,
+    tokenized,
+    tokenizer,
+    *,
+    level: str,
+    prune_ratio: float,
+    script_tag: str = SCRIPT_TAG_HIS,
+    metric_title: str = "HIS",
+):
     set_seed(SEED)
+    rtag = int(round(prune_ratio * 100))
+    out_dir = os.path.join(
+        RESULTS_DIR, "prune_finetune_tmp", script_tag, f"{task_name}_{level}_r{rtag}"
+    )
+    os.makedirs(out_dir, exist_ok=True)
     trainer = Trainer(
         model=model,
         args=TrainingArguments(
-            output_dir=f"./tmp_{task_name}_HIS",
+            output_dir=out_dir,
             num_train_epochs=FINETUNE_EPOCHS,
             per_device_train_batch_size=32,
             per_device_eval_batch_size=64,
-            learning_rate=2e-5, weight_decay=0.01, warmup_ratio=0.1,
-            evaluation_strategy="epoch", save_strategy="no",
-            seed=SEED, data_seed=SEED, report_to="none",
+            learning_rate=2e-5,
+            weight_decay=0.01,
+            warmup_ratio=0.1,
+            evaluation_strategy="epoch",
+            save_strategy="no",
+            seed=SEED,
+            data_seed=SEED,
+            report_to="none",
             fp16=torch.cuda.is_available(),
+            logging_steps=20,
         ),
         train_dataset=tokenized["train"],
         eval_dataset=tokenized["validation"],
@@ -333,6 +451,9 @@ def finetune_and_eval(model, task_name, cfg, tokenized, tokenizer):
         compute_metrics=compute_metrics_fn(cfg["metric_name"]),
     )
     trainer.train()
+    save_prune_finetune_logs_and_curve(
+        script_tag, metric_title, task_name, level, prune_ratio, trainer, cfg
+    )
     return trainer.evaluate()
 
 # ---------------------------------------------------------------------------
@@ -606,7 +727,15 @@ def main():
             print(f"    {HIS_HEAD_RULE}")
             pruned, pruned_list = prune_heads_by_his(base_model, his, ratio)
             pruned_per_task_ratio[(task_name, ratio)] = pruned_list
-            res   = finetune_and_eval(pruned, task_name, cfg, tokenized, tokenizer)
+            res   = finetune_and_eval(
+                pruned,
+                task_name,
+                cfg,
+                tokenized,
+                tokenizer,
+                level="head",
+                prune_ratio=ratio,
+            )
             score = res.get(pk, 0.0)
             print(f"    {cfg['primary_label']}: {score:.4f}  (baseline: {baseline_score:.4f})")
             print(f"    Pruned {len(pruned_list)} heads; full list in report file.")
@@ -624,7 +753,15 @@ def main():
             pruned, _, block_details = prune_blocks_by_his(base_model, his, ratio)
             for layer_i, mean_his in block_details:
                 print(f"    Skip block L{layer_i}: mean head HIS = {mean_his:.6f}")
-            res   = finetune_and_eval(pruned, task_name, cfg, tokenized, tokenizer)
+            res   = finetune_and_eval(
+                pruned,
+                task_name,
+                cfg,
+                tokenized,
+                tokenizer,
+                level="block",
+                prune_ratio=ratio,
+            )
             score = res.get(pk, 0.0)
             print(f"    {cfg['primary_label']}: {score:.4f}")
             append_pruning_report_block(
