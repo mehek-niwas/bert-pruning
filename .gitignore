@@ -1,3 +1,4 @@
 checkpoints/
+checkpoints-best/
 __pycache__/
 results/prune_finetune_tmp/

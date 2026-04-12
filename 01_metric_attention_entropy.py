@@ -59,21 +59,12 @@ for d in [FIGURES_DIR, RESULTS_DIR]:
     os.makedirs(d, exist_ok=True)
 
 CALIB_SIZE      = 512
-PRUNE_RATIOS    = [0.1, 0.2, 0.3, 0.4, 0.5]
+PRUNE_RATIOS    = [0.1, 0.3, 0.5]
 FINETUNE_EPOCHS = 2
 N_LAYERS        = 12
 N_HEADS         = 12
 
 TASK_CONFIG = {
-    "sst2": {
-        "dataset":       ("glue", "sst2"),
-        "text_keys":     ("sentence", None),
-        "num_labels":    2,
-        "metric_name":   "glue/sst2",
-        "primary_key":   "eval_accuracy",
-        "primary_label": "Accuracy",
-        "color":         "#2563EB",
-    },
     "cola": {
         "dataset":       ("glue", "cola"),
         "text_keys":     ("sentence", None),
