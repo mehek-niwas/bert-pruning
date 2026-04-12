@@ -12,6 +12,7 @@ publication-ready figures for the final report:
   figures/02_KLR_pruned_head_map.png       — which heads pruned at each ratio
   figures/02_KLR_score_distribution.png    — distribution of KL-R scores
   results/02_KLR_results.csv
+  results/02_KLR_pruning_report.txt      — full 12×12 head scores + per-layer block means, pruned subsets, eval per ratio
 
 Usage:
     python 02_metric_kl_redundancy.py
@@ -218,11 +219,99 @@ def prune_blocks_by_kl(model, kl_scores, prune_ratio):
     model = copy.deepcopy(model)
     for i, layer in enumerate(model.bert.encoder.layer):
         model.bert.encoder.layer[i] = SkippableBlock(layer)
-    n_skip       = max(1, int(N_LAYERS * prune_ratio))
-    skip_indices = np.argsort(kl_scores.mean(axis=1))[:n_skip]
-    for idx in skip_indices:
+    n_skip = max(1, int(N_LAYERS * prune_ratio))
+    layer_means = kl_scores.mean(axis=1)
+    skip_indices = np.argsort(layer_means)[:n_skip]
+    skip_list = skip_indices.tolist()
+    block_details = [(int(i), float(layer_means[i])) for i in skip_list]
+    for idx in skip_list:
         model.bert.encoder.layer[idx].skip = True
-    return model, skip_indices.tolist()
+    return model, skip_list, block_details
+
+
+KLR_HEAD_RULE = (
+    "Prune heads with the lowest min pairwise KL divergence to another head in the "
+    "same layer (attention most similar to a peer = redundant under KL-R)."
+)
+KLR_BLOCK_RULE = (
+    "Skip encoder blocks with the lowest mean KL-R across heads "
+    "(layers whose heads are on average most redundant are skipped first)."
+)
+
+
+def append_complete_score_inventory_klr(lines, task_name, scores):
+    """Every head and every layer's block-level mean (before any pruning)."""
+    lines.append("")
+    lines.append(
+        f"COMPLETE SCORE INVENTORY — task={task_name} — "
+        "per-head min pairwise KL-R (all 12×12 heads)"
+    )
+    for li in range(N_LAYERS):
+        for hi in range(N_HEADS):
+            lines.append(
+                f"  L{li:2d}  H{hi:2d}  KL-R={float(scores[li, hi]):.6f}"
+            )
+    lines.append(
+        "Per-block aggregate: mean KL-R over heads in each layer "
+        "(block pruning uses these means; lowest mean skipped first):"
+    )
+    layer_means = scores.mean(axis=1)
+    for li in range(N_LAYERS):
+        lines.append(
+            f"  Block L{li:2d}  mean_head_KL-R={float(layer_means[li]):.6f}"
+        )
+
+
+def append_pruning_report_head(
+    lines, task_name, ratio, pruned_list, res, cfg, baseline_score, primary_key
+):
+    score = res.get(primary_key, 0.0)
+    lines.append("")
+    lines.append("-" * 72)
+    lines.append(
+        f"Task={task_name}  level=head  prune_ratio={ratio:.0%}  "
+        f"n_pruned={len(pruned_list)}"
+    )
+    lines.append(f"Selection rule (KL-R): {KLR_HEAD_RULE}")
+    lines.append("Pruned heads (layer, head, min_pairwise_KL_score):")
+    for l, h, s in pruned_list:
+        lines.append(f"  L{l:2d}  H{h:2d}  KL-R={s:.6f}")
+    lines.append(
+        f"After fine-tune: {cfg['primary_label']} = {score:.6f}  "
+        f"(baseline {baseline_score:.6f},  delta {score - baseline_score:+.6f})"
+    )
+    ev = ", ".join(
+        f"{k}={float(v):.6f}"
+        for k, v in sorted(res.items())
+        if isinstance(v, (float, np.floating))
+    )
+    lines.append("Full eval metrics: " + ev)
+
+
+def append_pruning_report_block(
+    lines, task_name, ratio, block_details, res, cfg, baseline_score, primary_key
+):
+    score = res.get(primary_key, 0.0)
+    lines.append("")
+    lines.append("-" * 72)
+    lines.append(
+        f"Task={task_name}  level=block  prune_ratio={ratio:.0%}  "
+        f"n_skipped_blocks={len(block_details)}"
+    )
+    lines.append(f"Selection rule (KL-R): {KLR_BLOCK_RULE}")
+    lines.append("Skipped blocks (layer index, mean KL-R over heads):")
+    for layer_i, mean_kl in block_details:
+        lines.append(f"  Block L{layer_i:2d}  mean_head_KL-R={mean_kl:.6f}")
+    lines.append(
+        f"After fine-tune: {cfg['primary_label']} = {score:.6f}  "
+        f"(baseline {baseline_score:.6f},  delta {score - baseline_score:+.6f})"
+    )
+    ev = ", ".join(
+        f"{k}={float(v):.6f}"
+        for k, v in sorted(res.items())
+        if isinstance(v, (float, np.floating))
+    )
+    lines.append("Full eval metrics: " + ev)
 
 # ---------------------------------------------------------------------------
 # Fine-tune & evaluate
@@ -411,6 +500,11 @@ def main():
     rows                    = []
     kl_per_task             = {}
     pruned_per_task_ratio   = {}
+    report_lines            = [
+        "02_metric_kl_redundancy.py — KL-R pruning report",
+        "Metric: per head, min over other heads of KL(attn_h || attn_k) on calibration data.",
+        "",
+    ]
 
     for task_name, cfg in TASK_CONFIG.items():
         print(f"\n{'='*60}")
@@ -443,14 +537,27 @@ def main():
             data_collator=collator, compute_metrics=compute_metrics_fn(cfg["metric_name"]),
         ).evaluate()
         baseline_score = baseline_eval.get(cfg["primary_key"], 0.0)
+        pk = cfg["primary_key"]
+        report_lines.append("")
+        report_lines.append("=" * 72)
+        report_lines.append(f"TASK {task_name.upper()} — baseline (no pruning)")
+        report_lines.append(
+            f"  {cfg['primary_label']} = {baseline_score:.6f}  ({pk})"
+        )
+        append_complete_score_inventory_klr(report_lines, task_name, kl)
 
         for ratio in PRUNE_RATIOS:
             print(f"\n  [Head] prune_ratio={ratio}")
+            print(f"    {KLR_HEAD_RULE}")
             pruned, pruned_list = prune_heads_by_kl(base_model, kl, ratio)
             pruned_per_task_ratio[(task_name, ratio)] = pruned_list
             res   = finetune_and_eval(pruned, task_name, cfg, tokenized, tokenizer)
-            score = res.get(cfg["primary_key"], 0.0)
+            score = res.get(pk, 0.0)
             print(f"    {cfg['primary_label']}: {score:.4f}  (baseline: {baseline_score:.4f})")
+            print(f"    Pruned {len(pruned_list)} heads; full list in report file.")
+            append_pruning_report_head(
+                report_lines, task_name, ratio, pruned_list, res, cfg, baseline_score, pk
+            )
             rows.append(dict(task=task_name, metric="KL-R", level="head",
                              prune_ratio=ratio, primary_score=score,
                              baseline_score=baseline_score,
@@ -458,11 +565,16 @@ def main():
 
         for ratio in PRUNE_RATIOS:
             print(f"\n  [Block] prune_ratio={ratio}")
-            pruned, skipped = prune_blocks_by_kl(base_model, kl, ratio)
-            print(f"    Skipped blocks: {skipped}")
+            print(f"    {KLR_BLOCK_RULE}")
+            pruned, _, block_details = prune_blocks_by_kl(base_model, kl, ratio)
+            for layer_i, mean_kl in block_details:
+                print(f"    Skip block L{layer_i}: mean head KL-R = {mean_kl:.6f}")
             res   = finetune_and_eval(pruned, task_name, cfg, tokenized, tokenizer)
-            score = res.get(cfg["primary_key"], 0.0)
+            score = res.get(pk, 0.0)
             print(f"    {cfg['primary_label']}: {score:.4f}")
+            append_pruning_report_block(
+                report_lines, task_name, ratio, block_details, res, cfg, baseline_score, pk
+            )
             rows.append(dict(task=task_name, metric="KL-R", level="block",
                              prune_ratio=ratio, primary_score=score,
                              baseline_score=baseline_score,
@@ -472,6 +584,11 @@ def main():
     csv_path = os.path.join(RESULTS_DIR, "02_KLR_results.csv")
     df.to_csv(csv_path, index=False)
     print(f"\nResults saved: {csv_path}")
+
+    report_path = os.path.join(RESULTS_DIR, "02_KLR_pruning_report.txt")
+    with open(report_path, "w", encoding="utf-8") as rf:
+        rf.write("\n".join(report_lines) + "\n")
+    print(f"Pruning report saved: {report_path}")
 
     print("\n" + "="*70)
     print("SUMMARY TABLE — KL-R Metric")
