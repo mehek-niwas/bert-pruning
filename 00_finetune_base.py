@@ -13,8 +13,12 @@ and produces visualizations for the final report:
 
 Run once before any metric script:
     python 00_finetune_base.py
+
+Resume after an interrupted run (latest checkpoint per task under ./checkpoints/bert-<task>/):
+    python 00_finetune_base.py --resume
 """
 
+import argparse
 import os
 import random
 import numpy as np
@@ -31,6 +35,7 @@ from transformers import (
     Trainer,
     DataCollatorWithPadding,
 )
+from transformers.trainer_utils import get_last_checkpoint
 from datasets import load_dataset
 import evaluate
 
@@ -85,7 +90,7 @@ TASK_CONFIG = {
         "metric_name":   "glue/mrpc",
         "primary_key":   "eval_f1",
         "primary_label": "F1",
-        "epochs":        5,
+        "epochs":        3,
         "color":         "#DC2626",
     },
 }
@@ -302,6 +307,19 @@ def plot_entropy_per_layer(entropy_per_task):
 # Main
 # ---------------------------------------------------------------------------
 def main():
+    parser = argparse.ArgumentParser(
+        description="Fine-tune BERT-base on SST-2, CoLA, and MRPC (GLUE)."
+    )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help=(
+            "Resume each task from the latest checkpoint in its output_dir "
+            "when present; otherwise train from pretrained weights."
+        ),
+    )
+    cli = parser.parse_args()
+
     all_log_histories = {}
     final_results     = {}
     entropy_per_task  = {}
@@ -322,6 +340,17 @@ def main():
         )
 
         out_dir = os.path.join(CHECKPOINT_DIR, f"bert-{task_name}")
+
+        resume_from = None
+        if cli.resume:
+            resume_from = get_last_checkpoint(out_dir)
+            if resume_from:
+                print(f"  Resuming from: {resume_from}\n")
+            else:
+                print(
+                    f"  --resume: no checkpoint in {out_dir}; training from scratch.\n"
+                )
+
         args = TrainingArguments(
             output_dir=out_dir,
             num_train_epochs=cfg["epochs"],
@@ -350,7 +379,7 @@ def main():
             data_collator=collator,
             compute_metrics=compute_metrics_fn(cfg["metric_name"]),
         )
-        trainer.train()
+        trainer.train(resume_from_checkpoint=resume_from)
         all_log_histories[task_name] = trainer.state.log_history
 
         eval_out = trainer.evaluate()
