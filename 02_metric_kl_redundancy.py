@@ -440,7 +440,7 @@ def finetune_and_eval(
             learning_rate=2e-5,
             weight_decay=0.01,
             warmup_ratio=0.1,
-            evaluation_strategy="epoch",
+            eval_strategy="epoch",
             save_strategy="no",
             seed=SEED,
             data_seed=SEED,
