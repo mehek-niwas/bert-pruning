@@ -62,7 +62,7 @@ for d in [FIGURES_DIR, RESULTS_DIR]:
 
 CALIB_SIZE      = 512
 PRUNE_RATIOS    = [0.1, 0.2, 0.3, 0.4, 0.5]
-FINETUNE_EPOCHS = 3
+FINETUNE_EPOCHS = 2
 N_LAYERS        = 12
 N_HEADS         = 12
 
