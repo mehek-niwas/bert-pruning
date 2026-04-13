@@ -63,6 +63,8 @@ PRUNE_RATIOS    = [0.1, 0.3, 0.5]
 FINETUNE_EPOCHS = 2
 N_LAYERS        = 12
 N_HEADS         = 12
+# Soft head masking: at least this many heads stay active in each encoder layer.
+MIN_HEADS_PER_LAYER = 1
 
 TASK_CONFIG = {
     "cola": {
@@ -116,9 +118,10 @@ def compute_metrics_fn(metric_name):
     return compute_metrics
 
 def safe_remove_cols(dataset):
-    keep = {"input_ids", "attention_mask", "token_type_ids", "label"}
+    # Drop raw text / metadata so collator only sees tensors (needed when remove_unused_columns=False).
+    keep = {"input_ids", "attention_mask", "token_type_ids", "label", "labels"}
     drop = [c for c in dataset.column_names if c not in keep]
-    return dataset.remove_columns(drop)
+    return dataset.remove_columns(drop) if drop else dataset
 
 # ---------------------------------------------------------------------------
 # Attention entropy computation
@@ -152,22 +155,66 @@ def compute_attention_entropy(model, dataloader):
     return entropy_sum / max(count, 1)
 
 # ---------------------------------------------------------------------------
-# Pruning
+# Pruning (head level: soft mask + per-layer floor; block level: unchanged)
 # ---------------------------------------------------------------------------
+class HeadMaskWrapper(nn.Module):
+    """Wraps the classifier; applies a fixed encoder head_mask (1=active, 0=masked) each forward."""
+
+    def __init__(self, model: nn.Module, head_mask: torch.Tensor):
+        super().__init__()
+        self.model = model
+        self.register_buffer("head_mask", head_mask.float())
+
+    def forward(self, *args, **kwargs):
+        # Trainer may pass this; HF models do not accept it.
+        kwargs.pop("num_items_in_batch", None)
+        kwargs["head_mask"] = self.head_mask
+        return self.model(*args, **kwargs)
+
+    def __getattr__(self, name):
+        # Must delegate to nn.Module.__getattr__ so buffers (head_mask) and submodules (model) resolve.
+        try:
+            return super().__getattr__(name)
+        except AttributeError:
+            return getattr(self.model, name)
+
+
+def greedy_mask_heads_by_sorted_order(sorted_pairs, n_target, min_heads_per_layer):
+    """
+    sorted_pairs: (l, h, score) in removal order (first entry removed first).
+    Masks up to n_target heads while keeping >= min_heads_per_layer active per layer.
+    """
+    active = [N_HEADS] * N_LAYERS
+    masked_list = []
+    for l, h, s in sorted_pairs:
+        if len(masked_list) >= n_target:
+            break
+        if active[l] <= min_heads_per_layer:
+            continue
+        masked_list.append((l, h, s))
+        active[l] -= 1
+    return masked_list
+
+
+def head_mask_tensor_from_masked_list(masked_list):
+    m = torch.ones(N_LAYERS, N_HEADS)
+    for l, h, _ in masked_list:
+        m[l, h] = 0.0
+    return m
+
+
 def prune_heads_by_entropy(model, entropy_scores, prune_ratio):
-    """Prune HIGHEST-entropy heads (most diffuse)."""
+    """Mask highest-entropy heads via BERT head_mask (soft prune); >= MIN_HEADS_PER_LAYER head(s)/layer stay active."""
     model = copy.deepcopy(model)
-    n_prune = max(1, int(N_LAYERS * N_HEADS * prune_ratio))
+    n_target = max(1, int(N_LAYERS * N_HEADS * prune_ratio))
     flat = sorted(
         [(l, h, float(entropy_scores[l, h])) for l in range(N_LAYERS) for h in range(N_HEADS)],
-        key=lambda x: x[2], reverse=True,
+        key=lambda x: x[2],
+        reverse=True,
     )
-    heads_to_prune = {}
-    for l, h, _ in flat[:n_prune]:
-        heads_to_prune.setdefault(l, set()).add(h)
-    for l, hset in heads_to_prune.items():
-        model.bert.encoder.layer[l].attention.prune_heads(hset)
-    return model, flat[:n_prune]
+    masked_list = greedy_mask_heads_by_sorted_order(flat, n_target, MIN_HEADS_PER_LAYER)
+    hm = head_mask_tensor_from_masked_list(masked_list)
+    return HeadMaskWrapper(model, hm), masked_list
 
 
 class SkippableBlock(nn.Module):
@@ -176,13 +223,37 @@ class SkippableBlock(nn.Module):
         self.block = block
         self.skip  = False
 
-    def forward(self, hidden_states, attention_mask=None, head_mask=None,
-                encoder_hidden_states=None, encoder_attention_mask=None,
-                past_key_value=None, output_attentions=False):
+    def forward(
+        self,
+        hidden_states,
+        attention_mask=None,
+        head_mask=None,
+        encoder_hidden_states=None,
+        encoder_attention_mask=None,
+        past_key_values=None,
+        output_attentions=False,
+        cache_position=None,
+        **kwargs,
+    ):
+        # Backwards-compat: older code may still pass past_key_value (singular).
+        if past_key_values is None and "past_key_value" in kwargs:
+            past_key_values = kwargs.pop("past_key_value")
         if self.skip:
-            return (hidden_states,)
-        return self.block(hidden_states, attention_mask=attention_mask,
-                          head_mask=head_mask, output_attentions=output_attentions)
+            outputs = (hidden_states,)
+            if output_attentions:
+                outputs = outputs + (None,)
+            return outputs
+        return self.block(
+            hidden_states,
+            attention_mask=attention_mask,
+            head_mask=head_mask,
+            encoder_hidden_states=encoder_hidden_states,
+            encoder_attention_mask=encoder_attention_mask,
+            past_key_values=past_key_values,
+            output_attentions=output_attentions,
+            cache_position=cache_position,
+            **kwargs,
+        )
 
 
 def prune_blocks_by_entropy(model, entropy_scores, prune_ratio):
@@ -201,8 +272,9 @@ def prune_blocks_by_entropy(model, entropy_scores, prune_ratio):
 
 
 AE_HEAD_RULE = (
-    "Prune heads with the highest mean attention entropy (most diffuse attention "
-    "distributions; AE treats them as least critical and removes them first)."
+    "Mask (BERT head_mask) heads with highest mean attention entropy first; "
+    f"at least {MIN_HEADS_PER_LAYER} head per layer stays active. "
+    "Structural weights are kept; attention is zeroed for masked heads."
 )
 AE_BLOCK_RULE = (
     "Skip entire encoder blocks whose mean attention entropy across heads is highest "
@@ -239,12 +311,17 @@ def append_pruning_report_head(
     score = res.get(primary_key, 0.0)
     lines.append("")
     lines.append("-" * 72)
+    n_budget = max(1, int(N_LAYERS * N_HEADS * ratio))
     lines.append(
         f"Task={task_name}  level=head  prune_ratio={ratio:.0%}  "
-        f"n_pruned={len(pruned_list)}"
+        f"n_masked={len(pruned_list)}  (budget {n_budget})"
     )
+    if len(pruned_list) < n_budget:
+        lines.append(
+            f"  Note: fewer than budget because of >= {MIN_HEADS_PER_LAYER} active head(s) per layer."
+        )
     lines.append(f"Selection rule (AE): {AE_HEAD_RULE}")
-    lines.append("Pruned heads (layer, head, entropy_score):")
+    lines.append("Masked heads (layer, head, entropy_score):")
     for l, h, s in pruned_list:
         lines.append(f"  L{l:2d}  H{h:2d}  entropy={s:.6f}")
     lines.append(
@@ -414,13 +491,15 @@ def finetune_and_eval(
         report_to="none",
         fp16=torch.cuda.is_available(),
         logging_steps=20,
+        # HeadMaskWrapper.forward is (*args, **kwargs); Trainer would drop input_ids etc.
+        remove_unused_columns=False,
     )
     trainer = Trainer(
         model=model,
         args=args,
         train_dataset=tokenized["train"],
         eval_dataset=tokenized["validation"],
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
         data_collator=DataCollatorWithPadding(tokenizer),
         compute_metrics=compute_metrics_fn(cfg["metric_name"]),
     )
@@ -530,7 +609,7 @@ def plot_pruned_head_map(pruned_heads_per_task_ratio):
     n_tasks = len(TASK_CONFIG)
     fig, axes = plt.subplots(n_tasks, len(ratios),
                              figsize=(4 * len(ratios), 3.5 * n_tasks))
-    fig.suptitle("AE: Pruned Heads at Each Ratio (red = pruned)",
+    fig.suptitle("AE: Masked Heads at Each Ratio (red = masked)",
                  fontsize=13, fontweight="bold")
 
     for row_i, task_name in enumerate(TASK_CONFIG.keys()):
@@ -598,10 +677,12 @@ def main():
 
         raw       = load_dataset(*cfg["dataset"])
         tokenized = raw.map(make_tokenize_fn(tokenizer, cfg["text_keys"]), batched=True)
+        for split in tokenized:
+            tokenized[split] = safe_remove_cols(tokenized[split])
         collator  = DataCollatorWithPadding(tokenizer)
 
         calib_loader = torch.utils.data.DataLoader(
-            safe_remove_cols(tokenized["train"].select(range(CALIB_SIZE))),
+            tokenized["train"].select(range(CALIB_SIZE)),
             batch_size=32, collate_fn=collator,
         )
 
@@ -618,7 +699,7 @@ def main():
                 per_device_eval_batch_size=64, seed=SEED,
             ),
             eval_dataset=tokenized["validation"],
-            tokenizer=tokenizer,
+            processing_class=tokenizer,
             data_collator=collator,
             compute_metrics=compute_metrics_fn(cfg["metric_name"]),
         ).evaluate()
@@ -649,7 +730,7 @@ def main():
             )
             score = res.get(pk, 0.0)
             print(f"    {cfg['primary_label']}: {score:.4f}  (baseline: {baseline_score:.4f})")
-            print(f"    Pruned {len(pruned_list)} heads; listing in report file.")
+            print(f"    Masked {len(pruned_list)} heads (soft); listing in report file.")
             append_pruning_report_head(
                 report_lines, task_name, ratio, pruned_list, res, cfg, baseline_score, pk
             )
