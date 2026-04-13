@@ -1,0 +1,691 @@
+01_metric_attention_entropy.py — AE pruning report
+Metric: mean per-head attention entropy on calibration data.
+
+
+========================================================================
+TASK COLA — baseline (no pruning)
+  Matthews Corr. = 0.528880  (eval_matthews_correlation)
+
+COMPLETE SCORE INVENTORY — task=cola — per-head mean attention entropy (all 12×12 heads)
+  L 0  H 0  entropy=2.326490
+  L 0  H 1  entropy=2.040782
+  L 0  H 2  entropy=1.008032
+  L 0  H 3  entropy=1.094689
+  L 0  H 4  entropy=1.946295
+  L 0  H 5  entropy=2.054211
+  L 0  H 6  entropy=2.116567
+  L 0  H 7  entropy=2.067225
+  L 0  H 8  entropy=2.186256
+  L 0  H 9  entropy=2.078383
+  L 0  H10  entropy=0.769691
+  L 0  H11  entropy=1.501900
+  L 1  H 0  entropy=1.643724
+  L 1  H 1  entropy=1.253138
+  L 1  H 2  entropy=1.714962
+  L 1  H 3  entropy=1.613113
+  L 1  H 4  entropy=1.164804
+  L 1  H 5  entropy=1.870334
+  L 1  H 6  entropy=0.341888
+  L 1  H 7  entropy=1.620640
+  L 1  H 8  entropy=2.042731
+  L 1  H 9  entropy=1.968075
+  L 1  H10  entropy=1.805991
+  L 1  H11  entropy=1.955298
+  L 2  H 0  entropy=0.216424
+  L 2  H 1  entropy=1.109539
+  L 2  H 2  entropy=1.277538
+  L 2  H 3  entropy=1.793033
+  L 2  H 4  entropy=1.412103
+  L 2  H 5  entropy=1.808348
+  L 2  H 6  entropy=1.656775
+  L 2  H 7  entropy=1.636425
+  L 2  H 8  entropy=1.723279
+  L 2  H 9  entropy=0.178851
+  L 2  H10  entropy=1.680297
+  L 2  H11  entropy=1.564383
+  L 3  H 0  entropy=0.922804
+  L 3  H 1  entropy=1.778550
+  L 3  H 2  entropy=1.436916
+  L 3  H 3  entropy=1.452491
+  L 3  H 4  entropy=1.816248
+  L 3  H 5  entropy=0.516095
+  L 3  H 6  entropy=1.603995
+  L 3  H 7  entropy=1.857077
+  L 3  H 8  entropy=1.700705
+  L 3  H 9  entropy=1.108196
+  L 3  H10  entropy=1.568213
+  L 3  H11  entropy=1.294440
+  L 4  H 0  entropy=1.067887
+  L 4  H 1  entropy=2.008834
+  L 4  H 2  entropy=0.984484
+  L 4  H 3  entropy=0.773797
+  L 4  H 4  entropy=1.460931
+  L 4  H 5  entropy=0.939718
+  L 4  H 6  entropy=0.993016
+  L 4  H 7  entropy=0.694201
+  L 4  H 8  entropy=1.011105
+  L 4  H 9  entropy=1.380080
+  L 4  H10  entropy=1.142251
+  L 4  H11  entropy=1.147375
+  L 5  H 0  entropy=0.765096
+  L 5  H 1  entropy=0.499392
+  L 5  H 2  entropy=0.902732
+  L 5  H 3  entropy=0.954724
+  L 5  H 4  entropy=1.297057
+  L 5  H 5  entropy=0.437287
+  L 5  H 6  entropy=0.527650
+  L 5  H 7  entropy=0.556785
+  L 5  H 8  entropy=0.812458
+  L 5  H 9  entropy=0.536715
+  L 5  H10  entropy=0.909564
+  L 5  H11  entropy=0.628518
+  L 6  H 0  entropy=1.001103
+  L 6  H 1  entropy=1.209640
+  L 6  H 2  entropy=1.095553
+  L 6  H 3  entropy=0.601487
+  L 6  H 4  entropy=0.741557
+  L 6  H 5  entropy=0.782825
+  L 6  H 6  entropy=0.938232
+  L 6  H 7  entropy=1.168625
+  L 6  H 8  entropy=1.047948
+  L 6  H 9  entropy=0.996431
+  L 6  H10  entropy=0.753163
+  L 6  H11  entropy=0.789857
+  L 7  H 0  entropy=1.359343
+  L 7  H 1  entropy=1.169728
+  L 7  H 2  entropy=1.132935
+  L 7  H 3  entropy=0.624618
+  L 7  H 4  entropy=0.781576
+  L 7  H 5  entropy=1.203628
+  L 7  H 6  entropy=0.596290
+  L 7  H 7  entropy=0.796335
+  L 7  H 8  entropy=1.304312
+  L 7  H 9  entropy=0.954815
+  L 7  H10  entropy=0.974398
+  L 7  H11  entropy=0.764450
+  L 8  H 0  entropy=1.273210
+  L 8  H 1  entropy=1.326985
+  L 8  H 2  entropy=1.111156
+  L 8  H 3  entropy=1.339699
+  L 8  H 4  entropy=1.450861
+  L 8  H 5  entropy=1.233539
+  L 8  H 6  entropy=1.223834
+  L 8  H 7  entropy=1.637109
+  L 8  H 8  entropy=1.721272
+  L 8  H 9  entropy=1.432414
+  L 8  H10  entropy=1.198675
+  L 8  H11  entropy=1.227057
+  L 9  H 0  entropy=1.304227
+  L 9  H 1  entropy=1.468852
+  L 9  H 2  entropy=1.826198
+  L 9  H 3  entropy=1.752586
+  L 9  H 4  entropy=1.620020
+  L 9  H 5  entropy=1.676387
+  L 9  H 6  entropy=1.404595
+  L 9  H 7  entropy=1.066760
+  L 9  H 8  entropy=1.612437
+  L 9  H 9  entropy=1.445795
+  L 9  H10  entropy=1.925818
+  L 9  H11  entropy=1.380884
+  L10  H 0  entropy=2.128821
+  L10  H 1  entropy=1.321900
+  L10  H 2  entropy=1.890005
+  L10  H 3  entropy=1.673861
+  L10  H 4  entropy=1.838078
+  L10  H 5  entropy=1.676834
+  L10  H 6  entropy=1.704204
+  L10  H 7  entropy=1.881419
+  L10  H 8  entropy=1.750907
+  L10  H 9  entropy=1.423794
+  L10  H10  entropy=1.442165
+  L10  H11  entropy=2.045954
+  L11  H 0  entropy=1.665102
+  L11  H 1  entropy=2.070413
+  L11  H 2  entropy=1.951627
+  L11  H 3  entropy=1.937254
+  L11  H 4  entropy=1.908618
+  L11  H 5  entropy=1.826584
+  L11  H 6  entropy=1.944193
+  L11  H 7  entropy=1.533851
+  L11  H 8  entropy=1.739635
+  L11  H 9  entropy=2.020178
+  L11  H10  entropy=1.894439
+  L11  H11  entropy=1.695485
+Per-block aggregate: mean entropy over heads in each layer (block pruning uses these means; highest mean skipped first):
+  Block L 0  mean_head_entropy=1.765877
+  Block L 1  mean_head_entropy=1.582892
+  Block L 2  mean_head_entropy=1.338083
+  Block L 3  mean_head_entropy=1.421311
+  Block L 4  mean_head_entropy=1.133640
+  Block L 5  mean_head_entropy=0.735665
+  Block L 6  mean_head_entropy=0.927202
+  Block L 7  mean_head_entropy=0.971869
+  Block L 8  mean_head_entropy=1.347984
+  Block L 9  mean_head_entropy=1.540380
+  Block L10  mean_head_entropy=1.731495
+  Block L11  mean_head_entropy=1.848948
+
+------------------------------------------------------------------------
+Task=cola  level=head  prune_ratio=10%  n_masked=14  (budget 14)
+Selection rule (AE): Mask (BERT head_mask) heads with highest mean attention entropy first; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, entropy_score):
+  L 0  H 0  entropy=2.326490
+  L 0  H 8  entropy=2.186256
+  L10  H 0  entropy=2.128821
+  L 0  H 6  entropy=2.116567
+  L 0  H 9  entropy=2.078383
+  L11  H 1  entropy=2.070413
+  L 0  H 7  entropy=2.067225
+  L 0  H 5  entropy=2.054211
+  L10  H11  entropy=2.045954
+  L 1  H 8  entropy=2.042731
+  L 0  H 1  entropy=2.040782
+  L11  H 9  entropy=2.020178
+  L 4  H 1  entropy=2.008834
+  L 1  H 9  entropy=1.968075
+After fine-tune: Matthews Corr. = 0.000000  (baseline 0.528880,  delta -0.528880)
+Full eval metrics: epoch=2.000000, eval_runtime=10.954800, eval_samples_per_second=95.210000, eval_steps_per_second=1.552000
+
+------------------------------------------------------------------------
+Task=cola  level=head  prune_ratio=30%  n_masked=43  (budget 43)
+Selection rule (AE): Mask (BERT head_mask) heads with highest mean attention entropy first; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, entropy_score):
+  L 0  H 0  entropy=2.326490
+  L 0  H 8  entropy=2.186256
+  L10  H 0  entropy=2.128821
+  L 0  H 6  entropy=2.116567
+  L 0  H 9  entropy=2.078383
+  L11  H 1  entropy=2.070413
+  L 0  H 7  entropy=2.067225
+  L 0  H 5  entropy=2.054211
+  L10  H11  entropy=2.045954
+  L 1  H 8  entropy=2.042731
+  L 0  H 1  entropy=2.040782
+  L11  H 9  entropy=2.020178
+  L 4  H 1  entropy=2.008834
+  L 1  H 9  entropy=1.968075
+  L 1  H11  entropy=1.955298
+  L11  H 2  entropy=1.951627
+  L 0  H 4  entropy=1.946295
+  L11  H 6  entropy=1.944193
+  L11  H 3  entropy=1.937254
+  L 9  H10  entropy=1.925818
+  L11  H 4  entropy=1.908618
+  L11  H10  entropy=1.894439
+  L10  H 2  entropy=1.890005
+  L10  H 7  entropy=1.881419
+  L 1  H 5  entropy=1.870334
+  L 3  H 7  entropy=1.857077
+  L10  H 4  entropy=1.838078
+  L11  H 5  entropy=1.826584
+  L 9  H 2  entropy=1.826198
+  L 3  H 4  entropy=1.816248
+  L 2  H 5  entropy=1.808348
+  L 1  H10  entropy=1.805991
+  L 2  H 3  entropy=1.793033
+  L 3  H 1  entropy=1.778550
+  L 9  H 3  entropy=1.752586
+  L10  H 8  entropy=1.750907
+  L11  H 8  entropy=1.739635
+  L 2  H 8  entropy=1.723279
+  L 8  H 8  entropy=1.721272
+  L 1  H 2  entropy=1.714962
+  L10  H 6  entropy=1.704204
+  L 3  H 8  entropy=1.700705
+  L11  H11  entropy=1.695485
+After fine-tune: Matthews Corr. = 0.000000  (baseline 0.528880,  delta -0.528880)
+Full eval metrics: epoch=2.000000, eval_runtime=10.947300, eval_samples_per_second=95.274000, eval_steps_per_second=1.553000
+
+------------------------------------------------------------------------
+Task=cola  level=head  prune_ratio=50%  n_masked=72  (budget 72)
+Selection rule (AE): Mask (BERT head_mask) heads with highest mean attention entropy first; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, entropy_score):
+  L 0  H 0  entropy=2.326490
+  L 0  H 8  entropy=2.186256
+  L10  H 0  entropy=2.128821
+  L 0  H 6  entropy=2.116567
+  L 0  H 9  entropy=2.078383
+  L11  H 1  entropy=2.070413
+  L 0  H 7  entropy=2.067225
+  L 0  H 5  entropy=2.054211
+  L10  H11  entropy=2.045954
+  L 1  H 8  entropy=2.042731
+  L 0  H 1  entropy=2.040782
+  L11  H 9  entropy=2.020178
+  L 4  H 1  entropy=2.008834
+  L 1  H 9  entropy=1.968075
+  L 1  H11  entropy=1.955298
+  L11  H 2  entropy=1.951627
+  L 0  H 4  entropy=1.946295
+  L11  H 6  entropy=1.944193
+  L11  H 3  entropy=1.937254
+  L 9  H10  entropy=1.925818
+  L11  H 4  entropy=1.908618
+  L11  H10  entropy=1.894439
+  L10  H 2  entropy=1.890005
+  L10  H 7  entropy=1.881419
+  L 1  H 5  entropy=1.870334
+  L 3  H 7  entropy=1.857077
+  L10  H 4  entropy=1.838078
+  L11  H 5  entropy=1.826584
+  L 9  H 2  entropy=1.826198
+  L 3  H 4  entropy=1.816248
+  L 2  H 5  entropy=1.808348
+  L 1  H10  entropy=1.805991
+  L 2  H 3  entropy=1.793033
+  L 3  H 1  entropy=1.778550
+  L 9  H 3  entropy=1.752586
+  L10  H 8  entropy=1.750907
+  L11  H 8  entropy=1.739635
+  L 2  H 8  entropy=1.723279
+  L 8  H 8  entropy=1.721272
+  L 1  H 2  entropy=1.714962
+  L10  H 6  entropy=1.704204
+  L 3  H 8  entropy=1.700705
+  L11  H11  entropy=1.695485
+  L 2  H10  entropy=1.680297
+  L10  H 5  entropy=1.676834
+  L 9  H 5  entropy=1.676387
+  L10  H 3  entropy=1.673861
+  L11  H 0  entropy=1.665102
+  L 2  H 6  entropy=1.656775
+  L 1  H 0  entropy=1.643724
+  L 8  H 7  entropy=1.637109
+  L 2  H 7  entropy=1.636425
+  L 1  H 7  entropy=1.620640
+  L 9  H 4  entropy=1.620020
+  L 1  H 3  entropy=1.613113
+  L 9  H 8  entropy=1.612437
+  L 3  H 6  entropy=1.603995
+  L 3  H10  entropy=1.568213
+  L 2  H11  entropy=1.564383
+  L 0  H11  entropy=1.501900
+  L 9  H 1  entropy=1.468852
+  L 4  H 4  entropy=1.460931
+  L 3  H 3  entropy=1.452491
+  L 8  H 4  entropy=1.450861
+  L 9  H 9  entropy=1.445795
+  L10  H10  entropy=1.442165
+  L 3  H 2  entropy=1.436916
+  L 8  H 9  entropy=1.432414
+  L10  H 9  entropy=1.423794
+  L 2  H 4  entropy=1.412103
+  L 9  H 6  entropy=1.404595
+  L 9  H11  entropy=1.380884
+After fine-tune: Matthews Corr. = 0.000000  (baseline 0.528880,  delta -0.528880)
+Full eval metrics: epoch=2.000000, eval_runtime=10.955800, eval_samples_per_second=95.200000, eval_steps_per_second=1.552000
+
+------------------------------------------------------------------------
+Task=cola  level=block  prune_ratio=10%  n_skipped_blocks=1
+Selection rule (AE): Skip entire encoder blocks whose mean attention entropy across heads is highest (most diffuse layers are skipped first).
+Skipped blocks (encoder layer index, mean entropy over heads):
+  Block L11  mean_head_entropy=1.848948
+After fine-tune: Matthews Corr. = 0.565252  (baseline 0.528880,  delta +0.036371)
+Full eval metrics: epoch=2.000000, eval_loss=0.553094, eval_matthews_correlation=0.565252, eval_runtime=9.946400, eval_samples_per_second=104.862000, eval_steps_per_second=1.709000
+
+------------------------------------------------------------------------
+Task=cola  level=block  prune_ratio=30%  n_skipped_blocks=3
+Selection rule (AE): Skip entire encoder blocks whose mean attention entropy across heads is highest (most diffuse layers are skipped first).
+Skipped blocks (encoder layer index, mean entropy over heads):
+  Block L11  mean_head_entropy=1.848948
+  Block L 0  mean_head_entropy=1.765877
+  Block L10  mean_head_entropy=1.731495
+After fine-tune: Matthews Corr. = 0.552318  (baseline 0.528880,  delta +0.023438)
+Full eval metrics: epoch=2.000000, eval_loss=0.547425, eval_matthews_correlation=0.552318, eval_runtime=8.145100, eval_samples_per_second=128.052000, eval_steps_per_second=2.087000
+
+------------------------------------------------------------------------
+Task=cola  level=block  prune_ratio=50%  n_skipped_blocks=6
+Selection rule (AE): Skip entire encoder blocks whose mean attention entropy across heads is highest (most diffuse layers are skipped first).
+Skipped blocks (encoder layer index, mean entropy over heads):
+  Block L11  mean_head_entropy=1.848948
+  Block L 0  mean_head_entropy=1.765877
+  Block L10  mean_head_entropy=1.731495
+  Block L 1  mean_head_entropy=1.582892
+  Block L 9  mean_head_entropy=1.540380
+  Block L 3  mean_head_entropy=1.421311
+After fine-tune: Matthews Corr. = 0.427202  (baseline 0.528880,  delta -0.101678)
+Full eval metrics: epoch=2.000000, eval_loss=0.543802, eval_matthews_correlation=0.427202, eval_runtime=5.474400, eval_samples_per_second=190.522000, eval_steps_per_second=3.105000
+
+========================================================================
+TASK MRPC — baseline (no pruning)
+  F1 = 0.884354  (eval_f1)
+
+COMPLETE SCORE INVENTORY — task=mrpc — per-head mean attention entropy (all 12×12 heads)
+  L 0  H 0  entropy=3.190335
+  L 0  H 1  entropy=3.075840
+  L 0  H 2  entropy=1.363677
+  L 0  H 3  entropy=1.253504
+  L 0  H 4  entropy=3.485930
+  L 0  H 5  entropy=3.245531
+  L 0  H 6  entropy=3.598969
+  L 0  H 7  entropy=3.373487
+  L 0  H 8  entropy=2.970479
+  L 0  H 9  entropy=3.479376
+  L 0  H10  entropy=0.966824
+  L 0  H11  entropy=2.300110
+  L 1  H 0  entropy=2.930917
+  L 1  H 1  entropy=1.602048
+  L 1  H 2  entropy=3.300306
+  L 1  H 3  entropy=2.901136
+  L 1  H 4  entropy=1.466833
+  L 1  H 5  entropy=2.978705
+  L 1  H 6  entropy=0.628428
+  L 1  H 7  entropy=2.995426
+  L 1  H 8  entropy=3.282953
+  L 1  H 9  entropy=3.448845
+  L 1  H10  entropy=2.565823
+  L 1  H11  entropy=2.906385
+  L 2  H 0  entropy=0.308890
+  L 2  H 1  entropy=2.118602
+  L 2  H 2  entropy=2.579153
+  L 2  H 3  entropy=3.414619
+  L 2  H 4  entropy=2.896902
+  L 2  H 5  entropy=3.070001
+  L 2  H 6  entropy=2.591772
+  L 2  H 7  entropy=3.192159
+  L 2  H 8  entropy=2.934005
+  L 2  H 9  entropy=0.335967
+  L 2  H10  entropy=3.242076
+  L 2  H11  entropy=2.809676
+  L 3  H 0  entropy=1.621581
+  L 3  H 1  entropy=3.227228
+  L 3  H 2  entropy=2.728599
+  L 3  H 3  entropy=2.308609
+  L 3  H 4  entropy=2.880243
+  L 3  H 5  entropy=1.179826
+  L 3  H 6  entropy=2.951551
+  L 3  H 7  entropy=3.168998
+  L 3  H 8  entropy=3.044696
+  L 3  H 9  entropy=1.561697
+  L 3  H10  entropy=2.670358
+  L 3  H11  entropy=2.169372
+  L 4  H 0  entropy=2.430711
+  L 4  H 1  entropy=2.935145
+  L 4  H 2  entropy=2.507050
+  L 4  H 3  entropy=1.676100
+  L 4  H 4  entropy=3.119498
+  L 4  H 5  entropy=1.955057
+  L 4  H 6  entropy=2.377119
+  L 4  H 7  entropy=1.743261
+  L 4  H 8  entropy=2.293014
+  L 4  H 9  entropy=3.049761
+  L 4  H10  entropy=2.314227
+  L 4  H11  entropy=1.809412
+  L 5  H 0  entropy=2.027155
+  L 5  H 1  entropy=1.562838
+  L 5  H 2  entropy=2.651698
+  L 5  H 3  entropy=2.176107
+  L 5  H 4  entropy=3.013304
+  L 5  H 5  entropy=2.022206
+  L 5  H 6  entropy=1.491472
+  L 5  H 7  entropy=1.670069
+  L 5  H 8  entropy=2.405307
+  L 5  H 9  entropy=1.076955
+  L 5  H10  entropy=1.909277
+  L 5  H11  entropy=1.796653
+  L 6  H 0  entropy=1.635257
+  L 6  H 1  entropy=1.823493
+  L 6  H 2  entropy=1.906045
+  L 6  H 3  entropy=1.492302
+  L 6  H 4  entropy=1.838982
+  L 6  H 5  entropy=1.753090
+  L 6  H 6  entropy=1.928673
+  L 6  H 7  entropy=1.888893
+  L 6  H 8  entropy=2.659569
+  L 6  H 9  entropy=1.857717
+  L 6  H10  entropy=1.531611
+  L 6  H11  entropy=1.206998
+  L 7  H 0  entropy=1.968412
+  L 7  H 1  entropy=1.772391
+  L 7  H 2  entropy=1.796328
+  L 7  H 3  entropy=1.220457
+  L 7  H 4  entropy=1.136525
+  L 7  H 5  entropy=1.585554
+  L 7  H 6  entropy=1.361327
+  L 7  H 7  entropy=1.246889
+  L 7  H 8  entropy=1.872831
+  L 7  H 9  entropy=1.748375
+  L 7  H10  entropy=1.657742
+  L 7  H11  entropy=1.788293
+  L 8  H 0  entropy=1.790817
+  L 8  H 1  entropy=2.190443
+  L 8  H 2  entropy=1.522003
+  L 8  H 3  entropy=2.412562
+  L 8  H 4  entropy=1.798138
+  L 8  H 5  entropy=1.724733
+  L 8  H 6  entropy=1.981401
+  L 8  H 7  entropy=2.277695
+  L 8  H 8  entropy=2.233218
+  L 8  H 9  entropy=2.266587
+  L 8  H10  entropy=1.925914
+  L 8  H11  entropy=1.899565
+  L 9  H 0  entropy=1.997220
+  L 9  H 1  entropy=1.791802
+  L 9  H 2  entropy=2.037243
+  L 9  H 3  entropy=2.257355
+  L 9  H 4  entropy=1.606657
+  L 9  H 5  entropy=2.091719
+  L 9  H 6  entropy=1.898634
+  L 9  H 7  entropy=1.486731
+  L 9  H 8  entropy=2.292411
+  L 9  H 9  entropy=1.999744
+  L 9  H10  entropy=1.721975
+  L 9  H11  entropy=2.358025
+  L10  H 0  entropy=2.562959
+  L10  H 1  entropy=1.795287
+  L10  H 2  entropy=2.123587
+  L10  H 3  entropy=2.351399
+  L10  H 4  entropy=2.159106
+  L10  H 5  entropy=1.977377
+  L10  H 6  entropy=2.130907
+  L10  H 7  entropy=2.614539
+  L10  H 8  entropy=2.127179
+  L10  H 9  entropy=1.856579
+  L10  H10  entropy=2.322088
+  L10  H11  entropy=2.083770
+  L11  H 0  entropy=2.107348
+  L11  H 1  entropy=2.147564
+  L11  H 2  entropy=2.466545
+  L11  H 3  entropy=1.896569
+  L11  H 4  entropy=2.217738
+  L11  H 5  entropy=2.222712
+  L11  H 6  entropy=1.904138
+  L11  H 7  entropy=1.869426
+  L11  H 8  entropy=2.058261
+  L11  H 9  entropy=2.316691
+  L11  H10  entropy=2.079375
+  L11  H11  entropy=2.123906
+Per-block aggregate: mean entropy over heads in each layer (block pruning uses these means; highest mean skipped first):
+  Block L 0  mean_head_entropy=2.692005
+  Block L 1  mean_head_entropy=2.583984
+  Block L 2  mean_head_entropy=2.457819
+  Block L 3  mean_head_entropy=2.459397
+  Block L 4  mean_head_entropy=2.350863
+  Block L 5  mean_head_entropy=1.983587
+  Block L 6  mean_head_entropy=1.793553
+  Block L 7  mean_head_entropy=1.596260
+  Block L 8  mean_head_entropy=2.001923
+  Block L 9  mean_head_entropy=1.961626
+  Block L10  mean_head_entropy=2.175398
+  Block L11  mean_head_entropy=2.117523
+
+------------------------------------------------------------------------
+Task=mrpc  level=head  prune_ratio=10%  n_masked=14  (budget 14)
+Selection rule (AE): Mask (BERT head_mask) heads with highest mean attention entropy first; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, entropy_score):
+  L 0  H 6  entropy=3.598969
+  L 0  H 4  entropy=3.485930
+  L 0  H 9  entropy=3.479376
+  L 1  H 9  entropy=3.448845
+  L 2  H 3  entropy=3.414619
+  L 0  H 7  entropy=3.373487
+  L 1  H 2  entropy=3.300306
+  L 1  H 8  entropy=3.282953
+  L 0  H 5  entropy=3.245531
+  L 2  H10  entropy=3.242076
+  L 3  H 1  entropy=3.227228
+  L 2  H 7  entropy=3.192159
+  L 0  H 0  entropy=3.190335
+  L 3  H 7  entropy=3.168998
+After fine-tune: F1 = 0.000000  (baseline 0.884354,  delta -0.884354)
+Full eval metrics: epoch=2.000000, eval_runtime=14.499600, eval_samples_per_second=28.139000, eval_steps_per_second=0.483000
+
+------------------------------------------------------------------------
+Task=mrpc  level=head  prune_ratio=30%  n_masked=43  (budget 43)
+Selection rule (AE): Mask (BERT head_mask) heads with highest mean attention entropy first; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, entropy_score):
+  L 0  H 6  entropy=3.598969
+  L 0  H 4  entropy=3.485930
+  L 0  H 9  entropy=3.479376
+  L 1  H 9  entropy=3.448845
+  L 2  H 3  entropy=3.414619
+  L 0  H 7  entropy=3.373487
+  L 1  H 2  entropy=3.300306
+  L 1  H 8  entropy=3.282953
+  L 0  H 5  entropy=3.245531
+  L 2  H10  entropy=3.242076
+  L 3  H 1  entropy=3.227228
+  L 2  H 7  entropy=3.192159
+  L 0  H 0  entropy=3.190335
+  L 3  H 7  entropy=3.168998
+  L 4  H 4  entropy=3.119498
+  L 0  H 1  entropy=3.075840
+  L 2  H 5  entropy=3.070001
+  L 4  H 9  entropy=3.049761
+  L 3  H 8  entropy=3.044696
+  L 5  H 4  entropy=3.013304
+  L 1  H 7  entropy=2.995426
+  L 1  H 5  entropy=2.978705
+  L 0  H 8  entropy=2.970479
+  L 3  H 6  entropy=2.951551
+  L 4  H 1  entropy=2.935145
+  L 2  H 8  entropy=2.934005
+  L 1  H 0  entropy=2.930917
+  L 1  H11  entropy=2.906385
+  L 1  H 3  entropy=2.901136
+  L 2  H 4  entropy=2.896902
+  L 3  H 4  entropy=2.880243
+  L 2  H11  entropy=2.809676
+  L 3  H 2  entropy=2.728599
+  L 3  H10  entropy=2.670358
+  L 6  H 8  entropy=2.659569
+  L 5  H 2  entropy=2.651698
+  L10  H 7  entropy=2.614539
+  L 2  H 6  entropy=2.591772
+  L 2  H 2  entropy=2.579153
+  L 1  H10  entropy=2.565823
+  L10  H 0  entropy=2.562959
+  L 4  H 2  entropy=2.507050
+  L11  H 2  entropy=2.466545
+After fine-tune: F1 = 0.000000  (baseline 0.884354,  delta -0.884354)
+Full eval metrics: epoch=2.000000, eval_runtime=14.499900, eval_samples_per_second=28.138000, eval_steps_per_second=0.483000
+
+------------------------------------------------------------------------
+Task=mrpc  level=head  prune_ratio=50%  n_masked=72  (budget 72)
+Selection rule (AE): Mask (BERT head_mask) heads with highest mean attention entropy first; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, entropy_score):
+  L 0  H 6  entropy=3.598969
+  L 0  H 4  entropy=3.485930
+  L 0  H 9  entropy=3.479376
+  L 1  H 9  entropy=3.448845
+  L 2  H 3  entropy=3.414619
+  L 0  H 7  entropy=3.373487
+  L 1  H 2  entropy=3.300306
+  L 1  H 8  entropy=3.282953
+  L 0  H 5  entropy=3.245531
+  L 2  H10  entropy=3.242076
+  L 3  H 1  entropy=3.227228
+  L 2  H 7  entropy=3.192159
+  L 0  H 0  entropy=3.190335
+  L 3  H 7  entropy=3.168998
+  L 4  H 4  entropy=3.119498
+  L 0  H 1  entropy=3.075840
+  L 2  H 5  entropy=3.070001
+  L 4  H 9  entropy=3.049761
+  L 3  H 8  entropy=3.044696
+  L 5  H 4  entropy=3.013304
+  L 1  H 7  entropy=2.995426
+  L 1  H 5  entropy=2.978705
+  L 0  H 8  entropy=2.970479
+  L 3  H 6  entropy=2.951551
+  L 4  H 1  entropy=2.935145
+  L 2  H 8  entropy=2.934005
+  L 1  H 0  entropy=2.930917
+  L 1  H11  entropy=2.906385
+  L 1  H 3  entropy=2.901136
+  L 2  H 4  entropy=2.896902
+  L 3  H 4  entropy=2.880243
+  L 2  H11  entropy=2.809676
+  L 3  H 2  entropy=2.728599
+  L 3  H10  entropy=2.670358
+  L 6  H 8  entropy=2.659569
+  L 5  H 2  entropy=2.651698
+  L10  H 7  entropy=2.614539
+  L 2  H 6  entropy=2.591772
+  L 2  H 2  entropy=2.579153
+  L 1  H10  entropy=2.565823
+  L10  H 0  entropy=2.562959
+  L 4  H 2  entropy=2.507050
+  L11  H 2  entropy=2.466545
+  L 4  H 0  entropy=2.430711
+  L 8  H 3  entropy=2.412562
+  L 5  H 8  entropy=2.405307
+  L 4  H 6  entropy=2.377119
+  L 9  H11  entropy=2.358025
+  L10  H 3  entropy=2.351399
+  L10  H10  entropy=2.322088
+  L11  H 9  entropy=2.316691
+  L 4  H10  entropy=2.314227
+  L 3  H 3  entropy=2.308609
+  L 0  H11  entropy=2.300110
+  L 4  H 8  entropy=2.293014
+  L 9  H 8  entropy=2.292411
+  L 8  H 7  entropy=2.277695
+  L 8  H 9  entropy=2.266587
+  L 9  H 3  entropy=2.257355
+  L 8  H 8  entropy=2.233218
+  L11  H 5  entropy=2.222712
+  L11  H 4  entropy=2.217738
+  L 8  H 1  entropy=2.190443
+  L 5  H 3  entropy=2.176107
+  L 3  H11  entropy=2.169372
+  L10  H 4  entropy=2.159106
+  L11  H 1  entropy=2.147564
+  L10  H 6  entropy=2.130907
+  L10  H 8  entropy=2.127179
+  L11  H11  entropy=2.123906
+  L10  H 2  entropy=2.123587
+  L 2  H 1  entropy=2.118602
+After fine-tune: F1 = 0.000000  (baseline 0.884354,  delta -0.884354)
+Full eval metrics: epoch=2.000000, eval_runtime=14.543200, eval_samples_per_second=28.054000, eval_steps_per_second=0.481000
+
+------------------------------------------------------------------------
+Task=mrpc  level=block  prune_ratio=10%  n_skipped_blocks=1
+Selection rule (AE): Skip entire encoder blocks whose mean attention entropy across heads is highest (most diffuse layers are skipped first).
+Skipped blocks (encoder layer index, mean entropy over heads):
+  Block L 0  mean_head_entropy=2.692005
+After fine-tune: F1 = 0.887737  (baseline 0.884354,  delta +0.003384)
+Full eval metrics: epoch=2.000000, eval_accuracy=0.840686, eval_f1=0.887737, eval_loss=0.417837, eval_runtime=13.005100, eval_samples_per_second=31.372000, eval_steps_per_second=0.538000
+
+------------------------------------------------------------------------
+Task=mrpc  level=block  prune_ratio=30%  n_skipped_blocks=3
+Selection rule (AE): Skip entire encoder blocks whose mean attention entropy across heads is highest (most diffuse layers are skipped first).
+Skipped blocks (encoder layer index, mean entropy over heads):
+  Block L 0  mean_head_entropy=2.692005
+  Block L 1  mean_head_entropy=2.583984
+  Block L 3  mean_head_entropy=2.459397
+After fine-tune: F1 = 0.860353  (baseline 0.884354,  delta -0.024001)
+Full eval metrics: epoch=2.000000, eval_accuracy=0.786765, eval_f1=0.860353, eval_loss=0.557682, eval_runtime=10.658200, eval_samples_per_second=38.280000, eval_steps_per_second=0.657000
+
+------------------------------------------------------------------------
+Task=mrpc  level=block  prune_ratio=50%  n_skipped_blocks=6
+Selection rule (AE): Skip entire encoder blocks whose mean attention entropy across heads is highest (most diffuse layers are skipped first).
+Skipped blocks (encoder layer index, mean entropy over heads):
+  Block L 0  mean_head_entropy=2.692005
+  Block L 1  mean_head_entropy=2.583984
+  Block L 3  mean_head_entropy=2.459397
+  Block L 2  mean_head_entropy=2.457819
+  Block L 4  mean_head_entropy=2.350863
+  Block L10  mean_head_entropy=2.175398
+After fine-tune: F1 = 0.818750  (baseline 0.884354,  delta -0.065604)
+Full eval metrics: epoch=2.000000, eval_accuracy=0.715686, eval_f1=0.818750, eval_loss=0.591158, eval_runtime=7.194000, eval_samples_per_second=56.714000, eval_steps_per_second=0.973000

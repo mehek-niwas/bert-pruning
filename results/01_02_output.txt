@@ -1,0 +1,871 @@
+(cloud-env) PS D:\projects\cloud-wrapper\cs462\final-project\bert-pruning> python .\01_metric_attention_entropy.py; python .\02_metric_kl_redundancy.py; python .\03_metric_head_importance.py
+
+============================================================
+  AE — Task: COLA
+============================================================
+  Computing attention entropy...
+BertSdpaSelfAttention is used but `torch.nn.functional.scaled_dot_product_attention` does not support non-absolute `position_embedding_type` or `output_attentions=True` or `head_mask`. Falling back to the manual attention implementation, but specifying the manual implementation will be required from Transformers version v5.0.0 onwards. This warning can be removed using the argument `attn_implementation="eager"` when loading the model.
+  Entropy — min: 0.179  max: 2.326
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:02<00:00,  7.20it/s]
+
+  [Head] prune_ratio=0.1
+    Mask (BERT head_mask) heads with highest mean attention entropy first; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+{'loss': 0.4822, 'grad_norm': 5.4727463722229, 'learning_rate': 6.666666666666667e-06, 'epoch': 0.07}
+{'loss': 0.4383, 'grad_norm': 5.768459320068359, 'learning_rate': 1.4074074074074075e-05, 'epoch': 0.15}
+{'loss': 0.3886, 'grad_norm': 4.279658794403076, 'learning_rate': 1.9875518672199173e-05, 'epoch': 0.22}
+{'loss': 0.302, 'grad_norm': 6.591785430908203, 'learning_rate': 1.9045643153526972e-05, 'epoch': 0.3}
+{'loss': 0.3192, 'grad_norm': 6.048791408538818, 'learning_rate': 1.8215767634854774e-05, 'epoch': 0.37}
+{'loss': 0.2813, 'grad_norm': 6.951547622680664, 'learning_rate': 1.7385892116182573e-05, 'epoch': 0.45}
+{'loss': 0.3486, 'grad_norm': 8.177780151367188, 'learning_rate': 1.6556016597510372e-05, 'epoch': 0.52}
+{'loss': 0.2884, 'grad_norm': 6.922389507293701, 'learning_rate': 1.5726141078838175e-05, 'epoch': 0.6}
+{'loss': 0.2996, 'grad_norm': 7.159700870513916, 'learning_rate': 1.4896265560165977e-05, 'epoch': 0.67}
+{'loss': 0.2939, 'grad_norm': 7.383392333984375, 'learning_rate': 1.4066390041493778e-05, 'epoch': 0.75}
+{'loss': 0.3305, 'grad_norm': 3.5024356842041016, 'learning_rate': 1.3236514522821577e-05, 'epoch': 0.82}
+{'loss': 0.2745, 'grad_norm': 5.185579299926758, 'learning_rate': 1.240663900414938e-05, 'epoch': 0.9}
+{'loss': 0.3134, 'grad_norm': 13.318942070007324, 'learning_rate': 1.157676348547718e-05, 'epoch': 0.97}
+{'eval_runtime': 11.005, 'eval_samples_per_second': 94.775, 'eval_steps_per_second': 1.545, 'epoch': 1.0}
+{'loss': 0.2981, 'grad_norm': 7.838886737823486, 'learning_rate': 1.074688796680498e-05, 'epoch': 1.04}
+{'loss': 0.2057, 'grad_norm': 6.220704555511475, 'learning_rate': 9.91701244813278e-06, 'epoch': 1.12}
+{'loss': 0.2137, 'grad_norm': 5.380814552307129, 'learning_rate': 9.087136929460581e-06, 'epoch': 1.19}
+{'loss': 0.2286, 'grad_norm': 7.1692705154418945, 'learning_rate': 8.257261410788382e-06, 'epoch': 1.27}
+{'loss': 0.2153, 'grad_norm': 9.629960060119629, 'learning_rate': 7.427385892116184e-06, 'epoch': 1.34}
+{'loss': 0.2055, 'grad_norm': 13.586008071899414, 'learning_rate': 6.5975103734439835e-06, 'epoch': 1.42}
+{'loss': 0.2251, 'grad_norm': 5.595184326171875, 'learning_rate': 5.767634854771784e-06, 'epoch': 1.49}
+{'loss': 0.2216, 'grad_norm': 5.846585750579834, 'learning_rate': 4.937759336099586e-06, 'epoch': 1.57}
+{'loss': 0.204, 'grad_norm': 1.2090791463851929, 'learning_rate': 4.107883817427386e-06, 'epoch': 1.64}
+{'loss': 0.2413, 'grad_norm': 11.173277854919434, 'learning_rate': 3.278008298755187e-06, 'epoch': 1.72}
+{'loss': 0.1686, 'grad_norm': 6.959234714508057, 'learning_rate': 2.448132780082988e-06, 'epoch': 1.79}
+{'loss': 0.2054, 'grad_norm': 6.781846046447754, 'learning_rate': 1.6182572614107886e-06, 'epoch': 1.87}
+{'loss': 0.1827, 'grad_norm': 5.856112957000732, 'learning_rate': 7.883817427385892e-07, 'epoch': 1.94}
+{'eval_runtime': 10.9997, 'eval_samples_per_second': 94.821, 'eval_steps_per_second': 1.545, 'epoch': 2.0}
+{'train_runtime': 606.8791, 'train_samples_per_second': 28.18, 'train_steps_per_second': 0.883, 'train_loss': 0.2736072202227009, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 536/536 [10:06<00:00,  1.13s/it]
+    FT log:  ./results\prune_finetune_logs\01_AE\cola_head_r10.json
+    FT plot: ./results\prune_finetune_logs\01_AE\cola_head_r10.png
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:10<00:00,  1.66it/s]
+    Matthews Corr.: 0.0000  (baseline: 0.5289)
+    Masked 14 heads (soft); listing in report file.
+
+  [Head] prune_ratio=0.3
+    Mask (BERT head_mask) heads with highest mean attention entropy first; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+{'loss': 0.6273, 'grad_norm': 3.4019076824188232, 'learning_rate': 6.666666666666667e-06, 'epoch': 0.07}
+{'loss': 0.5318, 'grad_norm': 5.587671756744385, 'learning_rate': 1.4074074074074075e-05, 'epoch': 0.15}
+{'loss': 0.4193, 'grad_norm': 4.4249186515808105, 'learning_rate': 1.983402489626556e-05, 'epoch': 0.22}
+{'loss': 0.3322, 'grad_norm': 4.982222557067871, 'learning_rate': 1.9004149377593363e-05, 'epoch': 0.3}
+{'loss': 0.3352, 'grad_norm': 7.744551658630371, 'learning_rate': 1.8174273858921162e-05, 'epoch': 0.37}
+{'loss': 0.3198, 'grad_norm': 12.965882301330566, 'learning_rate': 1.7344398340248965e-05, 'epoch': 0.45}
+{'loss': 0.3761, 'grad_norm': 4.999627590179443, 'learning_rate': 1.6514522821576764e-05, 'epoch': 0.52}
+{'loss': 0.3041, 'grad_norm': 7.043431758880615, 'learning_rate': 1.5684647302904566e-05, 'epoch': 0.6}
+{'loss': 0.3271, 'grad_norm': 5.201142311096191, 'learning_rate': 1.4854771784232367e-05, 'epoch': 0.67}
+{'loss': 0.3248, 'grad_norm': 5.740584373474121, 'learning_rate': 1.4066390041493778e-05, 'epoch': 0.75}
+{'loss': 0.3459, 'grad_norm': 4.046360969543457, 'learning_rate': 1.3236514522821577e-05, 'epoch': 0.82}
+{'loss': 0.2952, 'grad_norm': 7.694418907165527, 'learning_rate': 1.240663900414938e-05, 'epoch': 0.9}
+{'loss': 0.322, 'grad_norm': 8.85828971862793, 'learning_rate': 1.157676348547718e-05, 'epoch': 0.97}
+{'eval_runtime': 10.9925, 'eval_samples_per_second': 94.883, 'eval_steps_per_second': 1.547, 'epoch': 1.0}
+{'loss': 0.3218, 'grad_norm': 6.597774982452393, 'learning_rate': 1.074688796680498e-05, 'epoch': 1.04}
+{'loss': 0.2191, 'grad_norm': 5.426756858825684, 'learning_rate': 9.91701244813278e-06, 'epoch': 1.12}
+{'loss': 0.2048, 'grad_norm': 5.433804512023926, 'learning_rate': 9.087136929460581e-06, 'epoch': 1.19}
+{'loss': 0.2602, 'grad_norm': 2.916048288345337, 'learning_rate': 8.257261410788382e-06, 'epoch': 1.27}
+{'loss': 0.2465, 'grad_norm': 8.348031044006348, 'learning_rate': 7.427385892116184e-06, 'epoch': 1.34}
+{'loss': 0.2322, 'grad_norm': 9.520025253295898, 'learning_rate': 6.5975103734439835e-06, 'epoch': 1.42}
+{'loss': 0.224, 'grad_norm': 5.865787506103516, 'learning_rate': 5.767634854771784e-06, 'epoch': 1.49}
+{'loss': 0.2389, 'grad_norm': 3.5794708728790283, 'learning_rate': 4.937759336099586e-06, 'epoch': 1.57}
+{'loss': 0.2059, 'grad_norm': 2.6062324047088623, 'learning_rate': 4.107883817427386e-06, 'epoch': 1.64}
+{'loss': 0.263, 'grad_norm': 7.373471736907959, 'learning_rate': 3.278008298755187e-06, 'epoch': 1.72}
+{'loss': 0.1835, 'grad_norm': 10.02835464477539, 'learning_rate': 2.448132780082988e-06, 'epoch': 1.79}
+{'loss': 0.2108, 'grad_norm': 6.589374542236328, 'learning_rate': 1.6182572614107886e-06, 'epoch': 1.87}
+{'loss': 0.2044, 'grad_norm': 8.490069389343262, 'learning_rate': 7.883817427385892e-07, 'epoch': 1.94}
+{'eval_runtime': 11.0019, 'eval_samples_per_second': 94.802, 'eval_steps_per_second': 1.545, 'epoch': 2.0}
+{'train_runtime': 607.4377, 'train_samples_per_second': 28.154, 'train_steps_per_second': 0.882, 'train_loss': 0.3004056677889468, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 536/536 [10:07<00:00,  1.13s/it]
+    FT log:  ./results\prune_finetune_logs\01_AE\cola_head_r30.json
+    FT plot: ./results\prune_finetune_logs\01_AE\cola_head_r30.png
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:10<00:00,  1.66it/s]
+    Matthews Corr.: 0.0000  (baseline: 0.5289)
+    Masked 43 heads (soft); listing in report file.
+
+  [Head] prune_ratio=0.5
+    Mask (BERT head_mask) heads with highest mean attention entropy first; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+{'loss': 0.6132, 'grad_norm': 3.2565581798553467, 'learning_rate': 7.0370370370370375e-06, 'epoch': 0.07}
+{'loss': 0.5776, 'grad_norm': 3.3569254875183105, 'learning_rate': 1.4444444444444446e-05, 'epoch': 0.15}
+{'loss': 0.4687, 'grad_norm': 3.990199089050293, 'learning_rate': 1.9792531120331952e-05, 'epoch': 0.22}
+{'loss': 0.382, 'grad_norm': 9.245838165283203, 'learning_rate': 1.9004149377593363e-05, 'epoch': 0.3}
+{'loss': 0.3671, 'grad_norm': 7.604746341705322, 'learning_rate': 1.8174273858921162e-05, 'epoch': 0.37}
+{'loss': 0.3549, 'grad_norm': 10.139119148254395, 'learning_rate': 1.7344398340248965e-05, 'epoch': 0.45}
+{'loss': 0.4248, 'grad_norm': 6.938885688781738, 'learning_rate': 1.6514522821576764e-05, 'epoch': 0.52}
+{'loss': 0.3513, 'grad_norm': 10.53870677947998, 'learning_rate': 1.5684647302904566e-05, 'epoch': 0.6}
+{'loss': 0.3429, 'grad_norm': 12.075996398925781, 'learning_rate': 1.4854771784232367e-05, 'epoch': 0.67}
+{'loss': 0.3648, 'grad_norm': 7.133154392242432, 'learning_rate': 1.4024896265560166e-05, 'epoch': 0.75}
+{'loss': 0.3877, 'grad_norm': 4.660151958465576, 'learning_rate': 1.3195020746887967e-05, 'epoch': 0.82}
+{'loss': 0.3425, 'grad_norm': 6.2178754806518555, 'learning_rate': 1.236514522821577e-05, 'epoch': 0.9}
+{'loss': 0.3569, 'grad_norm': 8.093074798583984, 'learning_rate': 1.1535269709543569e-05, 'epoch': 0.97}
+{'eval_runtime': 11.0031, 'eval_samples_per_second': 94.791, 'eval_steps_per_second': 1.545, 'epoch': 1.0}
+{'loss': 0.3425, 'grad_norm': 5.248804092407227, 'learning_rate': 1.070539419087137e-05, 'epoch': 1.04}
+{'loss': 0.2695, 'grad_norm': 3.0773074626922607, 'learning_rate': 9.875518672199172e-06, 'epoch': 1.12}
+{'loss': 0.2312, 'grad_norm': 4.463759422302246, 'learning_rate': 9.087136929460581e-06, 'epoch': 1.19}
+{'loss': 0.3088, 'grad_norm': 8.084237098693848, 'learning_rate': 8.257261410788382e-06, 'epoch': 1.27}
+{'loss': 0.2555, 'grad_norm': 10.297185897827148, 'learning_rate': 7.427385892116184e-06, 'epoch': 1.34}
+{'loss': 0.2571, 'grad_norm': 7.797272682189941, 'learning_rate': 6.5975103734439835e-06, 'epoch': 1.42}
+{'loss': 0.2446, 'grad_norm': 6.331215858459473, 'learning_rate': 5.767634854771784e-06, 'epoch': 1.49}
+{'loss': 0.2615, 'grad_norm': 4.529079914093018, 'learning_rate': 4.937759336099586e-06, 'epoch': 1.57}
+{'loss': 0.2344, 'grad_norm': 10.233744621276855, 'learning_rate': 4.107883817427386e-06, 'epoch': 1.64}
+{'loss': 0.291, 'grad_norm': 6.382315158843994, 'learning_rate': 3.278008298755187e-06, 'epoch': 1.72}
+{'loss': 0.2323, 'grad_norm': 12.877291679382324, 'learning_rate': 2.448132780082988e-06, 'epoch': 1.79}
+{'loss': 0.2168, 'grad_norm': 3.936859369277954, 'learning_rate': 1.6182572614107886e-06, 'epoch': 1.87}
+{'loss': 0.2458, 'grad_norm': 7.353917598724365, 'learning_rate': 7.883817427385892e-07, 'epoch': 1.94}
+{'eval_runtime': 10.9952, 'eval_samples_per_second': 94.86, 'eval_steps_per_second': 1.546, 'epoch': 2.0}
+{'train_runtime': 607.504, 'train_samples_per_second': 28.151, 'train_steps_per_second': 0.882, 'train_loss': 0.33274203583375733, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 536/536 [10:07<00:00,  1.13s/it]
+    FT log:  ./results\prune_finetune_logs\01_AE\cola_head_r50.json
+    FT plot: ./results\prune_finetune_logs\01_AE\cola_head_r50.png
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:10<00:00,  1.66it/s]
+    Matthews Corr.: 0.0000  (baseline: 0.5289)
+    Masked 72 heads (soft); listing in report file.
+
+  [Block] prune_ratio=0.1
+    Skip entire encoder blocks whose mean attention entropy across heads is highest (most diffuse layers are skipped first).
+    Skip block L11: mean head entropy = 1.848948
+{'loss': 0.4968, 'grad_norm': 5.10888147354126, 'learning_rate': 7.0370370370370375e-06, 'epoch': 0.07}
+{'loss': 0.4463, 'grad_norm': 6.860639572143555, 'learning_rate': 1.4074074074074075e-05, 'epoch': 0.15}
+{'loss': 0.3987, 'grad_norm': 3.8603036403656006, 'learning_rate': 1.983402489626556e-05, 'epoch': 0.22}
+{'loss': 0.2939, 'grad_norm': 7.439416885375977, 'learning_rate': 1.9004149377593363e-05, 'epoch': 0.3}
+{'loss': 0.2974, 'grad_norm': 6.896911144256592, 'learning_rate': 1.8174273858921162e-05, 'epoch': 0.37}
+{'loss': 0.2846, 'grad_norm': 6.730354309082031, 'learning_rate': 1.7344398340248965e-05, 'epoch': 0.45}
+{'loss': 0.3528, 'grad_norm': 4.124127388000488, 'learning_rate': 1.6514522821576764e-05, 'epoch': 0.52}
+{'loss': 0.2943, 'grad_norm': 6.607337474822998, 'learning_rate': 1.5684647302904566e-05, 'epoch': 0.6}
+{'loss': 0.2797, 'grad_norm': 5.441041469573975, 'learning_rate': 1.4854771784232367e-05, 'epoch': 0.67}
+{'loss': 0.285, 'grad_norm': 6.598310947418213, 'learning_rate': 1.4024896265560166e-05, 'epoch': 0.75}
+{'loss': 0.3121, 'grad_norm': 5.69380521774292, 'learning_rate': 1.3195020746887967e-05, 'epoch': 0.82}
+{'loss': 0.29, 'grad_norm': 6.245463848114014, 'learning_rate': 1.236514522821577e-05, 'epoch': 0.9}
+{'loss': 0.2945, 'grad_norm': 5.852506160736084, 'learning_rate': 1.1535269709543569e-05, 'epoch': 0.97}
+{'eval_loss': 0.44236454367637634, 'eval_matthews_correlation': 0.557882735147727, 'eval_runtime': 9.9784, 'eval_samples_per_second': 104.526, 'eval_steps_per_second': 1.704, 'epoch': 1.0}
+{'loss': 0.2981, 'grad_norm': 4.361484050750732, 'learning_rate': 1.070539419087137e-05, 'epoch': 1.04}
+{'loss': 0.1977, 'grad_norm': 9.977906227111816, 'learning_rate': 9.875518672199172e-06, 'epoch': 1.12}
+{'loss': 0.194, 'grad_norm': 9.174696922302246, 'learning_rate': 9.087136929460581e-06, 'epoch': 1.19}
+{'loss': 0.2173, 'grad_norm': 12.827264785766602, 'learning_rate': 8.257261410788382e-06, 'epoch': 1.27}
+{'loss': 0.1989, 'grad_norm': 8.887797355651855, 'learning_rate': 7.427385892116184e-06, 'epoch': 1.34}
+{'loss': 0.2138, 'grad_norm': 8.19775676727295, 'learning_rate': 6.5975103734439835e-06, 'epoch': 1.42}
+{'loss': 0.22, 'grad_norm': 7.9409589767456055, 'learning_rate': 5.767634854771784e-06, 'epoch': 1.49}
+{'loss': 0.2108, 'grad_norm': 7.989468574523926, 'learning_rate': 4.937759336099586e-06, 'epoch': 1.57}
+{'loss': 0.1922, 'grad_norm': 3.7163565158843994, 'learning_rate': 4.107883817427386e-06, 'epoch': 1.64}
+{'loss': 0.2424, 'grad_norm': 7.850825786590576, 'learning_rate': 3.278008298755187e-06, 'epoch': 1.72}
+{'loss': 0.1925, 'grad_norm': 10.229044914245605, 'learning_rate': 2.448132780082988e-06, 'epoch': 1.79}
+{'loss': 0.1987, 'grad_norm': 9.115872383117676, 'learning_rate': 1.6182572614107886e-06, 'epoch': 1.87}
+{'loss': 0.1834, 'grad_norm': 6.978922367095947, 'learning_rate': 7.883817427385892e-07, 'epoch': 1.94}
+{'eval_loss': 0.5530944466590881, 'eval_matthews_correlation': 0.5652516382961122, 'eval_runtime': 9.9774, 'eval_samples_per_second': 104.536, 'eval_steps_per_second': 1.704, 'epoch': 2.0}
+{'train_runtime': 554.4245, 'train_samples_per_second': 30.846, 'train_steps_per_second': 0.967, 'train_loss': 0.2704268582721255, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 536/536 [09:14<00:00,  1.03s/it]
+    FT log:  ./results\prune_finetune_logs\01_AE\cola_block_r10.json
+    FT plot: ./results\prune_finetune_logs\01_AE\cola_block_r10.png
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:09<00:00,  1.83it/s]
+    Matthews Corr.: 0.5653
+
+  [Block] prune_ratio=0.3
+    Skip entire encoder blocks whose mean attention entropy across heads is highest (most diffuse layers are skipped first).
+    Skip block L11: mean head entropy = 1.848948
+    Skip block L0: mean head entropy = 1.765877
+    Skip block L10: mean head entropy = 1.731495
+{'loss': 0.5922, 'grad_norm': 3.15140962600708, 'learning_rate': 6.666666666666667e-06, 'epoch': 0.07}
+{'loss': 0.5159, 'grad_norm': 5.719933986663818, 'learning_rate': 1.4074074074074075e-05, 'epoch': 0.15}
+{'loss': 0.425, 'grad_norm': 5.266303539276123, 'learning_rate': 1.983402489626556e-05, 'epoch': 0.22}
+{'loss': 0.3285, 'grad_norm': 7.974356174468994, 'learning_rate': 1.9004149377593363e-05, 'epoch': 0.3}
+{'loss': 0.3855, 'grad_norm': 7.836103439331055, 'learning_rate': 1.8174273858921162e-05, 'epoch': 0.37}
+{'loss': 0.3303, 'grad_norm': 9.277055740356445, 'learning_rate': 1.7344398340248965e-05, 'epoch': 0.45}
+{'loss': 0.3974, 'grad_norm': 6.276752948760986, 'learning_rate': 1.6514522821576764e-05, 'epoch': 0.52}
+{'loss': 0.3422, 'grad_norm': 11.457734107971191, 'learning_rate': 1.5684647302904566e-05, 'epoch': 0.6}
+{'loss': 0.3404, 'grad_norm': 5.790119171142578, 'learning_rate': 1.4854771784232367e-05, 'epoch': 0.67}
+{'loss': 0.3457, 'grad_norm': 6.3365092277526855, 'learning_rate': 1.4024896265560166e-05, 'epoch': 0.75}
+{'loss': 0.3648, 'grad_norm': 5.5855560302734375, 'learning_rate': 1.3195020746887967e-05, 'epoch': 0.82}
+{'loss': 0.319, 'grad_norm': 6.418529033660889, 'learning_rate': 1.236514522821577e-05, 'epoch': 0.9}
+{'loss': 0.3741, 'grad_norm': 6.890872478485107, 'learning_rate': 1.1535269709543569e-05, 'epoch': 0.97}
+{'eval_loss': 0.4403659999370575, 'eval_matthews_correlation': 0.5635758105599825, 'eval_runtime': 8.1886, 'eval_samples_per_second': 127.371, 'eval_steps_per_second': 2.076, 'epoch': 1.0}
+{'loss': 0.3372, 'grad_norm': 4.644050121307373, 'learning_rate': 1.070539419087137e-05, 'epoch': 1.04}
+{'loss': 0.2592, 'grad_norm': 4.277450084686279, 'learning_rate': 9.875518672199172e-06, 'epoch': 1.12}
+{'loss': 0.223, 'grad_norm': 7.306483745574951, 'learning_rate': 9.045643153526971e-06, 'epoch': 1.19}
+{'loss': 0.2354, 'grad_norm': 7.980035781860352, 'learning_rate': 8.215767634854772e-06, 'epoch': 1.27}
+{'loss': 0.2329, 'grad_norm': 5.674360752105713, 'learning_rate': 7.385892116182573e-06, 'epoch': 1.34}
+{'loss': 0.2514, 'grad_norm': 8.312148094177246, 'learning_rate': 6.556016597510374e-06, 'epoch': 1.42}
+{'loss': 0.2207, 'grad_norm': 5.278534412384033, 'learning_rate': 5.726141078838174e-06, 'epoch': 1.49}
+{'loss': 0.2415, 'grad_norm': 10.600473403930664, 'learning_rate': 4.896265560165976e-06, 'epoch': 1.57}
+{'loss': 0.2346, 'grad_norm': 8.11923599243164, 'learning_rate': 4.0663900414937765e-06, 'epoch': 1.64}
+{'loss': 0.2431, 'grad_norm': 7.007431507110596, 'learning_rate': 3.2365145228215773e-06, 'epoch': 1.72}
+{'loss': 0.2198, 'grad_norm': 10.235841751098633, 'learning_rate': 2.4066390041493776e-06, 'epoch': 1.79}
+{'loss': 0.2428, 'grad_norm': 7.752121925354004, 'learning_rate': 1.5767634854771784e-06, 'epoch': 1.87}
+{'loss': 0.2217, 'grad_norm': 9.678563117980957, 'learning_rate': 7.468879668049793e-07, 'epoch': 1.94}
+{'eval_loss': 0.5474252104759216, 'eval_matthews_correlation': 0.5523181756655187, 'eval_runtime': 8.1832, 'eval_samples_per_second': 127.456, 'eval_steps_per_second': 2.077, 'epoch': 2.0}
+{'train_runtime': 455.8872, 'train_samples_per_second': 37.514, 'train_steps_per_second': 1.176, 'train_loss': 0.31352965867341454, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 536/536 [07:35<00:00,  1.18it/s]
+    FT log:  ./results\prune_finetune_logs\01_AE\cola_block_r30.json
+    FT plot: ./results\prune_finetune_logs\01_AE\cola_block_r30.png
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:07<00:00,  2.23it/s]
+    Matthews Corr.: 0.5523
+
+  [Block] prune_ratio=0.5
+    Skip entire encoder blocks whose mean attention entropy across heads is highest (most diffuse layers are skipped first).
+    Skip block L11: mean head entropy = 1.848948
+    Skip block L0: mean head entropy = 1.765877
+    Skip block L10: mean head entropy = 1.731495
+    Skip block L1: mean head entropy = 1.582892
+    Skip block L9: mean head entropy = 1.540380
+    Skip block L3: mean head entropy = 1.421311
+{'loss': 0.6341, 'grad_norm': 2.7783310413360596, 'learning_rate': 7.0370370370370375e-06, 'epoch': 0.07}
+{'loss': 0.6015, 'grad_norm': 3.6827008724212646, 'learning_rate': 1.4444444444444446e-05, 'epoch': 0.15}
+{'loss': 0.5716, 'grad_norm': 3.465921401977539, 'learning_rate': 1.9792531120331952e-05, 'epoch': 0.22}
+{'loss': 0.4875, 'grad_norm': 7.516909599304199, 'learning_rate': 1.896265560165975e-05, 'epoch': 0.3}
+{'loss': 0.5128, 'grad_norm': 5.783139228820801, 'learning_rate': 1.8132780082987554e-05, 'epoch': 0.37}
+{'loss': 0.4443, 'grad_norm': 6.866179466247559, 'learning_rate': 1.7302904564315356e-05, 'epoch': 0.45}
+{'loss': 0.5259, 'grad_norm': 6.26171350479126, 'learning_rate': 1.6473029045643155e-05, 'epoch': 0.52}
+{'loss': 0.4679, 'grad_norm': 8.597336769104004, 'learning_rate': 1.5643153526970954e-05, 'epoch': 0.6}
+{'loss': 0.4634, 'grad_norm': 5.236894130706787, 'learning_rate': 1.4813278008298757e-05, 'epoch': 0.67}
+{'loss': 0.4678, 'grad_norm': 10.261011123657227, 'learning_rate': 1.3983402489626556e-05, 'epoch': 0.75}
+{'loss': 0.4709, 'grad_norm': 6.1745147705078125, 'learning_rate': 1.3153526970954359e-05, 'epoch': 0.82}
+{'loss': 0.4629, 'grad_norm': 8.012694358825684, 'learning_rate': 1.232365145228216e-05, 'epoch': 0.9}
+{'loss': 0.4673, 'grad_norm': 8.24050235748291, 'learning_rate': 1.1493775933609958e-05, 'epoch': 0.97}
+{'eval_loss': 0.48789897561073303, 'eval_matthews_correlation': 0.4219587641967578, 'eval_runtime': 5.5079, 'eval_samples_per_second': 189.364, 'eval_steps_per_second': 3.086, 'epoch': 1.0}
+{'loss': 0.4241, 'grad_norm': 7.1783881187438965, 'learning_rate': 1.0663900414937761e-05, 'epoch': 1.04}
+{'loss': 0.4066, 'grad_norm': 5.154677391052246, 'learning_rate': 9.83402489626556e-06, 'epoch': 1.12}
+{'loss': 0.3613, 'grad_norm': 8.962074279785156, 'learning_rate': 9.004149377593362e-06, 'epoch': 1.19}
+{'loss': 0.4174, 'grad_norm': 7.337350845336914, 'learning_rate': 8.174273858921162e-06, 'epoch': 1.27}
+{'loss': 0.3466, 'grad_norm': 7.027006149291992, 'learning_rate': 7.344398340248964e-06, 'epoch': 1.34}
+{'loss': 0.3716, 'grad_norm': 8.894746780395508, 'learning_rate': 6.514522821576764e-06, 'epoch': 1.42}
+{'loss': 0.3418, 'grad_norm': 10.292791366577148, 'learning_rate': 5.684647302904565e-06, 'epoch': 1.49}
+{'loss': 0.3631, 'grad_norm': 7.142247676849365, 'learning_rate': 4.8547717842323655e-06, 'epoch': 1.57}
+{'loss': 0.3214, 'grad_norm': 10.171102523803711, 'learning_rate': 4.024896265560166e-06, 'epoch': 1.64}
+{'loss': 0.3764, 'grad_norm': 12.289162635803223, 'learning_rate': 3.1950207468879666e-06, 'epoch': 1.72}
+{'loss': 0.3412, 'grad_norm': 8.447872161865234, 'learning_rate': 2.365145228215768e-06, 'epoch': 1.79}
+{'loss': 0.3356, 'grad_norm': 9.919154167175293, 'learning_rate': 1.5352697095435686e-06, 'epoch': 1.87}
+{'loss': 0.3475, 'grad_norm': 9.017659187316895, 'learning_rate': 7.053941908713693e-07, 'epoch': 1.94}
+{'eval_loss': 0.5438018441200256, 'eval_matthews_correlation': 0.42720203489114567, 'eval_runtime': 5.505, 'eval_samples_per_second': 189.462, 'eval_steps_per_second': 3.088, 'epoch': 2.0}
+{'train_runtime': 307.9875, 'train_samples_per_second': 55.528, 'train_steps_per_second': 1.74, 'train_loss': 0.4321111422866138, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 536/536 [05:07<00:00,  1.74it/s]
+    FT log:  ./results\prune_finetune_logs\01_AE\cola_block_r50.json
+    FT plot: ./results\prune_finetune_logs\01_AE\cola_block_r50.png
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:05<00:00,  3.32it/s]
+    Matthews Corr.: 0.4272
+
+============================================================
+  AE — Task: MRPC
+============================================================
+  Computing attention entropy...
+  Entropy — min: 0.309  max: 3.599
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:12<00:00,  1.73s/it]
+
+  [Head] prune_ratio=0.1
+    Mask (BERT head_mask) heads with highest mean attention entropy first; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+{'loss': 0.3422, 'grad_norm': 4.475916862487793, 'learning_rate': 1.565217391304348e-05, 'epoch': 0.17}
+{'loss': 0.2714, 'grad_norm': 7.605295658111572, 'learning_rate': 1.8550724637681162e-05, 'epoch': 0.35}
+{'loss': 0.2446, 'grad_norm': 6.298904895782471, 'learning_rate': 1.6618357487922706e-05, 'epoch': 0.52}
+{'loss': 0.2422, 'grad_norm': 7.33993673324585, 'learning_rate': 1.4685990338164254e-05, 'epoch': 0.7}
+{'loss': 0.2102, 'grad_norm': 19.667787551879883, 'learning_rate': 1.2753623188405797e-05, 'epoch': 0.87}
+{'eval_runtime': 14.5417, 'eval_samples_per_second': 28.057, 'eval_steps_per_second': 0.481, 'epoch': 1.0}
+{'loss': 0.1808, 'grad_norm': 2.529923915863037, 'learning_rate': 1.0821256038647342e-05, 'epoch': 1.04}
+{'loss': 0.1478, 'grad_norm': 3.681241750717163, 'learning_rate': 8.888888888888888e-06, 'epoch': 1.22}
+{'loss': 0.1169, 'grad_norm': 14.464424133300781, 'learning_rate': 6.956521739130435e-06, 'epoch': 1.39}
+{'loss': 0.125, 'grad_norm': 8.27274227142334, 'learning_rate': 5.1207729468599045e-06, 'epoch': 1.57}
+{'loss': 0.1422, 'grad_norm': 5.3751444816589355, 'learning_rate': 3.188405797101449e-06, 'epoch': 1.74}
+{'loss': 0.1411, 'grad_norm': 15.421918869018555, 'learning_rate': 1.2560386473429952e-06, 'epoch': 1.91}
+{'eval_runtime': 14.5349, 'eval_samples_per_second': 28.07, 'eval_steps_per_second': 0.482, 'epoch': 2.0}
+{'train_runtime': 834.2105, 'train_samples_per_second': 8.794, 'train_steps_per_second': 0.276, 'train_loss': 0.19463905355204705, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 230/230 [13:54<00:00,  3.63s/it]
+    FT log:  ./results\prune_finetune_logs\01_AE\mrpc_head_r10.json
+    FT plot: ./results\prune_finetune_logs\01_AE\mrpc_head_r10.png
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:12<00:00,  1.75s/it]
+    F1: 0.0000  (baseline: 0.8844)
+    Masked 14 heads (soft); listing in report file.
+
+  [Head] prune_ratio=0.3
+    Mask (BERT head_mask) heads with highest mean attention entropy first; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+{'loss': 0.544, 'grad_norm': inf, 'learning_rate': 1.6521739130434785e-05, 'epoch': 0.17}
+{'loss': 0.4517, 'grad_norm': 10.773579597473145, 'learning_rate': 1.8550724637681162e-05, 'epoch': 0.35}
+{'loss': 0.3892, 'grad_norm': 8.038745880126953, 'learning_rate': 1.6618357487922706e-05, 'epoch': 0.52}
+{'loss': 0.3851, 'grad_norm': 10.447741508483887, 'learning_rate': 1.4685990338164254e-05, 'epoch': 0.7}
+{'loss': 0.3727, 'grad_norm': 9.98524284362793, 'learning_rate': 1.2753623188405797e-05, 'epoch': 0.87}
+{'eval_runtime': 14.5469, 'eval_samples_per_second': 28.047, 'eval_steps_per_second': 0.481, 'epoch': 1.0}
+{'loss': 0.3422, 'grad_norm': 10.313506126403809, 'learning_rate': 1.0821256038647342e-05, 'epoch': 1.04}
+{'loss': 0.2335, 'grad_norm': 10.803524017333984, 'learning_rate': 8.888888888888888e-06, 'epoch': 1.22}
+{'loss': 0.2118, 'grad_norm': 15.314533233642578, 'learning_rate': 6.956521739130435e-06, 'epoch': 1.39}
+{'loss': 0.2332, 'grad_norm': 8.857451438903809, 'learning_rate': 5.024154589371981e-06, 'epoch': 1.57}
+{'loss': 0.2331, 'grad_norm': 14.8628568649292, 'learning_rate': 3.0917874396135268e-06, 'epoch': 1.74}
+{'loss': 0.2846, 'grad_norm': 17.128908157348633, 'learning_rate': 1.1594202898550726e-06, 'epoch': 1.91}
+{'eval_runtime': 14.5356, 'eval_samples_per_second': 28.069, 'eval_steps_per_second': 0.482, 'epoch': 2.0}
+{'train_runtime': 832.7984, 'train_samples_per_second': 8.809, 'train_steps_per_second': 0.276, 'train_loss': 0.3326798905497012, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 230/230 [13:52<00:00,  3.62s/it]
+    FT log:  ./results\prune_finetune_logs\01_AE\mrpc_head_r30.json
+    FT plot: ./results\prune_finetune_logs\01_AE\mrpc_head_r30.png
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:12<00:00,  1.75s/it]
+    F1: 0.0000  (baseline: 0.8844)
+    Masked 43 heads (soft); listing in report file.
+
+  [Head] prune_ratio=0.5
+    Mask (BERT head_mask) heads with highest mean attention entropy first; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+{'loss': 0.6658, 'grad_norm': 4.616542339324951, 'learning_rate': 1.6521739130434785e-05, 'epoch': 0.17}
+{'loss': 0.5806, 'grad_norm': 5.729367733001709, 'learning_rate': 1.8454106280193237e-05, 'epoch': 0.35}
+{'loss': 0.5332, 'grad_norm': 3.048640489578247, 'learning_rate': 1.6521739130434785e-05, 'epoch': 0.52}
+{'loss': 0.5154, 'grad_norm': 4.244862079620361, 'learning_rate': 1.458937198067633e-05, 'epoch': 0.7}
+{'loss': 0.4957, 'grad_norm': 5.987070560455322, 'learning_rate': 1.2657004830917876e-05, 'epoch': 0.87}
+{'eval_runtime': 14.5911, 'eval_samples_per_second': 27.962, 'eval_steps_per_second': 0.48, 'epoch': 1.0}
+{'loss': 0.4926, 'grad_norm': 4.477051734924316, 'learning_rate': 1.0724637681159422e-05, 'epoch': 1.04}
+{'loss': 0.3933, 'grad_norm': 4.628786087036133, 'learning_rate': 8.792270531400966e-06, 'epoch': 1.22}
+{'loss': 0.3837, 'grad_norm': 9.531055450439453, 'learning_rate': 6.859903381642513e-06, 'epoch': 1.39}
+{'loss': 0.3614, 'grad_norm': 5.157776832580566, 'learning_rate': 5.024154589371981e-06, 'epoch': 1.57}
+{'loss': 0.3595, 'grad_norm': 7.838878154754639, 'learning_rate': 3.0917874396135268e-06, 'epoch': 1.74}
+{'loss': 0.4011, 'grad_norm': 12.747075080871582, 'learning_rate': 1.1594202898550726e-06, 'epoch': 1.91}
+{'eval_runtime': 14.5919, 'eval_samples_per_second': 27.961, 'eval_steps_per_second': 0.48, 'epoch': 2.0}
+{'train_runtime': 835.7059, 'train_samples_per_second': 8.778, 'train_steps_per_second': 0.275, 'train_loss': 0.4678667452024377, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 230/230 [13:55<00:00,  3.63s/it]
+    FT log:  ./results\prune_finetune_logs\01_AE\mrpc_head_r50.json
+    FT plot: ./results\prune_finetune_logs\01_AE\mrpc_head_r50.png
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:12<00:00,  1.76s/it]
+    F1: 0.0000  (baseline: 0.8844)
+    Masked 72 heads (soft); listing in report file.
+
+  [Block] prune_ratio=0.1
+    Skip entire encoder blocks whose mean attention entropy across heads is highest (most diffuse layers are skipped first).
+    Skip block L0: mean head entropy = 2.692005
+{'loss': 0.367, 'grad_norm': 5.246858596801758, 'learning_rate': 1.565217391304348e-05, 'epoch': 0.17}
+{'loss': 0.3251, 'grad_norm': 10.631959915161133, 'learning_rate': 1.8550724637681162e-05, 'epoch': 0.35}
+{'loss': 0.2915, 'grad_norm': 6.144431114196777, 'learning_rate': 1.6618357487922706e-05, 'epoch': 0.52}
+{'loss': 0.2683, 'grad_norm': 6.7348551750183105, 'learning_rate': 1.4782608695652174e-05, 'epoch': 0.7}
+{'loss': 0.2684, 'grad_norm': 7.060109615325928, 'learning_rate': 1.2946859903381644e-05, 'epoch': 0.87}
+{'eval_loss': 0.3672991394996643, 'eval_accuracy': 0.8382352941176471, 'eval_f1': 0.8791208791208791, 'eval_runtime': 13.0499, 'eval_samples_per_second': 31.265, 'eval_steps_per_second': 0.536, 'epoch': 1.0}
+{'loss': 0.2487, 'grad_norm': 5.3987650871276855, 'learning_rate': 1.101449275362319e-05, 'epoch': 1.04}
+{'loss': 0.2141, 'grad_norm': 7.488268852233887, 'learning_rate': 9.082125603864736e-06, 'epoch': 1.22}
+{'loss': 0.1547, 'grad_norm': 11.710490226745605, 'learning_rate': 7.149758454106281e-06, 'epoch': 1.39}
+{'loss': 0.168, 'grad_norm': 8.124002456665039, 'learning_rate': 5.2173913043478265e-06, 'epoch': 1.57}
+{'loss': 0.1619, 'grad_norm': 5.9644575119018555, 'learning_rate': 3.2850241545893724e-06, 'epoch': 1.74}
+{'loss': 0.1796, 'grad_norm': 5.0553879737854, 'learning_rate': 1.3526570048309178e-06, 'epoch': 1.91}
+{'eval_loss': 0.41783666610717773, 'eval_accuracy': 0.8406862745098039, 'eval_f1': 0.8877374784110535, 'eval_runtime': 13.0448, 'eval_samples_per_second': 31.277, 'eval_steps_per_second': 0.537, 'epoch': 2.0}
+{'train_runtime': 751.0295, 'train_samples_per_second': 9.768, 'train_steps_per_second': 0.306, 'train_loss': 0.2384278090103813, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 230/230 [12:31<00:00,  3.27s/it]
+    FT log:  ./results\prune_finetune_logs\01_AE\mrpc_block_r10.json
+    FT plot: ./results\prune_finetune_logs\01_AE\mrpc_block_r10.png
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:11<00:00,  1.57s/it]
+    F1: 0.8877
+
+  [Block] prune_ratio=0.3
+    Skip entire encoder blocks whose mean attention entropy across heads is highest (most diffuse layers are skipped first).
+    Skip block L0: mean head entropy = 2.692005
+    Skip block L1: mean head entropy = 2.583984
+    Skip block L3: mean head entropy = 2.459397
+{'loss': 0.5337, 'grad_norm': inf, 'learning_rate': 1.565217391304348e-05, 'epoch': 0.17}
+{'loss': 0.5001, 'grad_norm': 10.777871131896973, 'learning_rate': 1.8647342995169084e-05, 'epoch': 0.35}
+{'loss': 0.4577, 'grad_norm': 9.324798583984375, 'learning_rate': 1.6714975845410632e-05, 'epoch': 0.52}
+{'loss': 0.4422, 'grad_norm': 7.18222188949585, 'learning_rate': 1.4782608695652174e-05, 'epoch': 0.7}
+{'loss': 0.4339, 'grad_norm': 10.762802124023438, 'learning_rate': 1.285024154589372e-05, 'epoch': 0.87}
+{'eval_loss': 0.47103065252304077, 'eval_accuracy': 0.7965686274509803, 'eval_f1': 0.8628099173553719, 'eval_runtime': 10.6898, 'eval_samples_per_second': 38.167, 'eval_steps_per_second': 0.655, 'epoch': 1.0}
+{'loss': 0.4085, 'grad_norm': 15.838970184326172, 'learning_rate': 1.0917874396135266e-05, 'epoch': 1.04}
+{'loss': 0.3102, 'grad_norm': 6.671092510223389, 'learning_rate': 8.985507246376812e-06, 'epoch': 1.22}
+{'loss': 0.2908, 'grad_norm': 13.50641918182373, 'learning_rate': 7.053140096618359e-06, 'epoch': 1.39}
+{'loss': 0.272, 'grad_norm': 8.296335220336914, 'learning_rate': 5.1207729468599045e-06, 'epoch': 1.57}
+{'loss': 0.3147, 'grad_norm': 9.425202369689941, 'learning_rate': 3.188405797101449e-06, 'epoch': 1.74}
+{'loss': 0.3102, 'grad_norm': 13.104131698608398, 'learning_rate': 1.2560386473429952e-06, 'epoch': 1.91}
+{'eval_loss': 0.557681679725647, 'eval_accuracy': 0.7867647058823529, 'eval_f1': 0.8603531300160514, 'eval_runtime': 10.6934, 'eval_samples_per_second': 38.154, 'eval_steps_per_second': 0.655, 'epoch': 2.0}
+{'train_runtime': 615.6609, 'train_samples_per_second': 11.916, 'train_steps_per_second': 0.374, 'train_loss': 0.38846370759217635, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 230/230 [10:15<00:00,  2.68s/it]
+    FT log:  ./results\prune_finetune_logs\01_AE\mrpc_block_r30.json
+    FT plot: ./results\prune_finetune_logs\01_AE\mrpc_block_r30.png
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:09<00:00,  1.29s/it]
+    F1: 0.8604
+
+  [Block] prune_ratio=0.5
+    Skip entire encoder blocks whose mean attention entropy across heads is highest (most diffuse layers are skipped first).
+    Skip block L0: mean head entropy = 2.692005
+    Skip block L1: mean head entropy = 2.583984
+    Skip block L3: mean head entropy = 2.459397
+    Skip block L2: mean head entropy = 2.457819
+    Skip block L4: mean head entropy = 2.350863
+    Skip block L10: mean head entropy = 2.175398
+{'loss': 0.6839, 'grad_norm': 4.032397747039795, 'learning_rate': 1.6521739130434785e-05, 'epoch': 0.17}
+{'loss': 0.6201, 'grad_norm': 5.415669918060303, 'learning_rate': 1.8454106280193237e-05, 'epoch': 0.35}
+{'loss': 0.5805, 'grad_norm': 3.6969826221466064, 'learning_rate': 1.6521739130434785e-05, 'epoch': 0.52}
+{'loss': 0.608, 'grad_norm': 2.9674439430236816, 'learning_rate': 1.458937198067633e-05, 'epoch': 0.7}
+{'loss': 0.5953, 'grad_norm': 3.3935585021972656, 'learning_rate': 1.2657004830917876e-05, 'epoch': 0.87}
+{'eval_loss': 0.5930973291397095, 'eval_accuracy': 0.7009803921568627, 'eval_f1': 0.8173652694610778, 'eval_runtime': 7.1755, 'eval_samples_per_second': 56.86, 'eval_steps_per_second': 0.976, 'epoch': 1.0}
+{'loss': 0.5679, 'grad_norm': 3.128664493560791, 'learning_rate': 1.0724637681159422e-05, 'epoch': 1.04}
+{'loss': 0.549, 'grad_norm': 2.8639562129974365, 'learning_rate': 8.888888888888888e-06, 'epoch': 1.22}
+{'loss': 0.5458, 'grad_norm': 4.303053379058838, 'learning_rate': 6.956521739130435e-06, 'epoch': 1.39}
+{'loss': 0.5393, 'grad_norm': 4.615936279296875, 'learning_rate': 5.024154589371981e-06, 'epoch': 1.57}
+{'loss': 0.5346, 'grad_norm': 5.435330867767334, 'learning_rate': 3.0917874396135268e-06, 'epoch': 1.74}
+{'loss': 0.5318, 'grad_norm': 8.172571182250977, 'learning_rate': 1.1594202898550726e-06, 'epoch': 1.91}
+{'eval_loss': 0.591157853603363, 'eval_accuracy': 0.7156862745098039, 'eval_f1': 0.81875, 'eval_runtime': 7.2235, 'eval_samples_per_second': 56.482, 'eval_steps_per_second': 0.969, 'epoch': 2.0}
+{'train_runtime': 413.3409, 'train_samples_per_second': 17.748, 'train_steps_per_second': 0.556, 'train_loss': 0.5768130468285602, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 230/230 [06:53<00:00,  1.80s/it]
+    FT log:  ./results\prune_finetune_logs\01_AE\mrpc_block_r50.json
+    FT plot: ./results\prune_finetune_logs\01_AE\mrpc_block_r50.png
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:06<00:00,  1.15it/s]
+    F1: 0.8187
+
+Results saved: ./results\01_AE_results.csv
+Pruning report saved: ./results\01_AE_pruning_report.txt
+
+======================================================================
+SUMMARY TABLE — AE Metric
+======================================================================
+task level prune_ratio  primary_score  baseline_score  score_drop
+cola  head         10%         0.0000          0.5289      0.5289
+cola  head         30%         0.0000          0.5289      0.5289
+cola  head         50%         0.0000          0.5289      0.5289
+cola block         10%         0.5653          0.5289     -0.0364
+cola block         30%         0.5523          0.5289     -0.0234
+cola block         50%         0.4272          0.5289      0.1017
+mrpc  head         10%         0.0000          0.8844      0.8844
+mrpc  head         30%         0.0000          0.8844      0.8844
+mrpc  head         50%         0.0000          0.8844      0.8844
+mrpc block         10%         0.8877          0.8844     -0.0034
+mrpc block         30%         0.8604          0.8844      0.0240
+mrpc block         50%         0.8188          0.8844      0.0656
+
+Generating figures...
+  Saved: ./figures\01_AE_score_heatmap.png
+  Saved: ./figures\01_AE_head_accuracy_curves.png
+  Saved: ./figures\01_AE_block_accuracy_curves.png
+  Saved: ./figures\01_AE_head_vs_block.png
+  Saved: ./figures\01_AE_pruned_head_map.png
+  Saved: ./figures\01_AE_score_distribution.png
+
+Figures produced:
+  01_AE_score_heatmap.png
+  01_AE_head_accuracy_curves.png
+  01_AE_block_accuracy_curves.png
+  01_AE_head_vs_block.png
+  01_AE_pruned_head_map.png
+  01_AE_score_distribution.png
+
+============================================================
+  KL-R — Task: COLA
+============================================================
+Map: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████| 8551/8551 [00:00<00:00, 29475.67 examples/s]
+Map: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████| 1043/1043 [00:00<00:00, 27767.15 examples/s]
+Map: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████| 1063/1063 [00:00<00:00, 30440.40 examples/s]
+  Computing pairwise KL redundancy (O(H²) per layer — may take a few minutes)...
+BertSdpaSelfAttention is used but `torch.nn.functional.scaled_dot_product_attention` does not support non-absolute `position_embedding_type` or `output_attentions=True` or `head_mask`. Falling back to the manual attention implementation, but specifying the manual implementation will be required from Transformers version v5.0.0 onwards. This warning can be removed using the argument `attn_implementation="eager"` when loading the model.
+  KL scores — min: 0.1026  max: 1.1489
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:02<00:00,  7.02it/s]
+
+  [Head] prune_ratio=0.1
+    Mask (BERT head_mask) heads with lowest min pairwise KL to another head in the same layer; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+{'loss': 0.4525, 'grad_norm': 8.040366172790527, 'learning_rate': 7.0370370370370375e-06, 'epoch': 0.07}
+{'loss': 0.4485, 'grad_norm': 7.172473430633545, 'learning_rate': 1.4444444444444446e-05, 'epoch': 0.15}
+{'loss': 0.4045, 'grad_norm': 6.64205265045166, 'learning_rate': 1.983402489626556e-05, 'epoch': 0.22}
+{'loss': 0.3145, 'grad_norm': 5.21380615234375, 'learning_rate': 1.9004149377593363e-05, 'epoch': 0.3}
+{'loss': 0.3175, 'grad_norm': 9.967305183410645, 'learning_rate': 1.8174273858921162e-05, 'epoch': 0.37}
+{'loss': 0.2916, 'grad_norm': 10.129271507263184, 'learning_rate': 1.7344398340248965e-05, 'epoch': 0.45}
+{'loss': 0.3546, 'grad_norm': 10.595125198364258, 'learning_rate': 1.6514522821576764e-05, 'epoch': 0.52}
+{'loss': 0.2871, 'grad_norm': 7.765087127685547, 'learning_rate': 1.5684647302904566e-05, 'epoch': 0.6}
+{'loss': 0.2946, 'grad_norm': 10.255475997924805, 'learning_rate': 1.4854771784232367e-05, 'epoch': 0.67}
+{'loss': 0.316, 'grad_norm': 6.891537666320801, 'learning_rate': 1.4024896265560166e-05, 'epoch': 0.75}
+{'loss': 0.3235, 'grad_norm': 3.345853567123413, 'learning_rate': 1.3195020746887967e-05, 'epoch': 0.82}
+{'loss': 0.304, 'grad_norm': 10.123275756835938, 'learning_rate': 1.236514522821577e-05, 'epoch': 0.9}
+{'loss': 0.3203, 'grad_norm': 8.679499626159668, 'learning_rate': 1.1535269709543569e-05, 'epoch': 0.97}
+{'eval_runtime': 11.0966, 'eval_samples_per_second': 93.993, 'eval_steps_per_second': 1.532, 'epoch': 1.0}
+{'loss': 0.304, 'grad_norm': 5.845862865447998, 'learning_rate': 1.070539419087137e-05, 'epoch': 1.04}
+{'loss': 0.2038, 'grad_norm': 6.356943130493164, 'learning_rate': 9.875518672199172e-06, 'epoch': 1.12}
+{'loss': 0.2077, 'grad_norm': 6.005920886993408, 'learning_rate': 9.045643153526971e-06, 'epoch': 1.19}
+{'loss': 0.2239, 'grad_norm': 9.050370216369629, 'learning_rate': 8.215767634854772e-06, 'epoch': 1.27}
+{'loss': 0.2121, 'grad_norm': 8.615269660949707, 'learning_rate': 7.385892116182573e-06, 'epoch': 1.34}
+{'loss': 0.2274, 'grad_norm': 7.995809555053711, 'learning_rate': 6.556016597510374e-06, 'epoch': 1.42}
+{'loss': 0.2275, 'grad_norm': 6.564645290374756, 'learning_rate': 5.726141078838174e-06, 'epoch': 1.49}
+{'loss': 0.2413, 'grad_norm': 5.976132392883301, 'learning_rate': 4.896265560165976e-06, 'epoch': 1.57}
+{'loss': 0.2182, 'grad_norm': 1.3068734407424927, 'learning_rate': 4.0663900414937765e-06, 'epoch': 1.64}
+{'loss': 0.2576, 'grad_norm': 11.255050659179688, 'learning_rate': 3.2365145228215773e-06, 'epoch': 1.72}
+{'loss': 0.1904, 'grad_norm': 11.832493782043457, 'learning_rate': 2.4066390041493776e-06, 'epoch': 1.79}
+{'loss': 0.1966, 'grad_norm': 9.378132820129395, 'learning_rate': 1.5767634854771784e-06, 'epoch': 1.87}
+{'loss': 0.1977, 'grad_norm': 8.928606986999512, 'learning_rate': 7.468879668049793e-07, 'epoch': 1.94}
+{'eval_runtime': 11.084, 'eval_samples_per_second': 94.1, 'eval_steps_per_second': 1.534, 'epoch': 2.0}
+{'train_runtime': 610.9955, 'train_samples_per_second': 27.99, 'train_steps_per_second': 0.877, 'train_loss': 0.27948958704720683, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 536/536 [10:10<00:00,  1.14s/it]
+    FT log:  ./results\prune_finetune_logs\02_KLR\cola_head_r10.json
+    FT plot: ./results\prune_finetune_logs\02_KLR\cola_head_r10.png
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:10<00:00,  1.64it/s]
+    Matthews Corr.: 0.0000  (baseline: 0.5289)
+    Masked 14 heads (soft); full list in report file.
+
+  [Head] prune_ratio=0.3
+    Mask (BERT head_mask) heads with lowest min pairwise KL to another head in the same layer; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+{'loss': 0.5164, 'grad_norm': 5.567237854003906, 'learning_rate': 7.0370370370370375e-06, 'epoch': 0.07}
+{'loss': 0.4783, 'grad_norm': 6.1964030265808105, 'learning_rate': 1.4444444444444446e-05, 'epoch': 0.15}
+{'loss': 0.4615, 'grad_norm': 4.79635763168335, 'learning_rate': 1.983402489626556e-05, 'epoch': 0.22}
+{'loss': 0.3395, 'grad_norm': 6.332748889923096, 'learning_rate': 1.9004149377593363e-05, 'epoch': 0.3}
+{'loss': 0.3586, 'grad_norm': 7.022866249084473, 'learning_rate': 1.8174273858921162e-05, 'epoch': 0.37}
+{'loss': 0.3374, 'grad_norm': 6.54474401473999, 'learning_rate': 1.7344398340248965e-05, 'epoch': 0.45}
+{'loss': 0.4041, 'grad_norm': 4.903584957122803, 'learning_rate': 1.6514522821576764e-05, 'epoch': 0.52}
+{'loss': 0.3583, 'grad_norm': 9.583243370056152, 'learning_rate': 1.5684647302904566e-05, 'epoch': 0.6}
+{'loss': 0.3288, 'grad_norm': 4.520664215087891, 'learning_rate': 1.4854771784232367e-05, 'epoch': 0.67}
+{'loss': 0.3421, 'grad_norm': 7.951612949371338, 'learning_rate': 1.4024896265560166e-05, 'epoch': 0.75}
+{'loss': 0.3651, 'grad_norm': 4.85777473449707, 'learning_rate': 1.3195020746887967e-05, 'epoch': 0.82}
+{'loss': 0.3475, 'grad_norm': 7.647671699523926, 'learning_rate': 1.236514522821577e-05, 'epoch': 0.9}
+{'loss': 0.3505, 'grad_norm': 11.778104782104492, 'learning_rate': 1.1535269709543569e-05, 'epoch': 0.97}
+{'eval_runtime': 11.0884, 'eval_samples_per_second': 94.062, 'eval_steps_per_second': 1.533, 'epoch': 1.0}
+{'loss': 0.3234, 'grad_norm': 9.156329154968262, 'learning_rate': 1.070539419087137e-05, 'epoch': 1.04}
+{'loss': 0.245, 'grad_norm': 10.351347923278809, 'learning_rate': 9.875518672199172e-06, 'epoch': 1.12}
+{'loss': 0.2119, 'grad_norm': 2.2798426151275635, 'learning_rate': 9.045643153526971e-06, 'epoch': 1.19}
+{'loss': 0.2849, 'grad_norm': 4.7950119972229, 'learning_rate': 8.215767634854772e-06, 'epoch': 1.27}
+{'loss': 0.238, 'grad_norm': 9.123720169067383, 'learning_rate': 7.385892116182573e-06, 'epoch': 1.34}
+{'loss': 0.2631, 'grad_norm': 7.323672771453857, 'learning_rate': 6.5975103734439835e-06, 'epoch': 1.42}
+{'loss': 0.2408, 'grad_norm': 8.276398658752441, 'learning_rate': 5.767634854771784e-06, 'epoch': 1.49}
+{'loss': 0.2554, 'grad_norm': 7.682323932647705, 'learning_rate': 4.937759336099586e-06, 'epoch': 1.57}
+{'loss': 0.2298, 'grad_norm': 2.484748363494873, 'learning_rate': 4.107883817427386e-06, 'epoch': 1.64}
+{'loss': 0.2751, 'grad_norm': 8.119102478027344, 'learning_rate': 3.278008298755187e-06, 'epoch': 1.72}
+{'loss': 0.219, 'grad_norm': 10.51431941986084, 'learning_rate': 2.448132780082988e-06, 'epoch': 1.79}
+{'loss': 0.2275, 'grad_norm': 7.7455620765686035, 'learning_rate': 1.6182572614107886e-06, 'epoch': 1.87}
+{'loss': 0.233, 'grad_norm': 9.139189720153809, 'learning_rate': 7.883817427385892e-07, 'epoch': 1.94}
+{'eval_runtime': 11.09, 'eval_samples_per_second': 94.049, 'eval_steps_per_second': 1.533, 'epoch': 2.0}
+{'train_runtime': 611.9975, 'train_samples_per_second': 27.945, 'train_steps_per_second': 0.876, 'train_loss': 0.31310444536493787, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 536/536 [10:11<00:00,  1.14s/it]
+    FT log:  ./results\prune_finetune_logs\02_KLR\cola_head_r30.json
+    FT plot: ./results\prune_finetune_logs\02_KLR\cola_head_r30.png
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:10<00:00,  1.64it/s]
+    Matthews Corr.: 0.0000  (baseline: 0.5289)
+    Masked 43 heads (soft); full list in report file.
+
+  [Head] prune_ratio=0.5
+    Mask (BERT head_mask) heads with lowest min pairwise KL to another head in the same layer; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+{'loss': 0.5976, 'grad_norm': 4.499514579772949, 'learning_rate': 6.666666666666667e-06, 'epoch': 0.07}
+{'loss': 0.5473, 'grad_norm': 3.3777666091918945, 'learning_rate': 1.4074074074074075e-05, 'epoch': 0.15}
+{'loss': 0.5026, 'grad_norm': 4.716161727905273, 'learning_rate': 1.983402489626556e-05, 'epoch': 0.22}
+{'loss': 0.385, 'grad_norm': 7.452274799346924, 'learning_rate': 1.9004149377593363e-05, 'epoch': 0.3}
+{'loss': 0.409, 'grad_norm': 6.7362518310546875, 'learning_rate': 1.8174273858921162e-05, 'epoch': 0.37}
+{'loss': 0.391, 'grad_norm': 5.9537835121154785, 'learning_rate': 1.7344398340248965e-05, 'epoch': 0.45}
+{'loss': 0.4379, 'grad_norm': 5.6616291999816895, 'learning_rate': 1.6514522821576764e-05, 'epoch': 0.52}
+{'loss': 0.3756, 'grad_norm': 9.260415077209473, 'learning_rate': 1.5684647302904566e-05, 'epoch': 0.6}
+{'loss': 0.3831, 'grad_norm': 6.081009864807129, 'learning_rate': 1.4854771784232367e-05, 'epoch': 0.67}
+{'loss': 0.386, 'grad_norm': 5.37731409072876, 'learning_rate': 1.4024896265560166e-05, 'epoch': 0.75}
+{'loss': 0.3798, 'grad_norm': 3.5731923580169678, 'learning_rate': 1.3195020746887967e-05, 'epoch': 0.82}
+{'loss': 0.3896, 'grad_norm': 8.163044929504395, 'learning_rate': 1.236514522821577e-05, 'epoch': 0.9}
+{'loss': 0.3972, 'grad_norm': 8.53389835357666, 'learning_rate': 1.1535269709543569e-05, 'epoch': 0.97}
+{'eval_runtime': 11.0849, 'eval_samples_per_second': 94.092, 'eval_steps_per_second': 1.534, 'epoch': 1.0}
+{'loss': 0.352, 'grad_norm': 4.530546188354492, 'learning_rate': 1.070539419087137e-05, 'epoch': 1.04}
+{'loss': 0.2713, 'grad_norm': 7.863984107971191, 'learning_rate': 9.91701244813278e-06, 'epoch': 1.12}
+{'loss': 0.2327, 'grad_norm': 2.384927749633789, 'learning_rate': 9.087136929460581e-06, 'epoch': 1.19}
+{'loss': 0.326, 'grad_norm': 12.701078414916992, 'learning_rate': 8.257261410788382e-06, 'epoch': 1.27}
+{'loss': 0.2737, 'grad_norm': 6.955336093902588, 'learning_rate': 7.427385892116184e-06, 'epoch': 1.34}
+{'loss': 0.27, 'grad_norm': 7.008097171783447, 'learning_rate': 6.5975103734439835e-06, 'epoch': 1.42}
+{'loss': 0.2746, 'grad_norm': 9.547992706298828, 'learning_rate': 5.767634854771784e-06, 'epoch': 1.49}
+{'loss': 0.273, 'grad_norm': 7.23964786529541, 'learning_rate': 4.937759336099586e-06, 'epoch': 1.57}
+{'loss': 0.2445, 'grad_norm': 4.003705978393555, 'learning_rate': 4.107883817427386e-06, 'epoch': 1.64}
+{'loss': 0.2952, 'grad_norm': 8.107192993164062, 'learning_rate': 3.278008298755187e-06, 'epoch': 1.72}
+{'loss': 0.2588, 'grad_norm': 9.450127601623535, 'learning_rate': 2.448132780082988e-06, 'epoch': 1.79}
+{'loss': 0.2616, 'grad_norm': 5.3908843994140625, 'learning_rate': 1.6182572614107886e-06, 'epoch': 1.87}
+{'loss': 0.2845, 'grad_norm': 6.35589599609375, 'learning_rate': 7.883817427385892e-07, 'epoch': 1.94}
+{'eval_runtime': 11.0905, 'eval_samples_per_second': 94.045, 'eval_steps_per_second': 1.533, 'epoch': 2.0}
+{'train_runtime': 611.9831, 'train_samples_per_second': 27.945, 'train_steps_per_second': 0.876, 'train_loss': 0.3505844456046375, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 536/536 [10:11<00:00,  1.14s/it]
+    FT log:  ./results\prune_finetune_logs\02_KLR\cola_head_r50.json
+    FT plot: ./results\prune_finetune_logs\02_KLR\cola_head_r50.png
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:10<00:00,  1.64it/s]
+    Matthews Corr.: 0.0000  (baseline: 0.5289)
+    Masked 72 heads (soft); full list in report file.
+
+  [Block] prune_ratio=0.1
+    Skip encoder blocks with the lowest mean KL-R across heads (layers whose heads are on average most redundant are skipped first).
+    Skip block L11: mean head KL-R = 0.297206
+{'loss': 0.4968, 'grad_norm': 5.10888147354126, 'learning_rate': 7.0370370370370375e-06, 'epoch': 0.07}
+{'loss': 0.4463, 'grad_norm': 6.860639572143555, 'learning_rate': 1.4074074074074075e-05, 'epoch': 0.15}
+{'loss': 0.3987, 'grad_norm': 3.8603036403656006, 'learning_rate': 1.983402489626556e-05, 'epoch': 0.22}
+{'loss': 0.2939, 'grad_norm': 7.439416885375977, 'learning_rate': 1.9004149377593363e-05, 'epoch': 0.3}
+{'loss': 0.2974, 'grad_norm': 6.896911144256592, 'learning_rate': 1.8174273858921162e-05, 'epoch': 0.37}
+{'loss': 0.2846, 'grad_norm': 6.730354309082031, 'learning_rate': 1.7344398340248965e-05, 'epoch': 0.45}
+{'loss': 0.3528, 'grad_norm': 4.124127388000488, 'learning_rate': 1.6514522821576764e-05, 'epoch': 0.52}
+{'loss': 0.2943, 'grad_norm': 6.607337474822998, 'learning_rate': 1.5684647302904566e-05, 'epoch': 0.6}
+{'loss': 0.2797, 'grad_norm': 5.441041469573975, 'learning_rate': 1.4854771784232367e-05, 'epoch': 0.67}
+{'loss': 0.285, 'grad_norm': 6.598310947418213, 'learning_rate': 1.4024896265560166e-05, 'epoch': 0.75}
+{'loss': 0.3121, 'grad_norm': 5.69380521774292, 'learning_rate': 1.3195020746887967e-05, 'epoch': 0.82}
+{'loss': 0.29, 'grad_norm': 6.245463848114014, 'learning_rate': 1.236514522821577e-05, 'epoch': 0.9}
+{'loss': 0.2945, 'grad_norm': 5.852506160736084, 'learning_rate': 1.1535269709543569e-05, 'epoch': 0.97}
+{'eval_loss': 0.44236454367637634, 'eval_matthews_correlation': 0.557882735147727, 'eval_runtime': 10.0526, 'eval_samples_per_second': 103.754, 'eval_steps_per_second': 1.691, 'epoch': 1.0}
+{'loss': 0.2981, 'grad_norm': 4.361484050750732, 'learning_rate': 1.070539419087137e-05, 'epoch': 1.04}
+{'loss': 0.1977, 'grad_norm': 9.977906227111816, 'learning_rate': 9.875518672199172e-06, 'epoch': 1.12}
+{'loss': 0.194, 'grad_norm': 9.174696922302246, 'learning_rate': 9.087136929460581e-06, 'epoch': 1.19}
+{'loss': 0.2173, 'grad_norm': 12.827264785766602, 'learning_rate': 8.257261410788382e-06, 'epoch': 1.27}
+{'loss': 0.1989, 'grad_norm': 8.887797355651855, 'learning_rate': 7.427385892116184e-06, 'epoch': 1.34}
+{'loss': 0.2138, 'grad_norm': 8.19775676727295, 'learning_rate': 6.5975103734439835e-06, 'epoch': 1.42}
+{'loss': 0.22, 'grad_norm': 7.9409589767456055, 'learning_rate': 5.767634854771784e-06, 'epoch': 1.49}
+{'loss': 0.2108, 'grad_norm': 7.989468574523926, 'learning_rate': 4.937759336099586e-06, 'epoch': 1.57}
+{'loss': 0.1922, 'grad_norm': 3.7163565158843994, 'learning_rate': 4.107883817427386e-06, 'epoch': 1.64}
+{'loss': 0.2424, 'grad_norm': 7.850825786590576, 'learning_rate': 3.278008298755187e-06, 'epoch': 1.72}
+{'loss': 0.1925, 'grad_norm': 10.229044914245605, 'learning_rate': 2.448132780082988e-06, 'epoch': 1.79}
+{'loss': 0.1987, 'grad_norm': 9.115872383117676, 'learning_rate': 1.6182572614107886e-06, 'epoch': 1.87}
+{'loss': 0.1834, 'grad_norm': 6.978922367095947, 'learning_rate': 7.883817427385892e-07, 'epoch': 1.94}
+{'eval_loss': 0.5530944466590881, 'eval_matthews_correlation': 0.5652516382961122, 'eval_runtime': 10.0553, 'eval_samples_per_second': 103.727, 'eval_steps_per_second': 1.691, 'epoch': 2.0}
+{'train_runtime': 558.4906, 'train_samples_per_second': 30.622, 'train_steps_per_second': 0.96, 'train_loss': 0.2704268582721255, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 536/536 [09:18<00:00,  1.04s/it]
+    FT log:  ./results\prune_finetune_logs\02_KLR\cola_block_r10.json
+    FT plot: ./results\prune_finetune_logs\02_KLR\cola_block_r10.png
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:09<00:00,  1.81it/s]
+    Matthews Corr.: 0.5653
+
+  [Block] prune_ratio=0.3
+    Skip encoder blocks with the lowest mean KL-R across heads (layers whose heads are on average most redundant are skipped first).
+    Skip block L11: mean head KL-R = 0.297206
+    Skip block L5: mean head KL-R = 0.315881
+    Skip block L2: mean head KL-R = 0.344116
+{'loss': 0.5761, 'grad_norm': 3.671982765197754, 'learning_rate': 7.0370370370370375e-06, 'epoch': 0.07}
+{'loss': 0.5476, 'grad_norm': 4.877926349639893, 'learning_rate': 1.4444444444444446e-05, 'epoch': 0.15}
+{'loss': 0.485, 'grad_norm': 5.636425018310547, 'learning_rate': 1.9792531120331952e-05, 'epoch': 0.22}
+{'loss': 0.393, 'grad_norm': 6.937534332275391, 'learning_rate': 1.896265560165975e-05, 'epoch': 0.3}
+{'loss': 0.4342, 'grad_norm': 6.495787620544434, 'learning_rate': 1.8132780082987554e-05, 'epoch': 0.37}
+{'loss': 0.4069, 'grad_norm': 8.756677627563477, 'learning_rate': 1.7302904564315356e-05, 'epoch': 0.45}
+{'loss': 0.4724, 'grad_norm': 6.1839985847473145, 'learning_rate': 1.6473029045643155e-05, 'epoch': 0.52}
+{'loss': 0.4092, 'grad_norm': 11.6621675491333, 'learning_rate': 1.5643153526970954e-05, 'epoch': 0.6}
+{'loss': 0.4053, 'grad_norm': 5.735659122467041, 'learning_rate': 1.4854771784232367e-05, 'epoch': 0.67}
+{'loss': 0.3882, 'grad_norm': 7.604666709899902, 'learning_rate': 1.4024896265560166e-05, 'epoch': 0.75}
+{'loss': 0.4294, 'grad_norm': 5.463035583496094, 'learning_rate': 1.3195020746887967e-05, 'epoch': 0.82}
+{'loss': 0.3684, 'grad_norm': 10.828291893005371, 'learning_rate': 1.236514522821577e-05, 'epoch': 0.9}
+{'loss': 0.4111, 'grad_norm': 8.206408500671387, 'learning_rate': 1.1535269709543569e-05, 'epoch': 0.97}
+{'eval_loss': 0.46543174982070923, 'eval_matthews_correlation': 0.4896234097252215, 'eval_runtime': 8.2495, 'eval_samples_per_second': 126.432, 'eval_steps_per_second': 2.061, 'epoch': 1.0}
+{'loss': 0.3613, 'grad_norm': 5.189544200897217, 'learning_rate': 1.070539419087137e-05, 'epoch': 1.04}
+{'loss': 0.2894, 'grad_norm': 6.029707908630371, 'learning_rate': 9.875518672199172e-06, 'epoch': 1.12}
+{'loss': 0.2941, 'grad_norm': 8.095063209533691, 'learning_rate': 9.045643153526971e-06, 'epoch': 1.19}
+{'loss': 0.3258, 'grad_norm': 8.863744735717773, 'learning_rate': 8.215767634854772e-06, 'epoch': 1.27}
+{'loss': 0.2953, 'grad_norm': 4.853034973144531, 'learning_rate': 7.385892116182573e-06, 'epoch': 1.34}
+{'loss': 0.3006, 'grad_norm': 6.876608848571777, 'learning_rate': 6.556016597510374e-06, 'epoch': 1.42}
+{'loss': 0.2527, 'grad_norm': 6.009463787078857, 'learning_rate': 5.726141078838174e-06, 'epoch': 1.49}
+{'loss': 0.2848, 'grad_norm': 10.813202857971191, 'learning_rate': 4.896265560165976e-06, 'epoch': 1.57}
+{'loss': 0.294, 'grad_norm': 6.281365394592285, 'learning_rate': 4.0663900414937765e-06, 'epoch': 1.64}
+{'loss': 0.2897, 'grad_norm': 7.065525054931641, 'learning_rate': 3.2365145228215773e-06, 'epoch': 1.72}
+{'loss': 0.2548, 'grad_norm': 9.931872367858887, 'learning_rate': 2.4066390041493776e-06, 'epoch': 1.79}
+{'loss': 0.2554, 'grad_norm': 7.55838680267334, 'learning_rate': 1.5767634854771784e-06, 'epoch': 1.87}
+{'loss': 0.2772, 'grad_norm': 9.369758605957031, 'learning_rate': 7.468879668049793e-07, 'epoch': 1.94}
+{'eval_loss': 0.5782990455627441, 'eval_matthews_correlation': 0.48291834934449523, 'eval_runtime': 8.2452, 'eval_samples_per_second': 126.497, 'eval_steps_per_second': 2.062, 'epoch': 2.0}
+{'train_runtime': 459.2244, 'train_samples_per_second': 37.241, 'train_steps_per_second': 1.167, 'train_loss': 0.36257103574809746, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 536/536 [07:39<00:00,  1.17it/s]
+    FT log:  ./results\prune_finetune_logs\02_KLR\cola_block_r30.json
+    FT plot: ./results\prune_finetune_logs\02_KLR\cola_block_r30.png
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:07<00:00,  2.21it/s]
+    Matthews Corr.: 0.4829
+
+  [Block] prune_ratio=0.5
+    Skip encoder blocks with the lowest mean KL-R across heads (layers whose heads are on average most redundant are skipped first).
+    Skip block L11: mean head KL-R = 0.297206
+    Skip block L5: mean head KL-R = 0.315881
+    Skip block L2: mean head KL-R = 0.344116
+    Skip block L6: mean head KL-R = 0.473240
+    Skip block L7: mean head KL-R = 0.487892
+    Skip block L8: mean head KL-R = 0.502118
+{'loss': 0.6595, 'grad_norm': 2.1051523685455322, 'learning_rate': 7.0370370370370375e-06, 'epoch': 0.07}
+{'loss': 0.6231, 'grad_norm': 1.8331152200698853, 'learning_rate': 1.4444444444444446e-05, 'epoch': 0.15}
+{'loss': 0.6218, 'grad_norm': 1.365041971206665, 'learning_rate': 1.9792531120331952e-05, 'epoch': 0.22}
+{'loss': 0.5902, 'grad_norm': 3.973788261413574, 'learning_rate': 1.896265560165975e-05, 'epoch': 0.3}
+{'loss': 0.5829, 'grad_norm': 2.24688982963562, 'learning_rate': 1.8132780082987554e-05, 'epoch': 0.37}
+{'loss': 0.5582, 'grad_norm': 2.7276368141174316, 'learning_rate': 1.7302904564315356e-05, 'epoch': 0.45}
+{'loss': 0.597, 'grad_norm': 2.586141347885132, 'learning_rate': 1.6473029045643155e-05, 'epoch': 0.52}
+{'loss': 0.6046, 'grad_norm': 4.481380939483643, 'learning_rate': 1.5643153526970954e-05, 'epoch': 0.6}
+{'loss': 0.5631, 'grad_norm': 2.3772811889648438, 'learning_rate': 1.4813278008298757e-05, 'epoch': 0.67}
+{'loss': 0.5617, 'grad_norm': 3.0759315490722656, 'learning_rate': 1.3983402489626556e-05, 'epoch': 0.75}
+{'loss': 0.5745, 'grad_norm': 2.534860372543335, 'learning_rate': 1.3153526970954359e-05, 'epoch': 0.82}
+{'loss': 0.559, 'grad_norm': 3.53366756439209, 'learning_rate': 1.232365145228216e-05, 'epoch': 0.9}
+{'loss': 0.5528, 'grad_norm': 3.0782365798950195, 'learning_rate': 1.1493775933609958e-05, 'epoch': 0.97}
+{'eval_loss': 0.5754187107086182, 'eval_matthews_correlation': 0.1951930760399953, 'eval_runtime': 5.5438, 'eval_samples_per_second': 188.136, 'eval_steps_per_second': 3.066, 'epoch': 1.0}
+{'loss': 0.5151, 'grad_norm': 3.462501049041748, 'learning_rate': 1.0663900414937761e-05, 'epoch': 1.04}
+{'loss': 0.5036, 'grad_norm': 4.206089496612549, 'learning_rate': 9.83402489626556e-06, 'epoch': 1.12}
+{'loss': 0.5154, 'grad_norm': 6.370088577270508, 'learning_rate': 9.004149377593362e-06, 'epoch': 1.19}
+{'loss': 0.4948, 'grad_norm': 4.758664131164551, 'learning_rate': 8.174273858921162e-06, 'epoch': 1.27}
+{'loss': 0.4811, 'grad_norm': 5.025754451751709, 'learning_rate': 7.344398340248964e-06, 'epoch': 1.34}
+{'loss': 0.4803, 'grad_norm': 8.72651481628418, 'learning_rate': 6.514522821576764e-06, 'epoch': 1.42}
+{'loss': 0.4404, 'grad_norm': 6.918269157409668, 'learning_rate': 5.684647302904565e-06, 'epoch': 1.49}
+{'loss': 0.4738, 'grad_norm': 5.831050872802734, 'learning_rate': 4.8547717842323655e-06, 'epoch': 1.57}
+{'loss': 0.4619, 'grad_norm': 7.393604278564453, 'learning_rate': 4.024896265560166e-06, 'epoch': 1.64}
+{'loss': 0.5116, 'grad_norm': 6.48038911819458, 'learning_rate': 3.1950207468879666e-06, 'epoch': 1.72}
+{'loss': 0.4498, 'grad_norm': 6.724338054656982, 'learning_rate': 2.365145228215768e-06, 'epoch': 1.79}
+{'loss': 0.4582, 'grad_norm': 4.279876708984375, 'learning_rate': 1.5352697095435686e-06, 'epoch': 1.87}
+{'loss': 0.4611, 'grad_norm': 5.571991443634033, 'learning_rate': 7.053941908713693e-07, 'epoch': 1.94}
+{'eval_loss': 0.6152954697608948, 'eval_matthews_correlation': 0.2613711527128651, 'eval_runtime': 5.5488, 'eval_samples_per_second': 187.969, 'eval_steps_per_second': 3.064, 'epoch': 2.0}
+{'train_runtime': 310.1594, 'train_samples_per_second': 55.139, 'train_steps_per_second': 1.728, 'train_loss': 0.532097339630127, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 536/536 [05:10<00:00,  1.73it/s]
+    FT log:  ./results\prune_finetune_logs\02_KLR\cola_block_r50.json
+    FT plot: ./results\prune_finetune_logs\02_KLR\cola_block_r50.png
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:05<00:00,  3.29it/s]
+    Matthews Corr.: 0.2614
+
+============================================================
+  KL-R — Task: MRPC
+============================================================
+Map: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████| 3668/3668 [00:00<00:00, 18943.09 examples/s]
+Map: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████| 408/408 [00:00<00:00, 11366.07 examples/s]
+Map: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████| 1725/1725 [00:00<00:00, 17663.44 examples/s]
+  Computing pairwise KL redundancy (O(H²) per layer — may take a few minutes)...
+  KL scores — min: 0.0659  max: 2.9957
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:12<00:00,  1.73s/it]
+
+  [Head] prune_ratio=0.1
+    Mask (BERT head_mask) heads with lowest min pairwise KL to another head in the same layer; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+{'loss': 0.3423, 'grad_norm': 5.439962387084961, 'learning_rate': 1.565217391304348e-05, 'epoch': 0.17}
+{'loss': 0.2784, 'grad_norm': 7.523454189300537, 'learning_rate': 1.8550724637681162e-05, 'epoch': 0.35}
+{'loss': 0.2688, 'grad_norm': 10.551204681396484, 'learning_rate': 1.6618357487922706e-05, 'epoch': 0.52}
+{'loss': 0.2461, 'grad_norm': 8.316320419311523, 'learning_rate': 1.4685990338164254e-05, 'epoch': 0.7}
+{'loss': 0.2051, 'grad_norm': 4.965660095214844, 'learning_rate': 1.2753623188405797e-05, 'epoch': 0.87}
+{'eval_runtime': 14.5375, 'eval_samples_per_second': 28.065, 'eval_steps_per_second': 0.482, 'epoch': 1.0}
+{'loss': 0.1807, 'grad_norm': 4.538768291473389, 'learning_rate': 1.0821256038647342e-05, 'epoch': 1.04}
+{'loss': 0.1561, 'grad_norm': 6.1772637367248535, 'learning_rate': 8.888888888888888e-06, 'epoch': 1.22}
+{'loss': 0.157, 'grad_norm': inf, 'learning_rate': 6.956521739130435e-06, 'epoch': 1.39}
+{'loss': 0.1368, 'grad_norm': 7.525533676147461, 'learning_rate': 5.1207729468599045e-06, 'epoch': 1.57}
+{'loss': 0.1199, 'grad_norm': 5.622420787811279, 'learning_rate': 3.2850241545893724e-06, 'epoch': 1.74}
+{'loss': 0.1382, 'grad_norm': 15.626859664916992, 'learning_rate': 1.3526570048309178e-06, 'epoch': 1.91}
+{'eval_runtime': 14.5373, 'eval_samples_per_second': 28.066, 'eval_steps_per_second': 0.482, 'epoch': 2.0}
+{'train_runtime': 834.9079, 'train_samples_per_second': 8.787, 'train_steps_per_second': 0.275, 'train_loss': 0.19930754278017127, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 230/230 [13:54<00:00,  3.63s/it]
+    FT log:  ./results\prune_finetune_logs\02_KLR\mrpc_head_r10.json
+    FT plot: ./results\prune_finetune_logs\02_KLR\mrpc_head_r10.png
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:12<00:00,  1.75s/it]
+    F1: 0.0000  (baseline: 0.8844)
+    Masked 14 heads (soft); full list in report file.
+
+  [Head] prune_ratio=0.3
+    Mask (BERT head_mask) heads with lowest min pairwise KL to another head in the same layer; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+{'loss': 0.4617, 'grad_norm': inf, 'learning_rate': 1.6521739130434785e-05, 'epoch': 0.17}
+{'loss': 0.3447, 'grad_norm': 13.194098472595215, 'learning_rate': 1.8550724637681162e-05, 'epoch': 0.35}
+{'loss': 0.309, 'grad_norm': 11.888599395751953, 'learning_rate': 1.6618357487922706e-05, 'epoch': 0.52}
+{'loss': 0.2992, 'grad_norm': 5.891955375671387, 'learning_rate': 1.4685990338164254e-05, 'epoch': 0.7}
+{'loss': 0.2516, 'grad_norm': 9.792160987854004, 'learning_rate': 1.2753623188405797e-05, 'epoch': 0.87}
+{'eval_runtime': 14.5362, 'eval_samples_per_second': 28.068, 'eval_steps_per_second': 0.482, 'epoch': 1.0}
+{'loss': 0.2223, 'grad_norm': 5.146115303039551, 'learning_rate': 1.0821256038647342e-05, 'epoch': 1.04}
+{'loss': 0.1977, 'grad_norm': 6.207146644592285, 'learning_rate': 8.888888888888888e-06, 'epoch': 1.22}
+{'loss': 0.1677, 'grad_norm': 19.803672790527344, 'learning_rate': 6.956521739130435e-06, 'epoch': 1.39}
+{'loss': 0.1445, 'grad_norm': 7.926292419433594, 'learning_rate': 5.024154589371981e-06, 'epoch': 1.57}
+{'loss': 0.1707, 'grad_norm': 9.32707405090332, 'learning_rate': 3.0917874396135268e-06, 'epoch': 1.74}
+{'loss': 0.1922, 'grad_norm': 14.47252082824707, 'learning_rate': 1.2560386473429952e-06, 'epoch': 1.91}
+{'eval_runtime': 14.5326, 'eval_samples_per_second': 28.075, 'eval_steps_per_second': 0.482, 'epoch': 2.0}
+{'train_runtime': 832.4473, 'train_samples_per_second': 8.813, 'train_steps_per_second': 0.276, 'train_loss': 0.24762692555137303, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 230/230 [13:52<00:00,  3.62s/it]
+    FT log:  ./results\prune_finetune_logs\02_KLR\mrpc_head_r30.json
+    FT plot: ./results\prune_finetune_logs\02_KLR\mrpc_head_r30.png
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:12<00:00,  1.75s/it]
+    F1: 0.0000  (baseline: 0.8844)
+    Masked 43 heads (soft); full list in report file.
+
+  [Head] prune_ratio=0.5
+    Mask (BERT head_mask) heads with lowest min pairwise KL to another head in the same layer; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+{'loss': 0.5524, 'grad_norm': 11.293580055236816, 'learning_rate': 1.565217391304348e-05, 'epoch': 0.17}
+{'loss': 0.4628, 'grad_norm': 6.692523956298828, 'learning_rate': 1.8550724637681162e-05, 'epoch': 0.35}
+{'loss': 0.3818, 'grad_norm': 8.899054527282715, 'learning_rate': 1.6618357487922706e-05, 'epoch': 0.52}
+{'loss': 0.3599, 'grad_norm': 7.483384132385254, 'learning_rate': 1.4685990338164254e-05, 'epoch': 0.7}
+{'loss': 0.3472, 'grad_norm': 8.492650985717773, 'learning_rate': 1.2753623188405797e-05, 'epoch': 0.87}
+{'eval_runtime': 14.5694, 'eval_samples_per_second': 28.004, 'eval_steps_per_second': 0.48, 'epoch': 1.0}
+{'loss': 0.3172, 'grad_norm': 4.735774993896484, 'learning_rate': 1.0821256038647342e-05, 'epoch': 1.04}
+{'loss': 0.2623, 'grad_norm': 3.2685160636901855, 'learning_rate': 8.888888888888888e-06, 'epoch': 1.22}
+{'loss': 0.2482, 'grad_norm': 18.978853225708008, 'learning_rate': 6.956521739130435e-06, 'epoch': 1.39}
+{'loss': 0.237, 'grad_norm': 14.004283905029297, 'learning_rate': 5.024154589371981e-06, 'epoch': 1.57}
+{'loss': 0.2268, 'grad_norm': 11.942591667175293, 'learning_rate': 3.0917874396135268e-06, 'epoch': 1.74}
+{'loss': 0.2778, 'grad_norm': 14.210685729980469, 'learning_rate': 1.1594202898550726e-06, 'epoch': 1.91}
+{'eval_runtime': 14.5663, 'eval_samples_per_second': 28.01, 'eval_steps_per_second': 0.481, 'epoch': 2.0}
+{'train_runtime': 839.3662, 'train_samples_per_second': 8.74, 'train_steps_per_second': 0.274, 'train_loss': 0.32960380160290265, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 230/230 [13:59<00:00,  3.65s/it]
+    FT log:  ./results\prune_finetune_logs\02_KLR\mrpc_head_r50.json
+    FT plot: ./results\prune_finetune_logs\02_KLR\mrpc_head_r50.png
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:12<00:00,  1.75s/it]
+    F1: 0.0000  (baseline: 0.8844)
+    Masked 72 heads (soft); full list in report file.
+
+  [Block] prune_ratio=0.1
+    Skip encoder blocks with the lowest mean KL-R across heads (layers whose heads are on average most redundant are skipped first).
+    Skip block L11: mean head KL-R = 0.371712
+{'loss': 0.4585, 'grad_norm': 5.552168846130371, 'learning_rate': 1.6521739130434785e-05, 'epoch': 0.17}
+{'loss': 0.3235, 'grad_norm': 7.403153419494629, 'learning_rate': 1.8550724637681162e-05, 'epoch': 0.35}
+{'loss': 0.2789, 'grad_norm': 11.01129150390625, 'learning_rate': 1.6618357487922706e-05, 'epoch': 0.52}
+{'loss': 0.2563, 'grad_norm': 5.548847675323486, 'learning_rate': 1.4685990338164254e-05, 'epoch': 0.7}
+{'loss': 0.2321, 'grad_norm': 7.772298812866211, 'learning_rate': 1.2753623188405797e-05, 'epoch': 0.87}
+{'eval_loss': 0.3624367117881775, 'eval_accuracy': 0.8480392156862745, 'eval_f1': 0.8912280701754386, 'eval_runtime': 13.043, 'eval_samples_per_second': 31.281, 'eval_steps_per_second': 0.537, 'epoch': 1.0}
+{'loss': 0.2018, 'grad_norm': 3.8068690299987793, 'learning_rate': 1.0821256038647342e-05, 'epoch': 1.04}
+{'loss': 0.1819, 'grad_norm': 4.657994270324707, 'learning_rate': 8.888888888888888e-06, 'epoch': 1.22}
+{'loss': 0.1184, 'grad_norm': 8.416719436645508, 'learning_rate': 6.956521739130435e-06, 'epoch': 1.39}
+{'loss': 0.1375, 'grad_norm': 5.799508094787598, 'learning_rate': 5.1207729468599045e-06, 'epoch': 1.57}
+{'loss': 0.1253, 'grad_norm': 6.089698314666748, 'learning_rate': 3.188405797101449e-06, 'epoch': 1.74}
+{'loss': 0.1534, 'grad_norm': 15.197193145751953, 'learning_rate': 1.2560386473429952e-06, 'epoch': 1.91}
+{'eval_loss': 0.3983234465122223, 'eval_accuracy': 0.8553921568627451, 'eval_f1': 0.8970331588132635, 'eval_runtime': 13.0478, 'eval_samples_per_second': 31.27, 'eval_steps_per_second': 0.536, 'epoch': 2.0}
+{'train_runtime': 751.0855, 'train_samples_per_second': 9.767, 'train_steps_per_second': 0.306, 'train_loss': 0.22189338103584622, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 230/230 [12:31<00:00,  3.27s/it]
+    FT log:  ./results\prune_finetune_logs\02_KLR\mrpc_block_r10.json
+    FT plot: ./results\prune_finetune_logs\02_KLR\mrpc_block_r10.png
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:11<00:00,  1.57s/it]
+    F1: 0.8970
+
+  [Block] prune_ratio=0.3
+    Skip encoder blocks with the lowest mean KL-R across heads (layers whose heads are on average most redundant are skipped first).
+    Skip block L11: mean head KL-R = 0.371712
+    Skip block L2: mean head KL-R = 0.577830
+    Skip block L10: mean head KL-R = 0.582409
+{'loss': 0.5769, 'grad_norm': 5.415402412414551, 'learning_rate': 1.6521739130434785e-05, 'epoch': 0.17}
+{'loss': 0.458, 'grad_norm': 5.119434833526611, 'learning_rate': 1.8454106280193237e-05, 'epoch': 0.35}
+{'loss': 0.3826, 'grad_norm': 3.651986837387085, 'learning_rate': 1.6521739130434785e-05, 'epoch': 0.52}
+{'loss': 0.4035, 'grad_norm': 10.797537803649902, 'learning_rate': 1.4685990338164254e-05, 'epoch': 0.7}
+{'loss': 0.3523, 'grad_norm': 5.866034507751465, 'learning_rate': 1.2753623188405797e-05, 'epoch': 0.87}
+{'eval_loss': 0.3992132246494293, 'eval_accuracy': 0.8161764705882353, 'eval_f1': 0.8633879781420765, 'eval_runtime': 10.6969, 'eval_samples_per_second': 38.142, 'eval_steps_per_second': 0.654, 'epoch': 1.0}
+{'loss': 0.3125, 'grad_norm': 4.757056713104248, 'learning_rate': 1.0821256038647342e-05, 'epoch': 1.04}
+{'loss': 0.2946, 'grad_norm': 9.039715766906738, 'learning_rate': 8.888888888888888e-06, 'epoch': 1.22}
+{'loss': 0.2412, 'grad_norm': 6.488378047943115, 'learning_rate': 6.956521739130435e-06, 'epoch': 1.39}
+{'loss': 0.2333, 'grad_norm': 3.940164566040039, 'learning_rate': 5.024154589371981e-06, 'epoch': 1.57}
+{'loss': 0.228, 'grad_norm': 14.248642921447754, 'learning_rate': 3.0917874396135268e-06, 'epoch': 1.74}
+{'loss': 0.2977, 'grad_norm': inf, 'learning_rate': 1.1594202898550726e-06, 'epoch': 1.91}
+{'eval_loss': 0.4182873070240021, 'eval_accuracy': 0.8308823529411765, 'eval_f1': 0.8824531516183987, 'eval_runtime': 10.6971, 'eval_samples_per_second': 38.141, 'eval_steps_per_second': 0.654, 'epoch': 2.0}
+{'train_runtime': 615.6567, 'train_samples_per_second': 11.916, 'train_steps_per_second': 0.374, 'train_loss': 0.3407021771306577, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 230/230 [10:15<00:00,  2.68s/it]
+    FT log:  ./results\prune_finetune_logs\02_KLR\mrpc_block_r30.json
+    FT plot: ./results\prune_finetune_logs\02_KLR\mrpc_block_r30.png
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:09<00:00,  1.29s/it]
+    F1: 0.8825
+
+  [Block] prune_ratio=0.5
+    Skip encoder blocks with the lowest mean KL-R across heads (layers whose heads are on average most redundant are skipped first).
+    Skip block L11: mean head KL-R = 0.371712
+    Skip block L2: mean head KL-R = 0.577830
+    Skip block L10: mean head KL-R = 0.582409
+    Skip block L0: mean head KL-R = 0.629225
+    Skip block L7: mean head KL-R = 0.658225
+    Skip block L5: mean head KL-R = 0.728558
+{'loss': 0.6551, 'grad_norm': 5.120799541473389, 'learning_rate': 1.6521739130434785e-05, 'epoch': 0.17}
+{'loss': 0.5769, 'grad_norm': 7.507786750793457, 'learning_rate': 1.8550724637681162e-05, 'epoch': 0.35}
+{'loss': 0.5218, 'grad_norm': 3.367398738861084, 'learning_rate': 1.6618357487922706e-05, 'epoch': 0.52}
+{'loss': 0.5191, 'grad_norm': 4.1947221755981445, 'learning_rate': 1.4685990338164254e-05, 'epoch': 0.7}
+{'loss': 0.5163, 'grad_norm': 8.127326011657715, 'learning_rate': 1.2753623188405797e-05, 'epoch': 0.87}
+{'eval_loss': 0.48741966485977173, 'eval_accuracy': 0.7720588235294118, 'eval_f1': 0.8530805687203792, 'eval_runtime': 7.156, 'eval_samples_per_second': 57.015, 'eval_steps_per_second': 0.978, 'epoch': 1.0}
+{'loss': 0.4936, 'grad_norm': 3.579481363296509, 'learning_rate': 1.0821256038647342e-05, 'epoch': 1.04}
+{'loss': 0.426, 'grad_norm': 4.636355400085449, 'learning_rate': 8.888888888888888e-06, 'epoch': 1.22}
+{'loss': 0.3937, 'grad_norm': 12.14905071258545, 'learning_rate': 6.956521739130435e-06, 'epoch': 1.39}
+{'loss': 0.3968, 'grad_norm': 6.470180034637451, 'learning_rate': 5.024154589371981e-06, 'epoch': 1.57}
+{'loss': 0.3971, 'grad_norm': 6.049417495727539, 'learning_rate': 3.0917874396135268e-06, 'epoch': 1.74}
+{'loss': 0.4261, 'grad_norm': 12.054388046264648, 'learning_rate': 1.1594202898550726e-06, 'epoch': 1.91}
+{'eval_loss': 0.4834243953227997, 'eval_accuracy': 0.7892156862745098, 'eval_f1': 0.8612903225806452, 'eval_runtime': 7.1657, 'eval_samples_per_second': 56.938, 'eval_steps_per_second': 0.977, 'epoch': 2.0}
+{'train_runtime': 412.4888, 'train_samples_per_second': 17.785, 'train_steps_per_second': 0.558, 'train_loss': 0.48338672389154846, 'epoch': 2.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 230/230 [06:52<00:00,  1.79s/it]
+    FT log:  ./results\prune_finetune_logs\02_KLR\mrpc_block_r50.json
+    FT plot: ./results\prune_finetune_logs\02_KLR\mrpc_block_r50.png
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:06<00:00,  1.16it/s]
+    F1: 0.8613
+
+Results saved: ./results\02_KLR_results.csv
+Pruning report saved: ./results\02_KLR_pruning_report.txt
+
+======================================================================
+SUMMARY TABLE — KL-R Metric
+======================================================================
+task level prune_ratio  primary_score  baseline_score  score_drop
+cola  head         10%         0.0000          0.5289      0.5289
+cola  head         30%         0.0000          0.5289      0.5289
+cola  head         50%         0.0000          0.5289      0.5289
+cola block         10%         0.5653          0.5289     -0.0364
+cola block         30%         0.4829          0.5289      0.0460
+cola block         50%         0.2614          0.5289      0.2675
+mrpc  head         10%         0.0000          0.8844      0.8844
+mrpc  head         30%         0.0000          0.8844      0.8844
+mrpc  head         50%         0.0000          0.8844      0.8844
+mrpc block         10%         0.8970          0.8844     -0.0127
+mrpc block         30%         0.8825          0.8844      0.0019
+mrpc block         50%         0.8613          0.8844      0.0231
+
+Generating figures...
+  Saved: ./figures\02_KLR_score_heatmap.png
+  Saved: ./figures\02_KLR_head_accuracy_curves.png
+  Saved: ./figures\02_KLR_block_accuracy_curves.png
+  Saved: ./figures\02_KLR_head_vs_block.png
+  Saved: ./figures\02_KLR_pruned_head_map.png
+  Saved: ./figures\02_KLR_score_distribution.png
+  Saved: ./figures\02_KLR_mean_per_layer.png
+
+Figures produced:
+  02_KLR_score_heatmap.png
+  02_KLR_head_accuracy_curves.png
+  02_KLR_block_accuracy_curves.png
+  02_KLR_head_vs_block.png
+  02_KLR_pruned_head_map.png
+  02_KLR_score_distribution.png
+  02_KLR_mean_per_layer.png

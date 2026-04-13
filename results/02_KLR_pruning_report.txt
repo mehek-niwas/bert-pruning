@@ -1,0 +1,691 @@
+02_metric_kl_redundancy.py — KL-R pruning report
+Metric: per head, min over other heads of KL(attn_h || attn_k) on calibration data.
+
+
+========================================================================
+TASK COLA — baseline (no pruning)
+  Matthews Corr. = 0.528880  (eval_matthews_correlation)
+
+COMPLETE SCORE INVENTORY — task=cola — per-head min pairwise KL-R (all 12×12 heads)
+  L 0  H 0  KL-R=0.341413
+  L 0  H 1  KL-R=0.416115
+  L 0  H 2  KL-R=0.674089
+  L 0  H 3  KL-R=0.554579
+  L 0  H 4  KL-R=0.379448
+  L 0  H 5  KL-R=0.504400
+  L 0  H 6  KL-R=0.390492
+  L 0  H 7  KL-R=0.470877
+  L 0  H 8  KL-R=0.311315
+  L 0  H 9  KL-R=0.507455
+  L 0  H10  KL-R=0.977180
+  L 0  H11  KL-R=0.611986
+  L 1  H 0  KL-R=0.475494
+  L 1  H 1  KL-R=1.051345
+  L 1  H 2  KL-R=0.350019
+  L 1  H 3  KL-R=0.358542
+  L 1  H 4  KL-R=0.933883
+  L 1  H 5  KL-R=0.358526
+  L 1  H 6  KL-R=0.593199
+  L 1  H 7  KL-R=0.306230
+  L 1  H 8  KL-R=0.373465
+  L 1  H 9  KL-R=0.364198
+  L 1  H10  KL-R=0.496258
+  L 1  H11  KL-R=1.061858
+  L 2  H 0  KL-R=0.106956
+  L 2  H 1  KL-R=0.516158
+  L 2  H 2  KL-R=0.274480
+  L 2  H 3  KL-R=0.241708
+  L 2  H 4  KL-R=0.277729
+  L 2  H 5  KL-R=0.283310
+  L 2  H 6  KL-R=0.981723
+  L 2  H 7  KL-R=0.269109
+  L 2  H 8  KL-R=0.381012
+  L 2  H 9  KL-R=0.102582
+  L 2  H10  KL-R=0.346889
+  L 2  H11  KL-R=0.347732
+  L 3  H 0  KL-R=0.590439
+  L 3  H 1  KL-R=0.425219
+  L 3  H 2  KL-R=0.302445
+  L 3  H 3  KL-R=0.562943
+  L 3  H 4  KL-R=0.500539
+  L 3  H 5  KL-R=0.833358
+  L 3  H 6  KL-R=0.382082
+  L 3  H 7  KL-R=0.404955
+  L 3  H 8  KL-R=0.412139
+  L 3  H 9  KL-R=0.866437
+  L 3  H10  KL-R=0.583337
+  L 3  H11  KL-R=0.710374
+  L 4  H 0  KL-R=0.441847
+  L 4  H 1  KL-R=1.148881
+  L 4  H 2  KL-R=0.280247
+  L 4  H 3  KL-R=0.499607
+  L 4  H 4  KL-R=0.469528
+  L 4  H 5  KL-R=0.614471
+  L 4  H 6  KL-R=0.442964
+  L 4  H 7  KL-R=0.429033
+  L 4  H 8  KL-R=0.287796
+  L 4  H 9  KL-R=0.351132
+  L 4  H10  KL-R=0.498379
+  L 4  H11  KL-R=0.779142
+  L 5  H 0  KL-R=0.284672
+  L 5  H 1  KL-R=0.216476
+  L 5  H 2  KL-R=0.193983
+  L 5  H 3  KL-R=0.307797
+  L 5  H 4  KL-R=0.282940
+  L 5  H 5  KL-R=0.233296
+  L 5  H 6  KL-R=0.266755
+  L 5  H 7  KL-R=0.248488
+  L 5  H 8  KL-R=0.304708
+  L 5  H 9  KL-R=0.532743
+  L 5  H10  KL-R=0.637612
+  L 5  H11  KL-R=0.281104
+  L 6  H 0  KL-R=0.354604
+  L 6  H 1  KL-R=0.425283
+  L 6  H 2  KL-R=0.493879
+  L 6  H 3  KL-R=0.315020
+  L 6  H 4  KL-R=0.356042
+  L 6  H 5  KL-R=0.513653
+  L 6  H 6  KL-R=0.567006
+  L 6  H 7  KL-R=0.401798
+  L 6  H 8  KL-R=0.397586
+  L 6  H 9  KL-R=0.531716
+  L 6  H10  KL-R=0.345623
+  L 6  H11  KL-R=0.976671
+  L 7  H 0  KL-R=0.552913
+  L 7  H 1  KL-R=0.440127
+  L 7  H 2  KL-R=0.490418
+  L 7  H 3  KL-R=0.289279
+  L 7  H 4  KL-R=0.906937
+  L 7  H 5  KL-R=0.543167
+  L 7  H 6  KL-R=0.277319
+  L 7  H 7  KL-R=0.517957
+  L 7  H 8  KL-R=0.538009
+  L 7  H 9  KL-R=0.421134
+  L 7  H10  KL-R=0.424031
+  L 7  H11  KL-R=0.453417
+  L 8  H 0  KL-R=0.431224
+  L 8  H 1  KL-R=0.450902
+  L 8  H 2  KL-R=0.634367
+  L 8  H 3  KL-R=0.464512
+  L 8  H 4  KL-R=0.633856
+  L 8  H 5  KL-R=0.520274
+  L 8  H 6  KL-R=0.555004
+  L 8  H 7  KL-R=0.390741
+  L 8  H 8  KL-R=0.420728
+  L 8  H 9  KL-R=0.479461
+  L 8  H10  KL-R=0.587504
+  L 8  H11  KL-R=0.456851
+  L 9  H 0  KL-R=0.465191
+  L 9  H 1  KL-R=0.552687
+  L 9  H 2  KL-R=0.573520
+  L 9  H 3  KL-R=0.591029
+  L 9  H 4  KL-R=0.544815
+  L 9  H 5  KL-R=0.598911
+  L 9  H 6  KL-R=0.567146
+  L 9  H 7  KL-R=0.444556
+  L 9  H 8  KL-R=0.622817
+  L 9  H 9  KL-R=0.506710
+  L 9  H10  KL-R=0.643523
+  L 9  H11  KL-R=0.498736
+  L10  H 0  KL-R=0.609332
+  L10  H 1  KL-R=0.389506
+  L10  H 2  KL-R=0.562785
+  L10  H 3  KL-R=0.477224
+  L10  H 4  KL-R=0.465463
+  L10  H 5  KL-R=0.370512
+  L10  H 6  KL-R=0.465695
+  L10  H 7  KL-R=0.532226
+  L10  H 8  KL-R=0.614681
+  L10  H 9  KL-R=0.329731
+  L10  H10  KL-R=0.930798
+  L10  H11  KL-R=0.643602
+  L11  H 0  KL-R=0.228875
+  L11  H 1  KL-R=0.291906
+  L11  H 2  KL-R=0.291620
+  L11  H 3  KL-R=0.271981
+  L11  H 4  KL-R=0.286081
+  L11  H 5  KL-R=0.314850
+  L11  H 6  KL-R=0.282118
+  L11  H 7  KL-R=0.201905
+  L11  H 8  KL-R=0.533099
+  L11  H 9  KL-R=0.303695
+  L11  H10  KL-R=0.324759
+  L11  H11  KL-R=0.235579
+Per-block aggregate: mean KL-R over heads in each layer (block pruning uses these means; lowest mean skipped first):
+  Block L 0  mean_head_KL-R=0.511613
+  Block L 1  mean_head_KL-R=0.560251
+  Block L 2  mean_head_KL-R=0.344116
+  Block L 3  mean_head_KL-R=0.547856
+  Block L 4  mean_head_KL-R=0.520252
+  Block L 5  mean_head_KL-R=0.315881
+  Block L 6  mean_head_KL-R=0.473240
+  Block L 7  mean_head_KL-R=0.487892
+  Block L 8  mean_head_KL-R=0.502118
+  Block L 9  mean_head_KL-R=0.550803
+  Block L10  mean_head_KL-R=0.532630
+  Block L11  mean_head_KL-R=0.297206
+
+------------------------------------------------------------------------
+Task=cola  level=head  prune_ratio=10%  n_masked=14  (budget 14)
+Selection rule (KL-R): Mask (BERT head_mask) heads with lowest min pairwise KL to another head in the same layer; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, min_pairwise_KL_score):
+  L 2  H 9  KL-R=0.102582
+  L 2  H 0  KL-R=0.106956
+  L 5  H 2  KL-R=0.193983
+  L11  H 7  KL-R=0.201905
+  L 5  H 1  KL-R=0.216476
+  L11  H 0  KL-R=0.228875
+  L 5  H 5  KL-R=0.233296
+  L11  H11  KL-R=0.235579
+  L 2  H 3  KL-R=0.241708
+  L 5  H 7  KL-R=0.248488
+  L 5  H 6  KL-R=0.266755
+  L 2  H 7  KL-R=0.269109
+  L11  H 3  KL-R=0.271981
+  L 2  H 2  KL-R=0.274480
+After fine-tune: Matthews Corr. = 0.000000  (baseline 0.528880,  delta -0.528880)
+Full eval metrics: epoch=2.000000, eval_runtime=11.040700, eval_samples_per_second=94.469000, eval_steps_per_second=1.540000
+
+------------------------------------------------------------------------
+Task=cola  level=head  prune_ratio=30%  n_masked=43  (budget 43)
+Selection rule (KL-R): Mask (BERT head_mask) heads with lowest min pairwise KL to another head in the same layer; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, min_pairwise_KL_score):
+  L 2  H 9  KL-R=0.102582
+  L 2  H 0  KL-R=0.106956
+  L 5  H 2  KL-R=0.193983
+  L11  H 7  KL-R=0.201905
+  L 5  H 1  KL-R=0.216476
+  L11  H 0  KL-R=0.228875
+  L 5  H 5  KL-R=0.233296
+  L11  H11  KL-R=0.235579
+  L 2  H 3  KL-R=0.241708
+  L 5  H 7  KL-R=0.248488
+  L 5  H 6  KL-R=0.266755
+  L 2  H 7  KL-R=0.269109
+  L11  H 3  KL-R=0.271981
+  L 2  H 2  KL-R=0.274480
+  L 7  H 6  KL-R=0.277319
+  L 2  H 4  KL-R=0.277729
+  L 4  H 2  KL-R=0.280247
+  L 5  H11  KL-R=0.281104
+  L11  H 6  KL-R=0.282118
+  L 5  H 4  KL-R=0.282940
+  L 2  H 5  KL-R=0.283310
+  L 5  H 0  KL-R=0.284672
+  L11  H 4  KL-R=0.286081
+  L 4  H 8  KL-R=0.287796
+  L 7  H 3  KL-R=0.289279
+  L11  H 2  KL-R=0.291620
+  L11  H 1  KL-R=0.291906
+  L 3  H 2  KL-R=0.302445
+  L11  H 9  KL-R=0.303695
+  L 5  H 8  KL-R=0.304708
+  L 1  H 7  KL-R=0.306230
+  L 5  H 3  KL-R=0.307797
+  L 0  H 8  KL-R=0.311315
+  L11  H 5  KL-R=0.314850
+  L 6  H 3  KL-R=0.315020
+  L11  H10  KL-R=0.324759
+  L10  H 9  KL-R=0.329731
+  L 0  H 0  KL-R=0.341413
+  L 6  H10  KL-R=0.345623
+  L 2  H10  KL-R=0.346889
+  L 2  H11  KL-R=0.347732
+  L 1  H 2  KL-R=0.350019
+  L 4  H 9  KL-R=0.351132
+After fine-tune: Matthews Corr. = 0.000000  (baseline 0.528880,  delta -0.528880)
+Full eval metrics: epoch=2.000000, eval_runtime=11.039300, eval_samples_per_second=94.481000, eval_steps_per_second=1.540000
+
+------------------------------------------------------------------------
+Task=cola  level=head  prune_ratio=50%  n_masked=72  (budget 72)
+Selection rule (KL-R): Mask (BERT head_mask) heads with lowest min pairwise KL to another head in the same layer; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, min_pairwise_KL_score):
+  L 2  H 9  KL-R=0.102582
+  L 2  H 0  KL-R=0.106956
+  L 5  H 2  KL-R=0.193983
+  L11  H 7  KL-R=0.201905
+  L 5  H 1  KL-R=0.216476
+  L11  H 0  KL-R=0.228875
+  L 5  H 5  KL-R=0.233296
+  L11  H11  KL-R=0.235579
+  L 2  H 3  KL-R=0.241708
+  L 5  H 7  KL-R=0.248488
+  L 5  H 6  KL-R=0.266755
+  L 2  H 7  KL-R=0.269109
+  L11  H 3  KL-R=0.271981
+  L 2  H 2  KL-R=0.274480
+  L 7  H 6  KL-R=0.277319
+  L 2  H 4  KL-R=0.277729
+  L 4  H 2  KL-R=0.280247
+  L 5  H11  KL-R=0.281104
+  L11  H 6  KL-R=0.282118
+  L 5  H 4  KL-R=0.282940
+  L 2  H 5  KL-R=0.283310
+  L 5  H 0  KL-R=0.284672
+  L11  H 4  KL-R=0.286081
+  L 4  H 8  KL-R=0.287796
+  L 7  H 3  KL-R=0.289279
+  L11  H 2  KL-R=0.291620
+  L11  H 1  KL-R=0.291906
+  L 3  H 2  KL-R=0.302445
+  L11  H 9  KL-R=0.303695
+  L 5  H 8  KL-R=0.304708
+  L 1  H 7  KL-R=0.306230
+  L 5  H 3  KL-R=0.307797
+  L 0  H 8  KL-R=0.311315
+  L11  H 5  KL-R=0.314850
+  L 6  H 3  KL-R=0.315020
+  L11  H10  KL-R=0.324759
+  L10  H 9  KL-R=0.329731
+  L 0  H 0  KL-R=0.341413
+  L 6  H10  KL-R=0.345623
+  L 2  H10  KL-R=0.346889
+  L 2  H11  KL-R=0.347732
+  L 1  H 2  KL-R=0.350019
+  L 4  H 9  KL-R=0.351132
+  L 6  H 0  KL-R=0.354604
+  L 6  H 4  KL-R=0.356042
+  L 1  H 5  KL-R=0.358526
+  L 1  H 3  KL-R=0.358542
+  L 1  H 9  KL-R=0.364198
+  L10  H 5  KL-R=0.370512
+  L 1  H 8  KL-R=0.373465
+  L 0  H 4  KL-R=0.379448
+  L 2  H 8  KL-R=0.381012
+  L 3  H 6  KL-R=0.382082
+  L10  H 1  KL-R=0.389506
+  L 0  H 6  KL-R=0.390492
+  L 8  H 7  KL-R=0.390741
+  L 6  H 8  KL-R=0.397586
+  L 6  H 7  KL-R=0.401798
+  L 3  H 7  KL-R=0.404955
+  L 3  H 8  KL-R=0.412139
+  L 0  H 1  KL-R=0.416115
+  L 8  H 8  KL-R=0.420728
+  L 7  H 9  KL-R=0.421134
+  L 7  H10  KL-R=0.424031
+  L 3  H 1  KL-R=0.425219
+  L 6  H 1  KL-R=0.425283
+  L 4  H 7  KL-R=0.429033
+  L 8  H 0  KL-R=0.431224
+  L 7  H 1  KL-R=0.440127
+  L 4  H 0  KL-R=0.441847
+  L 4  H 6  KL-R=0.442964
+  L 9  H 7  KL-R=0.444556
+After fine-tune: Matthews Corr. = 0.000000  (baseline 0.528880,  delta -0.528880)
+Full eval metrics: epoch=2.000000, eval_runtime=11.037700, eval_samples_per_second=94.494000, eval_steps_per_second=1.540000
+
+------------------------------------------------------------------------
+Task=cola  level=block  prune_ratio=10%  n_skipped_blocks=1
+Selection rule (KL-R): Skip encoder blocks with the lowest mean KL-R across heads (layers whose heads are on average most redundant are skipped first).
+Skipped blocks (layer index, mean KL-R over heads):
+  Block L11  mean_head_KL-R=0.297206
+After fine-tune: Matthews Corr. = 0.565252  (baseline 0.528880,  delta +0.036371)
+Full eval metrics: epoch=2.000000, eval_loss=0.553094, eval_matthews_correlation=0.565252, eval_runtime=10.009600, eval_samples_per_second=104.200000, eval_steps_per_second=1.698000
+
+------------------------------------------------------------------------
+Task=cola  level=block  prune_ratio=30%  n_skipped_blocks=3
+Selection rule (KL-R): Skip encoder blocks with the lowest mean KL-R across heads (layers whose heads are on average most redundant are skipped first).
+Skipped blocks (layer index, mean KL-R over heads):
+  Block L11  mean_head_KL-R=0.297206
+  Block L 5  mean_head_KL-R=0.315881
+  Block L 2  mean_head_KL-R=0.344116
+After fine-tune: Matthews Corr. = 0.482918  (baseline 0.528880,  delta -0.045962)
+Full eval metrics: epoch=2.000000, eval_loss=0.578299, eval_matthews_correlation=0.482918, eval_runtime=8.211300, eval_samples_per_second=127.020000, eval_steps_per_second=2.070000
+
+------------------------------------------------------------------------
+Task=cola  level=block  prune_ratio=50%  n_skipped_blocks=6
+Selection rule (KL-R): Skip encoder blocks with the lowest mean KL-R across heads (layers whose heads are on average most redundant are skipped first).
+Skipped blocks (layer index, mean KL-R over heads):
+  Block L11  mean_head_KL-R=0.297206
+  Block L 5  mean_head_KL-R=0.315881
+  Block L 2  mean_head_KL-R=0.344116
+  Block L 6  mean_head_KL-R=0.473240
+  Block L 7  mean_head_KL-R=0.487892
+  Block L 8  mean_head_KL-R=0.502118
+After fine-tune: Matthews Corr. = 0.261371  (baseline 0.528880,  delta -0.267509)
+Full eval metrics: epoch=2.000000, eval_loss=0.615295, eval_matthews_correlation=0.261371, eval_runtime=5.520200, eval_samples_per_second=188.942000, eval_steps_per_second=3.080000
+
+========================================================================
+TASK MRPC — baseline (no pruning)
+  F1 = 0.884354  (eval_f1)
+
+COMPLETE SCORE INVENTORY — task=mrpc — per-head min pairwise KL-R (all 12×12 heads)
+  L 0  H 0  KL-R=0.489467
+  L 0  H 1  KL-R=0.560066
+  L 0  H 2  KL-R=0.792902
+  L 0  H 3  KL-R=0.643429
+  L 0  H 4  KL-R=0.436553
+  L 0  H 5  KL-R=0.529249
+  L 0  H 6  KL-R=0.478670
+  L 0  H 7  KL-R=0.506868
+  L 0  H 8  KL-R=0.534426
+  L 0  H 9  KL-R=0.568279
+  L 0  H10  KL-R=1.180856
+  L 0  H11  KL-R=0.829934
+  L 1  H 0  KL-R=0.500975
+  L 1  H 1  KL-R=1.483951
+  L 1  H 2  KL-R=0.602439
+  L 1  H 3  KL-R=0.463446
+  L 1  H 4  KL-R=1.382236
+  L 1  H 5  KL-R=0.578693
+  L 1  H 6  KL-R=1.336304
+  L 1  H 7  KL-R=0.451111
+  L 1  H 8  KL-R=0.456509
+  L 1  H 9  KL-R=0.435174
+  L 1  H10  KL-R=0.801594
+  L 1  H11  KL-R=1.476815
+  L 2  H 0  KL-R=0.065907
+  L 2  H 1  KL-R=0.999669
+  L 2  H 2  KL-R=0.606657
+  L 2  H 3  KL-R=0.461584
+  L 2  H 4  KL-R=0.509291
+  L 2  H 5  KL-R=0.487034
+  L 2  H 6  KL-R=1.440401
+  L 2  H 7  KL-R=0.460521
+  L 2  H 8  KL-R=0.534833
+  L 2  H 9  KL-R=0.074924
+  L 2  H10  KL-R=0.667302
+  L 2  H11  KL-R=0.625839
+  L 3  H 0  KL-R=1.701371
+  L 3  H 1  KL-R=0.558910
+  L 3  H 2  KL-R=0.365025
+  L 3  H 3  KL-R=1.032307
+  L 3  H 4  KL-R=0.720630
+  L 3  H 5  KL-R=1.333324
+  L 3  H 6  KL-R=0.414731
+  L 3  H 7  KL-R=0.527078
+  L 3  H 8  KL-R=0.519409
+  L 3  H 9  KL-R=1.027184
+  L 3  H10  KL-R=0.743813
+  L 3  H11  KL-R=1.244088
+  L 4  H 0  KL-R=0.798716
+  L 4  H 1  KL-R=1.095906
+  L 4  H 2  KL-R=0.576989
+  L 4  H 3  KL-R=1.951208
+  L 4  H 4  KL-R=0.871727
+  L 4  H 5  KL-R=1.175310
+  L 4  H 6  KL-R=0.689080
+  L 4  H 7  KL-R=1.027823
+  L 4  H 8  KL-R=0.687493
+  L 4  H 9  KL-R=0.802517
+  L 4  H10  KL-R=0.866252
+  L 4  H11  KL-R=1.103626
+  L 5  H 0  KL-R=0.665233
+  L 5  H 1  KL-R=0.457049
+  L 5  H 2  KL-R=0.562639
+  L 5  H 3  KL-R=0.701235
+  L 5  H 4  KL-R=0.742222
+  L 5  H 5  KL-R=0.820278
+  L 5  H 6  KL-R=0.448886
+  L 5  H 7  KL-R=0.512893
+  L 5  H 8  KL-R=0.756684
+  L 5  H 9  KL-R=1.290870
+  L 5  H10  KL-R=1.206509
+  L 5  H11  KL-R=0.578195
+  L 6  H 0  KL-R=0.629072
+  L 6  H 1  KL-R=0.475252
+  L 6  H 2  KL-R=0.521156
+  L 6  H 3  KL-R=0.590197
+  L 6  H 4  KL-R=0.824651
+  L 6  H 5  KL-R=0.860965
+  L 6  H 6  KL-R=1.060327
+  L 6  H 7  KL-R=0.441706
+  L 6  H 8  KL-R=1.259357
+  L 6  H 9  KL-R=1.018044
+  L 6  H10  KL-R=0.394760
+  L 6  H11  KL-R=1.386601
+  L 7  H 0  KL-R=0.719985
+  L 7  H 1  KL-R=0.571004
+  L 7  H 2  KL-R=0.992275
+  L 7  H 3  KL-R=0.221295
+  L 7  H 4  KL-R=1.194480
+  L 7  H 5  KL-R=0.644356
+  L 7  H 6  KL-R=0.446273
+  L 7  H 7  KL-R=0.237685
+  L 7  H 8  KL-R=0.644394
+  L 7  H 9  KL-R=0.649759
+  L 7  H10  KL-R=0.635874
+  L 7  H11  KL-R=0.941320
+  L 8  H 0  KL-R=0.573014
+  L 8  H 1  KL-R=0.683685
+  L 8  H 2  KL-R=2.995684
+  L 8  H 3  KL-R=1.150433
+  L 8  H 4  KL-R=0.709327
+  L 8  H 5  KL-R=0.576460
+  L 8  H 6  KL-R=1.114015
+  L 8  H 7  KL-R=0.716165
+  L 8  H 8  KL-R=0.675445
+  L 8  H 9  KL-R=1.007483
+  L 8  H10  KL-R=0.814341
+  L 8  H11  KL-R=0.904081
+  L 9  H 0  KL-R=1.483218
+  L 9  H 1  KL-R=0.565282
+  L 9  H 2  KL-R=0.645439
+  L 9  H 3  KL-R=1.240770
+  L 9  H 4  KL-R=0.506689
+  L 9  H 5  KL-R=0.590884
+  L 9  H 6  KL-R=1.406073
+  L 9  H 7  KL-R=0.500705
+  L 9  H 8  KL-R=1.114386
+  L 9  H 9  KL-R=1.629841
+  L 9  H10  KL-R=0.537063
+  L 9  H11  KL-R=0.666457
+  L10  H 0  KL-R=0.622568
+  L10  H 1  KL-R=0.356302
+  L10  H 2  KL-R=0.390953
+  L10  H 3  KL-R=0.506826
+  L10  H 4  KL-R=0.423822
+  L10  H 5  KL-R=0.393001
+  L10  H 6  KL-R=0.456389
+  L10  H 7  KL-R=0.701536
+  L10  H 8  KL-R=0.432514
+  L10  H 9  KL-R=0.398303
+  L10  H10  KL-R=1.778583
+  L10  H11  KL-R=0.528111
+  L11  H 0  KL-R=0.287911
+  L11  H 1  KL-R=0.349199
+  L11  H 2  KL-R=0.416090
+  L11  H 3  KL-R=0.211286
+  L11  H 4  KL-R=0.366800
+  L11  H 5  KL-R=0.473897
+  L11  H 6  KL-R=0.188862
+  L11  H 7  KL-R=0.127993
+  L11  H 8  KL-R=1.220967
+  L11  H 9  KL-R=0.339441
+  L11  H10  KL-R=0.275162
+  L11  H11  KL-R=0.202936
+Per-block aggregate: mean KL-R over heads in each layer (block pruning uses these means; lowest mean skipped first):
+  Block L 0  mean_head_KL-R=0.629225
+  Block L 1  mean_head_KL-R=0.830771
+  Block L 2  mean_head_KL-R=0.577830
+  Block L 3  mean_head_KL-R=0.848989
+  Block L 4  mean_head_KL-R=0.970554
+  Block L 5  mean_head_KL-R=0.728558
+  Block L 6  mean_head_KL-R=0.788507
+  Block L 7  mean_head_KL-R=0.658225
+  Block L 8  mean_head_KL-R=0.993344
+  Block L 9  mean_head_KL-R=0.907234
+  Block L10  mean_head_KL-R=0.582409
+  Block L11  mean_head_KL-R=0.371712
+
+------------------------------------------------------------------------
+Task=mrpc  level=head  prune_ratio=10%  n_masked=14  (budget 14)
+Selection rule (KL-R): Mask (BERT head_mask) heads with lowest min pairwise KL to another head in the same layer; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, min_pairwise_KL_score):
+  L 2  H 0  KL-R=0.065907
+  L 2  H 9  KL-R=0.074924
+  L11  H 7  KL-R=0.127993
+  L11  H 6  KL-R=0.188862
+  L11  H11  KL-R=0.202936
+  L11  H 3  KL-R=0.211286
+  L 7  H 3  KL-R=0.221295
+  L 7  H 7  KL-R=0.237685
+  L11  H10  KL-R=0.275162
+  L11  H 0  KL-R=0.287911
+  L11  H 9  KL-R=0.339441
+  L11  H 1  KL-R=0.349199
+  L10  H 1  KL-R=0.356302
+  L 3  H 2  KL-R=0.365025
+After fine-tune: F1 = 0.000000  (baseline 0.884354,  delta -0.884354)
+Full eval metrics: epoch=2.000000, eval_runtime=14.502200, eval_samples_per_second=28.134000, eval_steps_per_second=0.483000
+
+------------------------------------------------------------------------
+Task=mrpc  level=head  prune_ratio=30%  n_masked=43  (budget 43)
+Selection rule (KL-R): Mask (BERT head_mask) heads with lowest min pairwise KL to another head in the same layer; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, min_pairwise_KL_score):
+  L 2  H 0  KL-R=0.065907
+  L 2  H 9  KL-R=0.074924
+  L11  H 7  KL-R=0.127993
+  L11  H 6  KL-R=0.188862
+  L11  H11  KL-R=0.202936
+  L11  H 3  KL-R=0.211286
+  L 7  H 3  KL-R=0.221295
+  L 7  H 7  KL-R=0.237685
+  L11  H10  KL-R=0.275162
+  L11  H 0  KL-R=0.287911
+  L11  H 9  KL-R=0.339441
+  L11  H 1  KL-R=0.349199
+  L10  H 1  KL-R=0.356302
+  L 3  H 2  KL-R=0.365025
+  L11  H 4  KL-R=0.366800
+  L10  H 2  KL-R=0.390953
+  L10  H 5  KL-R=0.393001
+  L 6  H10  KL-R=0.394760
+  L10  H 9  KL-R=0.398303
+  L 3  H 6  KL-R=0.414731
+  L11  H 2  KL-R=0.416090
+  L10  H 4  KL-R=0.423822
+  L10  H 8  KL-R=0.432514
+  L 1  H 9  KL-R=0.435174
+  L 0  H 4  KL-R=0.436553
+  L 6  H 7  KL-R=0.441706
+  L 7  H 6  KL-R=0.446273
+  L 5  H 6  KL-R=0.448886
+  L 1  H 7  KL-R=0.451111
+  L10  H 6  KL-R=0.456389
+  L 1  H 8  KL-R=0.456509
+  L 5  H 1  KL-R=0.457049
+  L 2  H 7  KL-R=0.460521
+  L 2  H 3  KL-R=0.461584
+  L 1  H 3  KL-R=0.463446
+  L11  H 5  KL-R=0.473897
+  L 6  H 1  KL-R=0.475252
+  L 0  H 6  KL-R=0.478670
+  L 2  H 5  KL-R=0.487034
+  L 0  H 0  KL-R=0.489467
+  L 9  H 7  KL-R=0.500705
+  L 1  H 0  KL-R=0.500975
+  L 9  H 4  KL-R=0.506689
+After fine-tune: F1 = 0.000000  (baseline 0.884354,  delta -0.884354)
+Full eval metrics: epoch=2.000000, eval_runtime=14.496600, eval_samples_per_second=28.145000, eval_steps_per_second=0.483000
+
+------------------------------------------------------------------------
+Task=mrpc  level=head  prune_ratio=50%  n_masked=72  (budget 72)
+Selection rule (KL-R): Mask (BERT head_mask) heads with lowest min pairwise KL to another head in the same layer; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, min_pairwise_KL_score):
+  L 2  H 0  KL-R=0.065907
+  L 2  H 9  KL-R=0.074924
+  L11  H 7  KL-R=0.127993
+  L11  H 6  KL-R=0.188862
+  L11  H11  KL-R=0.202936
+  L11  H 3  KL-R=0.211286
+  L 7  H 3  KL-R=0.221295
+  L 7  H 7  KL-R=0.237685
+  L11  H10  KL-R=0.275162
+  L11  H 0  KL-R=0.287911
+  L11  H 9  KL-R=0.339441
+  L11  H 1  KL-R=0.349199
+  L10  H 1  KL-R=0.356302
+  L 3  H 2  KL-R=0.365025
+  L11  H 4  KL-R=0.366800
+  L10  H 2  KL-R=0.390953
+  L10  H 5  KL-R=0.393001
+  L 6  H10  KL-R=0.394760
+  L10  H 9  KL-R=0.398303
+  L 3  H 6  KL-R=0.414731
+  L11  H 2  KL-R=0.416090
+  L10  H 4  KL-R=0.423822
+  L10  H 8  KL-R=0.432514
+  L 1  H 9  KL-R=0.435174
+  L 0  H 4  KL-R=0.436553
+  L 6  H 7  KL-R=0.441706
+  L 7  H 6  KL-R=0.446273
+  L 5  H 6  KL-R=0.448886
+  L 1  H 7  KL-R=0.451111
+  L10  H 6  KL-R=0.456389
+  L 1  H 8  KL-R=0.456509
+  L 5  H 1  KL-R=0.457049
+  L 2  H 7  KL-R=0.460521
+  L 2  H 3  KL-R=0.461584
+  L 1  H 3  KL-R=0.463446
+  L11  H 5  KL-R=0.473897
+  L 6  H 1  KL-R=0.475252
+  L 0  H 6  KL-R=0.478670
+  L 2  H 5  KL-R=0.487034
+  L 0  H 0  KL-R=0.489467
+  L 9  H 7  KL-R=0.500705
+  L 1  H 0  KL-R=0.500975
+  L 9  H 4  KL-R=0.506689
+  L10  H 3  KL-R=0.506826
+  L 0  H 7  KL-R=0.506868
+  L 2  H 4  KL-R=0.509291
+  L 5  H 7  KL-R=0.512893
+  L 3  H 8  KL-R=0.519409
+  L 6  H 2  KL-R=0.521156
+  L 3  H 7  KL-R=0.527078
+  L10  H11  KL-R=0.528111
+  L 0  H 5  KL-R=0.529249
+  L 0  H 8  KL-R=0.534426
+  L 2  H 8  KL-R=0.534833
+  L 9  H10  KL-R=0.537063
+  L 3  H 1  KL-R=0.558910
+  L 0  H 1  KL-R=0.560066
+  L 5  H 2  KL-R=0.562639
+  L 9  H 1  KL-R=0.565282
+  L 0  H 9  KL-R=0.568279
+  L 7  H 1  KL-R=0.571004
+  L 8  H 0  KL-R=0.573014
+  L 8  H 5  KL-R=0.576460
+  L 4  H 2  KL-R=0.576989
+  L 5  H11  KL-R=0.578195
+  L 1  H 5  KL-R=0.578693
+  L 6  H 3  KL-R=0.590197
+  L 9  H 5  KL-R=0.590884
+  L 1  H 2  KL-R=0.602439
+  L 2  H 2  KL-R=0.606657
+  L10  H 0  KL-R=0.622568
+  L 2  H11  KL-R=0.625839
+After fine-tune: F1 = 0.000000  (baseline 0.884354,  delta -0.884354)
+Full eval metrics: epoch=2.000000, eval_runtime=14.503000, eval_samples_per_second=28.132000, eval_steps_per_second=0.483000
+
+------------------------------------------------------------------------
+Task=mrpc  level=block  prune_ratio=10%  n_skipped_blocks=1
+Selection rule (KL-R): Skip encoder blocks with the lowest mean KL-R across heads (layers whose heads are on average most redundant are skipped first).
+Skipped blocks (layer index, mean KL-R over heads):
+  Block L11  mean_head_KL-R=0.371712
+After fine-tune: F1 = 0.897033  (baseline 0.884354,  delta +0.012679)
+Full eval metrics: epoch=2.000000, eval_accuracy=0.855392, eval_f1=0.897033, eval_loss=0.398323, eval_runtime=13.006500, eval_samples_per_second=31.369000, eval_steps_per_second=0.538000
+
+------------------------------------------------------------------------
+Task=mrpc  level=block  prune_ratio=30%  n_skipped_blocks=3
+Selection rule (KL-R): Skip encoder blocks with the lowest mean KL-R across heads (layers whose heads are on average most redundant are skipped first).
+Skipped blocks (layer index, mean KL-R over heads):
+  Block L11  mean_head_KL-R=0.371712
+  Block L 2  mean_head_KL-R=0.577830
+  Block L10  mean_head_KL-R=0.582409
+After fine-tune: F1 = 0.882453  (baseline 0.884354,  delta -0.001901)
+Full eval metrics: epoch=2.000000, eval_accuracy=0.830882, eval_f1=0.882453, eval_loss=0.418287, eval_runtime=10.661900, eval_samples_per_second=38.267000, eval_steps_per_second=0.657000
+
+------------------------------------------------------------------------
+Task=mrpc  level=block  prune_ratio=50%  n_skipped_blocks=6
+Selection rule (KL-R): Skip encoder blocks with the lowest mean KL-R across heads (layers whose heads are on average most redundant are skipped first).
+Skipped blocks (layer index, mean KL-R over heads):
+  Block L11  mean_head_KL-R=0.371712
+  Block L 2  mean_head_KL-R=0.577830
+  Block L10  mean_head_KL-R=0.582409
+  Block L 0  mean_head_KL-R=0.629225
+  Block L 7  mean_head_KL-R=0.658225
+  Block L 5  mean_head_KL-R=0.728558
+After fine-tune: F1 = 0.861290  (baseline 0.884354,  delta -0.023063)
+Full eval metrics: epoch=2.000000, eval_accuracy=0.789216, eval_f1=0.861290, eval_loss=0.483424, eval_runtime=7.139800, eval_samples_per_second=57.144000, eval_steps_per_second=0.980000
