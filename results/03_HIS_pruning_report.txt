@@ -1,0 +1,691 @@
+03_metric_head_importance.py — HIS pruning report
+Metric: mean |gradient of loss w.r.t. head_mask × mask| on calibration data.
+
+
+========================================================================
+TASK COLA — baseline (no pruning)
+  Matthews Corr. = 0.528880  (eval_matthews_correlation)
+
+COMPLETE SCORE INVENTORY — task=cola — per-head HIS (all 12×12 heads)
+  L 0  H 0  HIS=0.005375
+  L 0  H 1  HIS=0.004797
+  L 0  H 2  HIS=0.004334
+  L 0  H 3  HIS=0.005878
+  L 0  H 4  HIS=0.005104
+  L 0  H 5  HIS=0.009577
+  L 0  H 6  HIS=0.002699
+  L 0  H 7  HIS=0.003980
+  L 0  H 8  HIS=0.005920
+  L 0  H 9  HIS=0.004009
+  L 0  H10  HIS=0.008349
+  L 0  H11  HIS=0.003626
+  L 1  H 0  HIS=0.002638
+  L 1  H 1  HIS=0.005610
+  L 1  H 2  HIS=0.005324
+  L 1  H 3  HIS=0.002928
+  L 1  H 4  HIS=0.005705
+  L 1  H 5  HIS=0.002835
+  L 1  H 6  HIS=0.004321
+  L 1  H 7  HIS=0.002773
+  L 1  H 8  HIS=0.002130
+  L 1  H 9  HIS=0.004079
+  L 1  H10  HIS=0.005264
+  L 1  H11  HIS=0.008894
+  L 2  H 0  HIS=0.004690
+  L 2  H 1  HIS=0.005533
+  L 2  H 2  HIS=0.003807
+  L 2  H 3  HIS=0.002399
+  L 2  H 4  HIS=0.002669
+  L 2  H 5  HIS=0.002674
+  L 2  H 6  HIS=0.006033
+  L 2  H 7  HIS=0.003377
+  L 2  H 8  HIS=0.004230
+  L 2  H 9  HIS=0.005199
+  L 2  H10  HIS=0.004535
+  L 2  H11  HIS=0.005040
+  L 3  H 0  HIS=0.005230
+  L 3  H 1  HIS=0.004147
+  L 3  H 2  HIS=0.004038
+  L 3  H 3  HIS=0.004091
+  L 3  H 4  HIS=0.003640
+  L 3  H 5  HIS=0.006322
+  L 3  H 6  HIS=0.004841
+  L 3  H 7  HIS=0.007663
+  L 3  H 8  HIS=0.004738
+  L 3  H 9  HIS=0.007238
+  L 3  H10  HIS=0.005019
+  L 3  H11  HIS=0.005281
+  L 4  H 0  HIS=0.003950
+  L 4  H 1  HIS=0.004286
+  L 4  H 2  HIS=0.003407
+  L 4  H 3  HIS=0.003229
+  L 4  H 4  HIS=0.006717
+  L 4  H 5  HIS=0.007083
+  L 4  H 6  HIS=0.003785
+  L 4  H 7  HIS=0.006608
+  L 4  H 8  HIS=0.004934
+  L 4  H 9  HIS=0.005539
+  L 4  H10  HIS=0.009645
+  L 4  H11  HIS=0.002833
+  L 5  H 0  HIS=0.007403
+  L 5  H 1  HIS=0.004392
+  L 5  H 2  HIS=0.001836
+  L 5  H 3  HIS=0.004886
+  L 5  H 4  HIS=0.006870
+  L 5  H 5  HIS=0.006344
+  L 5  H 6  HIS=0.007328
+  L 5  H 7  HIS=0.008725
+  L 5  H 8  HIS=0.004942
+  L 5  H 9  HIS=0.004168
+  L 5  H10  HIS=0.003376
+  L 5  H11  HIS=0.005913
+  L 6  H 0  HIS=0.006044
+  L 6  H 1  HIS=0.007295
+  L 6  H 2  HIS=0.005023
+  L 6  H 3  HIS=0.004078
+  L 6  H 4  HIS=0.003370
+  L 6  H 5  HIS=0.003860
+  L 6  H 6  HIS=0.004210
+  L 6  H 7  HIS=0.002669
+  L 6  H 8  HIS=0.008235
+  L 6  H 9  HIS=0.007698
+  L 6  H10  HIS=0.013031
+  L 6  H11  HIS=0.004173
+  L 7  H 0  HIS=0.004194
+  L 7  H 1  HIS=0.003563
+  L 7  H 2  HIS=0.006778
+  L 7  H 3  HIS=0.001975
+  L 7  H 4  HIS=0.003316
+  L 7  H 5  HIS=0.003789
+  L 7  H 6  HIS=0.001450
+  L 7  H 7  HIS=0.002433
+  L 7  H 8  HIS=0.005346
+  L 7  H 9  HIS=0.003174
+  L 7  H10  HIS=0.007142
+  L 7  H11  HIS=0.004370
+  L 8  H 0  HIS=0.002679
+  L 8  H 1  HIS=0.002336
+  L 8  H 2  HIS=0.002992
+  L 8  H 3  HIS=0.002272
+  L 8  H 4  HIS=0.004587
+  L 8  H 5  HIS=0.004547
+  L 8  H 6  HIS=0.003775
+  L 8  H 7  HIS=0.003916
+  L 8  H 8  HIS=0.022127
+  L 8  H 9  HIS=0.003208
+  L 8  H10  HIS=0.004726
+  L 8  H11  HIS=0.002686
+  L 9  H 0  HIS=0.002075
+  L 9  H 1  HIS=0.005026
+  L 9  H 2  HIS=0.002311
+  L 9  H 3  HIS=0.003203
+  L 9  H 4  HIS=0.002114
+  L 9  H 5  HIS=0.003841
+  L 9  H 6  HIS=0.001666
+  L 9  H 7  HIS=0.001666
+  L 9  H 8  HIS=0.009639
+  L 9  H 9  HIS=0.001723
+  L 9  H10  HIS=0.004621
+  L 9  H11  HIS=0.007668
+  L10  H 0  HIS=0.009135
+  L10  H 1  HIS=0.002677
+  L10  H 2  HIS=0.002705
+  L10  H 3  HIS=0.010888
+  L10  H 4  HIS=0.002703
+  L10  H 5  HIS=0.002583
+  L10  H 6  HIS=0.002622
+  L10  H 7  HIS=0.003752
+  L10  H 8  HIS=0.004187
+  L10  H 9  HIS=0.004618
+  L10  H10  HIS=0.002100
+  L10  H11  HIS=0.007883
+  L11  H 0  HIS=0.003491
+  L11  H 1  HIS=0.004508
+  L11  H 2  HIS=0.008148
+  L11  H 3  HIS=0.005589
+  L11  H 4  HIS=0.006379
+  L11  H 5  HIS=0.001846
+  L11  H 6  HIS=0.005249
+  L11  H 7  HIS=0.002757
+  L11  H 8  HIS=0.004349
+  L11  H 9  HIS=0.008641
+  L11  H10  HIS=0.003590
+  L11  H11  HIS=0.002107
+Per-block aggregate: mean HIS over heads in each layer (block pruning uses these means; lowest mean skipped first):
+  Block L 0  mean_head_HIS=0.005304
+  Block L 1  mean_head_HIS=0.004375
+  Block L 2  mean_head_HIS=0.004182
+  Block L 3  mean_head_HIS=0.005187
+  Block L 4  mean_head_HIS=0.005168
+  Block L 5  mean_head_HIS=0.005515
+  Block L 6  mean_head_HIS=0.005807
+  Block L 7  mean_head_HIS=0.003961
+  Block L 8  mean_head_HIS=0.004988
+  Block L 9  mean_head_HIS=0.003796
+  Block L10  mean_head_HIS=0.004654
+  Block L11  mean_head_HIS=0.004721
+
+------------------------------------------------------------------------
+Task=cola  level=head  prune_ratio=10%  n_masked=14  (budget 14)
+Selection rule (HIS): Mask (fixed BERT head_mask) heads with lowest HIS: mean |∂loss/∂head_mask · mask| on calibration batches; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, HIS score):
+  L 7  H 6  HIS=0.001450
+  L 9  H 6  HIS=0.001666
+  L 9  H 7  HIS=0.001666
+  L 9  H 9  HIS=0.001723
+  L 5  H 2  HIS=0.001836
+  L11  H 5  HIS=0.001846
+  L 7  H 3  HIS=0.001975
+  L 9  H 0  HIS=0.002075
+  L10  H10  HIS=0.002100
+  L11  H11  HIS=0.002107
+  L 9  H 4  HIS=0.002114
+  L 1  H 8  HIS=0.002130
+  L 8  H 3  HIS=0.002272
+  L 9  H 2  HIS=0.002311
+After fine-tune: Matthews Corr. = 0.000000  (baseline 0.528880,  delta -0.528880)
+Full eval metrics: epoch=2.000000, eval_runtime=10.958900, eval_samples_per_second=95.174000, eval_steps_per_second=1.551000
+
+------------------------------------------------------------------------
+Task=cola  level=head  prune_ratio=30%  n_masked=43  (budget 43)
+Selection rule (HIS): Mask (fixed BERT head_mask) heads with lowest HIS: mean |∂loss/∂head_mask · mask| on calibration batches; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, HIS score):
+  L 7  H 6  HIS=0.001450
+  L 9  H 6  HIS=0.001666
+  L 9  H 7  HIS=0.001666
+  L 9  H 9  HIS=0.001723
+  L 5  H 2  HIS=0.001836
+  L11  H 5  HIS=0.001846
+  L 7  H 3  HIS=0.001975
+  L 9  H 0  HIS=0.002075
+  L10  H10  HIS=0.002100
+  L11  H11  HIS=0.002107
+  L 9  H 4  HIS=0.002114
+  L 1  H 8  HIS=0.002130
+  L 8  H 3  HIS=0.002272
+  L 9  H 2  HIS=0.002311
+  L 8  H 1  HIS=0.002336
+  L 2  H 3  HIS=0.002399
+  L 7  H 7  HIS=0.002433
+  L10  H 5  HIS=0.002583
+  L10  H 6  HIS=0.002622
+  L 1  H 0  HIS=0.002638
+  L 6  H 7  HIS=0.002669
+  L 2  H 4  HIS=0.002669
+  L 2  H 5  HIS=0.002674
+  L10  H 1  HIS=0.002677
+  L 8  H 0  HIS=0.002679
+  L 8  H11  HIS=0.002686
+  L 0  H 6  HIS=0.002699
+  L10  H 4  HIS=0.002703
+  L10  H 2  HIS=0.002705
+  L11  H 7  HIS=0.002757
+  L 1  H 7  HIS=0.002773
+  L 4  H11  HIS=0.002833
+  L 1  H 5  HIS=0.002835
+  L 1  H 3  HIS=0.002928
+  L 8  H 2  HIS=0.002992
+  L 7  H 9  HIS=0.003174
+  L 9  H 3  HIS=0.003203
+  L 8  H 9  HIS=0.003208
+  L 4  H 3  HIS=0.003229
+  L 7  H 4  HIS=0.003316
+  L 6  H 4  HIS=0.003370
+  L 5  H10  HIS=0.003376
+  L 2  H 7  HIS=0.003377
+After fine-tune: Matthews Corr. = 0.000000  (baseline 0.528880,  delta -0.528880)
+Full eval metrics: epoch=2.000000, eval_runtime=10.952600, eval_samples_per_second=95.229000, eval_steps_per_second=1.552000
+
+------------------------------------------------------------------------
+Task=cola  level=head  prune_ratio=50%  n_masked=72  (budget 72)
+Selection rule (HIS): Mask (fixed BERT head_mask) heads with lowest HIS: mean |∂loss/∂head_mask · mask| on calibration batches; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, HIS score):
+  L 7  H 6  HIS=0.001450
+  L 9  H 6  HIS=0.001666
+  L 9  H 7  HIS=0.001666
+  L 9  H 9  HIS=0.001723
+  L 5  H 2  HIS=0.001836
+  L11  H 5  HIS=0.001846
+  L 7  H 3  HIS=0.001975
+  L 9  H 0  HIS=0.002075
+  L10  H10  HIS=0.002100
+  L11  H11  HIS=0.002107
+  L 9  H 4  HIS=0.002114
+  L 1  H 8  HIS=0.002130
+  L 8  H 3  HIS=0.002272
+  L 9  H 2  HIS=0.002311
+  L 8  H 1  HIS=0.002336
+  L 2  H 3  HIS=0.002399
+  L 7  H 7  HIS=0.002433
+  L10  H 5  HIS=0.002583
+  L10  H 6  HIS=0.002622
+  L 1  H 0  HIS=0.002638
+  L 6  H 7  HIS=0.002669
+  L 2  H 4  HIS=0.002669
+  L 2  H 5  HIS=0.002674
+  L10  H 1  HIS=0.002677
+  L 8  H 0  HIS=0.002679
+  L 8  H11  HIS=0.002686
+  L 0  H 6  HIS=0.002699
+  L10  H 4  HIS=0.002703
+  L10  H 2  HIS=0.002705
+  L11  H 7  HIS=0.002757
+  L 1  H 7  HIS=0.002773
+  L 4  H11  HIS=0.002833
+  L 1  H 5  HIS=0.002835
+  L 1  H 3  HIS=0.002928
+  L 8  H 2  HIS=0.002992
+  L 7  H 9  HIS=0.003174
+  L 9  H 3  HIS=0.003203
+  L 8  H 9  HIS=0.003208
+  L 4  H 3  HIS=0.003229
+  L 7  H 4  HIS=0.003316
+  L 6  H 4  HIS=0.003370
+  L 5  H10  HIS=0.003376
+  L 2  H 7  HIS=0.003377
+  L 4  H 2  HIS=0.003407
+  L11  H 0  HIS=0.003491
+  L 7  H 1  HIS=0.003563
+  L11  H10  HIS=0.003590
+  L 0  H11  HIS=0.003626
+  L 3  H 4  HIS=0.003640
+  L10  H 7  HIS=0.003752
+  L 8  H 6  HIS=0.003775
+  L 4  H 6  HIS=0.003785
+  L 7  H 5  HIS=0.003789
+  L 2  H 2  HIS=0.003807
+  L 9  H 5  HIS=0.003841
+  L 6  H 5  HIS=0.003860
+  L 8  H 7  HIS=0.003916
+  L 4  H 0  HIS=0.003950
+  L 0  H 7  HIS=0.003980
+  L 0  H 9  HIS=0.004009
+  L 3  H 2  HIS=0.004038
+  L 6  H 3  HIS=0.004078
+  L 1  H 9  HIS=0.004079
+  L 3  H 3  HIS=0.004091
+  L 3  H 1  HIS=0.004147
+  L 5  H 9  HIS=0.004168
+  L 6  H11  HIS=0.004173
+  L10  H 8  HIS=0.004187
+  L 7  H 0  HIS=0.004194
+  L 6  H 6  HIS=0.004210
+  L 2  H 8  HIS=0.004230
+  L 4  H 1  HIS=0.004286
+After fine-tune: Matthews Corr. = 0.000000  (baseline 0.528880,  delta -0.528880)
+Full eval metrics: epoch=2.000000, eval_runtime=10.967800, eval_samples_per_second=95.096000, eval_steps_per_second=1.550000
+
+------------------------------------------------------------------------
+Task=cola  level=block  prune_ratio=10%  n_skipped_blocks=1
+Selection rule (HIS): Skip encoder blocks with the lowest mean HIS across heads (layers least important to the loss on average are skipped first).
+Skipped blocks (layer index, mean HIS over heads):
+  Block L 9  mean_head_HIS=0.003796
+After fine-tune: Matthews Corr. = 0.545210  (baseline 0.528880,  delta +0.016330)
+Full eval metrics: epoch=2.000000, eval_loss=0.535580, eval_matthews_correlation=0.545210, eval_runtime=9.948100, eval_samples_per_second=104.844000, eval_steps_per_second=1.709000
+
+------------------------------------------------------------------------
+Task=cola  level=block  prune_ratio=30%  n_skipped_blocks=3
+Selection rule (HIS): Skip encoder blocks with the lowest mean HIS across heads (layers least important to the loss on average are skipped first).
+Skipped blocks (layer index, mean HIS over heads):
+  Block L 9  mean_head_HIS=0.003796
+  Block L 7  mean_head_HIS=0.003961
+  Block L 2  mean_head_HIS=0.004182
+After fine-tune: Matthews Corr. = 0.501933  (baseline 0.528880,  delta -0.026947)
+Full eval metrics: epoch=2.000000, eval_loss=0.555442, eval_matthews_correlation=0.501933, eval_runtime=8.155500, eval_samples_per_second=127.889000, eval_steps_per_second=2.084000
+
+------------------------------------------------------------------------
+Task=cola  level=block  prune_ratio=50%  n_skipped_blocks=6
+Selection rule (HIS): Skip encoder blocks with the lowest mean HIS across heads (layers least important to the loss on average are skipped first).
+Skipped blocks (layer index, mean HIS over heads):
+  Block L 9  mean_head_HIS=0.003796
+  Block L 7  mean_head_HIS=0.003961
+  Block L 2  mean_head_HIS=0.004182
+  Block L 1  mean_head_HIS=0.004375
+  Block L10  mean_head_HIS=0.004654
+  Block L11  mean_head_HIS=0.004721
+After fine-tune: Matthews Corr. = 0.449633  (baseline 0.528880,  delta -0.079247)
+Full eval metrics: epoch=2.000000, eval_loss=0.550636, eval_matthews_correlation=0.449633, eval_runtime=5.475000, eval_samples_per_second=190.502000, eval_steps_per_second=3.105000
+
+========================================================================
+TASK MRPC — baseline (no pruning)
+  F1 = 0.884354  (eval_f1)
+
+COMPLETE SCORE INVENTORY — task=mrpc — per-head HIS (all 12×12 heads)
+  L 0  H 0  HIS=0.007003
+  L 0  H 1  HIS=0.006137
+  L 0  H 2  HIS=0.004484
+  L 0  H 3  HIS=0.004800
+  L 0  H 4  HIS=0.004129
+  L 0  H 5  HIS=0.011006
+  L 0  H 6  HIS=0.004531
+  L 0  H 7  HIS=0.004256
+  L 0  H 8  HIS=0.011389
+  L 0  H 9  HIS=0.006358
+  L 0  H10  HIS=0.004983
+  L 0  H11  HIS=0.003200
+  L 1  H 0  HIS=0.002971
+  L 1  H 1  HIS=0.005337
+  L 1  H 2  HIS=0.003130
+  L 1  H 3  HIS=0.003079
+  L 1  H 4  HIS=0.008218
+  L 1  H 5  HIS=0.004486
+  L 1  H 6  HIS=0.004410
+  L 1  H 7  HIS=0.010739
+  L 1  H 8  HIS=0.004348
+  L 1  H 9  HIS=0.004941
+  L 1  H10  HIS=0.005348
+  L 1  H11  HIS=0.012161
+  L 2  H 0  HIS=0.004029
+  L 2  H 1  HIS=0.002894
+  L 2  H 2  HIS=0.004663
+  L 2  H 3  HIS=0.005071
+  L 2  H 4  HIS=0.002863
+  L 2  H 5  HIS=0.003411
+  L 2  H 6  HIS=0.012056
+  L 2  H 7  HIS=0.007824
+  L 2  H 8  HIS=0.003376
+  L 2  H 9  HIS=0.003689
+  L 2  H10  HIS=0.005470
+  L 2  H11  HIS=0.007432
+  L 3  H 0  HIS=0.020304
+  L 3  H 1  HIS=0.003343
+  L 3  H 2  HIS=0.003760
+  L 3  H 3  HIS=0.006522
+  L 3  H 4  HIS=0.009823
+  L 3  H 5  HIS=0.005482
+  L 3  H 6  HIS=0.005212
+  L 3  H 7  HIS=0.008066
+  L 3  H 8  HIS=0.003649
+  L 3  H 9  HIS=0.003899
+  L 3  H10  HIS=0.005378
+  L 3  H11  HIS=0.007831
+  L 4  H 0  HIS=0.005793
+  L 4  H 1  HIS=0.007672
+  L 4  H 2  HIS=0.010187
+  L 4  H 3  HIS=0.013721
+  L 4  H 4  HIS=0.007249
+  L 4  H 5  HIS=0.006515
+  L 4  H 6  HIS=0.003097
+  L 4  H 7  HIS=0.003998
+  L 4  H 8  HIS=0.004404
+  L 4  H 9  HIS=0.007982
+  L 4  H10  HIS=0.005064
+  L 4  H11  HIS=0.003550
+  L 5  H 0  HIS=0.004571
+  L 5  H 1  HIS=0.002904
+  L 5  H 2  HIS=0.004965
+  L 5  H 3  HIS=0.005994
+  L 5  H 4  HIS=0.005397
+  L 5  H 5  HIS=0.007926
+  L 5  H 6  HIS=0.003235
+  L 5  H 7  HIS=0.008483
+  L 5  H 8  HIS=0.020284
+  L 5  H 9  HIS=0.006213
+  L 5  H10  HIS=0.007274
+  L 5  H11  HIS=0.004927
+  L 6  H 0  HIS=0.010298
+  L 6  H 1  HIS=0.005688
+  L 6  H 2  HIS=0.003380
+  L 6  H 3  HIS=0.001892
+  L 6  H 4  HIS=0.005790
+  L 6  H 5  HIS=0.005201
+  L 6  H 6  HIS=0.005176
+  L 6  H 7  HIS=0.005494
+  L 6  H 8  HIS=0.013154
+  L 6  H 9  HIS=0.003360
+  L 6  H10  HIS=0.002684
+  L 6  H11  HIS=0.004483
+  L 7  H 0  HIS=0.007745
+  L 7  H 1  HIS=0.004230
+  L 7  H 2  HIS=0.003931
+  L 7  H 3  HIS=0.001364
+  L 7  H 4  HIS=0.007009
+  L 7  H 5  HIS=0.006438
+  L 7  H 6  HIS=0.001131
+  L 7  H 7  HIS=0.001483
+  L 7  H 8  HIS=0.005217
+  L 7  H 9  HIS=0.004422
+  L 7  H10  HIS=0.006423
+  L 7  H11  HIS=0.003501
+  L 8  H 0  HIS=0.006018
+  L 8  H 1  HIS=0.023292
+  L 8  H 2  HIS=0.004340
+  L 8  H 3  HIS=0.024468
+  L 8  H 4  HIS=0.004923
+  L 8  H 5  HIS=0.004996
+  L 8  H 6  HIS=0.004348
+  L 8  H 7  HIS=0.007169
+  L 8  H 8  HIS=0.012247
+  L 8  H 9  HIS=0.015545
+  L 8  H10  HIS=0.007369
+  L 8  H11  HIS=0.006110
+  L 9  H 0  HIS=0.006224
+  L 9  H 1  HIS=0.004203
+  L 9  H 2  HIS=0.005525
+  L 9  H 3  HIS=0.006032
+  L 9  H 4  HIS=0.006994
+  L 9  H 5  HIS=0.014041
+  L 9  H 6  HIS=0.008338
+  L 9  H 7  HIS=0.003732
+  L 9  H 8  HIS=0.025842
+  L 9  H 9  HIS=0.004767
+  L 9  H10  HIS=0.006536
+  L 9  H11  HIS=0.025347
+  L10  H 0  HIS=0.010927
+  L10  H 1  HIS=0.001531
+  L10  H 2  HIS=0.003256
+  L10  H 3  HIS=0.027540
+  L10  H 4  HIS=0.003553
+  L10  H 5  HIS=0.001846
+  L10  H 6  HIS=0.003318
+  L10  H 7  HIS=0.014846
+  L10  H 8  HIS=0.005572
+  L10  H 9  HIS=0.003933
+  L10  H10  HIS=0.011920
+  L10  H11  HIS=0.005288
+  L11  H 0  HIS=0.005399
+  L11  H 1  HIS=0.003952
+  L11  H 2  HIS=0.014076
+  L11  H 3  HIS=0.005973
+  L11  H 4  HIS=0.011993
+  L11  H 5  HIS=0.002334
+  L11  H 6  HIS=0.003180
+  L11  H 7  HIS=0.000398
+  L11  H 8  HIS=0.006151
+  L11  H 9  HIS=0.008241
+  L11  H10  HIS=0.003193
+  L11  H11  HIS=0.004887
+Per-block aggregate: mean HIS over heads in each layer (block pruning uses these means; lowest mean skipped first):
+  Block L 0  mean_head_HIS=0.006023
+  Block L 1  mean_head_HIS=0.005764
+  Block L 2  mean_head_HIS=0.005232
+  Block L 3  mean_head_HIS=0.006939
+  Block L 4  mean_head_HIS=0.006603
+  Block L 5  mean_head_HIS=0.006848
+  Block L 6  mean_head_HIS=0.005550
+  Block L 7  mean_head_HIS=0.004408
+  Block L 8  mean_head_HIS=0.010069
+  Block L 9  mean_head_HIS=0.009798
+  Block L10  mean_head_HIS=0.007794
+  Block L11  mean_head_HIS=0.005815
+
+------------------------------------------------------------------------
+Task=mrpc  level=head  prune_ratio=10%  n_masked=14  (budget 14)
+Selection rule (HIS): Mask (fixed BERT head_mask) heads with lowest HIS: mean |∂loss/∂head_mask · mask| on calibration batches; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, HIS score):
+  L11  H 7  HIS=0.000398
+  L 7  H 6  HIS=0.001131
+  L 7  H 3  HIS=0.001364
+  L 7  H 7  HIS=0.001483
+  L10  H 1  HIS=0.001531
+  L10  H 5  HIS=0.001846
+  L 6  H 3  HIS=0.001892
+  L11  H 5  HIS=0.002334
+  L 6  H10  HIS=0.002684
+  L 2  H 4  HIS=0.002863
+  L 2  H 1  HIS=0.002894
+  L 5  H 1  HIS=0.002904
+  L 1  H 0  HIS=0.002971
+  L 1  H 3  HIS=0.003079
+After fine-tune: F1 = 0.000000  (baseline 0.884354,  delta -0.884354)
+Full eval metrics: epoch=2.000000, eval_runtime=14.596200, eval_samples_per_second=27.953000, eval_steps_per_second=0.480000
+
+------------------------------------------------------------------------
+Task=mrpc  level=head  prune_ratio=30%  n_masked=43  (budget 43)
+Selection rule (HIS): Mask (fixed BERT head_mask) heads with lowest HIS: mean |∂loss/∂head_mask · mask| on calibration batches; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, HIS score):
+  L11  H 7  HIS=0.000398
+  L 7  H 6  HIS=0.001131
+  L 7  H 3  HIS=0.001364
+  L 7  H 7  HIS=0.001483
+  L10  H 1  HIS=0.001531
+  L10  H 5  HIS=0.001846
+  L 6  H 3  HIS=0.001892
+  L11  H 5  HIS=0.002334
+  L 6  H10  HIS=0.002684
+  L 2  H 4  HIS=0.002863
+  L 2  H 1  HIS=0.002894
+  L 5  H 1  HIS=0.002904
+  L 1  H 0  HIS=0.002971
+  L 1  H 3  HIS=0.003079
+  L 4  H 6  HIS=0.003097
+  L 1  H 2  HIS=0.003130
+  L11  H 6  HIS=0.003180
+  L11  H10  HIS=0.003193
+  L 0  H11  HIS=0.003200
+  L 5  H 6  HIS=0.003235
+  L10  H 2  HIS=0.003256
+  L10  H 6  HIS=0.003318
+  L 3  H 1  HIS=0.003343
+  L 6  H 9  HIS=0.003360
+  L 2  H 8  HIS=0.003376
+  L 6  H 2  HIS=0.003380
+  L 2  H 5  HIS=0.003411
+  L 7  H11  HIS=0.003501
+  L 4  H11  HIS=0.003550
+  L10  H 4  HIS=0.003553
+  L 3  H 8  HIS=0.003649
+  L 2  H 9  HIS=0.003689
+  L 9  H 7  HIS=0.003732
+  L 3  H 2  HIS=0.003760
+  L 3  H 9  HIS=0.003899
+  L 7  H 2  HIS=0.003931
+  L10  H 9  HIS=0.003933
+  L11  H 1  HIS=0.003952
+  L 4  H 7  HIS=0.003998
+  L 2  H 0  HIS=0.004029
+  L 0  H 4  HIS=0.004129
+  L 9  H 1  HIS=0.004203
+  L 7  H 1  HIS=0.004230
+After fine-tune: F1 = 0.000000  (baseline 0.884354,  delta -0.884354)
+Full eval metrics: epoch=2.000000, eval_runtime=14.918200, eval_samples_per_second=27.349000, eval_steps_per_second=0.469000
+
+------------------------------------------------------------------------
+Task=mrpc  level=head  prune_ratio=50%  n_masked=72  (budget 72)
+Selection rule (HIS): Mask (fixed BERT head_mask) heads with lowest HIS: mean |∂loss/∂head_mask · mask| on calibration batches; at least 1 head per layer stays active. Structural weights are kept; attention is zeroed for masked heads.
+Masked heads (layer, head, HIS score):
+  L11  H 7  HIS=0.000398
+  L 7  H 6  HIS=0.001131
+  L 7  H 3  HIS=0.001364
+  L 7  H 7  HIS=0.001483
+  L10  H 1  HIS=0.001531
+  L10  H 5  HIS=0.001846
+  L 6  H 3  HIS=0.001892
+  L11  H 5  HIS=0.002334
+  L 6  H10  HIS=0.002684
+  L 2  H 4  HIS=0.002863
+  L 2  H 1  HIS=0.002894
+  L 5  H 1  HIS=0.002904
+  L 1  H 0  HIS=0.002971
+  L 1  H 3  HIS=0.003079
+  L 4  H 6  HIS=0.003097
+  L 1  H 2  HIS=0.003130
+  L11  H 6  HIS=0.003180
+  L11  H10  HIS=0.003193
+  L 0  H11  HIS=0.003200
+  L 5  H 6  HIS=0.003235
+  L10  H 2  HIS=0.003256
+  L10  H 6  HIS=0.003318
+  L 3  H 1  HIS=0.003343
+  L 6  H 9  HIS=0.003360
+  L 2  H 8  HIS=0.003376
+  L 6  H 2  HIS=0.003380
+  L 2  H 5  HIS=0.003411
+  L 7  H11  HIS=0.003501
+  L 4  H11  HIS=0.003550
+  L10  H 4  HIS=0.003553
+  L 3  H 8  HIS=0.003649
+  L 2  H 9  HIS=0.003689
+  L 9  H 7  HIS=0.003732
+  L 3  H 2  HIS=0.003760
+  L 3  H 9  HIS=0.003899
+  L 7  H 2  HIS=0.003931
+  L10  H 9  HIS=0.003933
+  L11  H 1  HIS=0.003952
+  L 4  H 7  HIS=0.003998
+  L 2  H 0  HIS=0.004029
+  L 0  H 4  HIS=0.004129
+  L 9  H 1  HIS=0.004203
+  L 7  H 1  HIS=0.004230
+  L 0  H 7  HIS=0.004256
+  L 8  H 2  HIS=0.004340
+  L 1  H 8  HIS=0.004348
+  L 8  H 6  HIS=0.004348
+  L 4  H 8  HIS=0.004404
+  L 1  H 6  HIS=0.004410
+  L 7  H 9  HIS=0.004422
+  L 6  H11  HIS=0.004483
+  L 0  H 2  HIS=0.004484
+  L 1  H 5  HIS=0.004486
+  L 0  H 6  HIS=0.004531
+  L 5  H 0  HIS=0.004571
+  L 2  H 2  HIS=0.004663
+  L 9  H 9  HIS=0.004767
+  L 0  H 3  HIS=0.004800
+  L11  H11  HIS=0.004887
+  L 8  H 4  HIS=0.004923
+  L 5  H11  HIS=0.004927
+  L 1  H 9  HIS=0.004941
+  L 5  H 2  HIS=0.004965
+  L 0  H10  HIS=0.004983
+  L 8  H 5  HIS=0.004996
+  L 4  H10  HIS=0.005064
+  L 2  H 3  HIS=0.005071
+  L 6  H 6  HIS=0.005176
+  L 6  H 5  HIS=0.005201
+  L 3  H 6  HIS=0.005212
+  L 7  H 8  HIS=0.005217
+  L10  H11  HIS=0.005288
+After fine-tune: F1 = 0.000000  (baseline 0.884354,  delta -0.884354)
+Full eval metrics: epoch=2.000000, eval_runtime=805.647300, eval_samples_per_second=0.506000, eval_steps_per_second=0.009000
+
+------------------------------------------------------------------------
+Task=mrpc  level=block  prune_ratio=10%  n_skipped_blocks=1
+Selection rule (HIS): Skip encoder blocks with the lowest mean HIS across heads (layers least important to the loss on average are skipped first).
+Skipped blocks (layer index, mean HIS over heads):
+  Block L 7  mean_head_HIS=0.004408
+After fine-tune: F1 = 0.902778  (baseline 0.884354,  delta +0.018424)
+Full eval metrics: epoch=2.000000, eval_accuracy=0.862745, eval_f1=0.902778, eval_loss=0.443623, eval_runtime=13.058700, eval_samples_per_second=31.244000, eval_steps_per_second=0.536000
+
+------------------------------------------------------------------------
+Task=mrpc  level=block  prune_ratio=30%  n_skipped_blocks=3
+Selection rule (HIS): Skip encoder blocks with the lowest mean HIS across heads (layers least important to the loss on average are skipped first).
+Skipped blocks (layer index, mean HIS over heads):
+  Block L 7  mean_head_HIS=0.004408
+  Block L 2  mean_head_HIS=0.005232
+  Block L 6  mean_head_HIS=0.005550
+After fine-tune: F1 = 0.898305  (baseline 0.884354,  delta +0.013951)
+Full eval metrics: epoch=2.000000, eval_accuracy=0.852941, eval_f1=0.898305, eval_loss=0.453454, eval_runtime=10.580400, eval_samples_per_second=38.562000, eval_steps_per_second=0.662000
+
+------------------------------------------------------------------------
+Task=mrpc  level=block  prune_ratio=50%  n_skipped_blocks=6
+Selection rule (HIS): Skip encoder blocks with the lowest mean HIS across heads (layers least important to the loss on average are skipped first).
+Skipped blocks (layer index, mean HIS over heads):
+  Block L 7  mean_head_HIS=0.004408
+  Block L 2  mean_head_HIS=0.005232
+  Block L 6  mean_head_HIS=0.005550
+  Block L 1  mean_head_HIS=0.005764
+  Block L11  mean_head_HIS=0.005815
+  Block L 0  mean_head_HIS=0.006023
+After fine-tune: F1 = 0.845201  (baseline 0.884354,  delta -0.039153)
+Full eval metrics: epoch=2.000000, eval_accuracy=0.754902, eval_f1=0.845201, eval_loss=0.561866, eval_runtime=7.079900, eval_samples_per_second=57.628000, eval_steps_per_second=0.989000
